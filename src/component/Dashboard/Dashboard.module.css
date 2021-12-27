@@ -1,0 +1,36 @@
+*{
+
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+nav{
+  background-color:#192841!important ;
+}
+  
+
+  
+  
+  
+  
+  .f_container {
+    padding: 16px;
+  }
+  
+  
+ 
+  
+  /* Change styles for span and cancel button on extra small screens */
+  /* @media screen and (max-width: 800px) {
+ 
+    .f_form{
+      width: 60%;
+    }
+  
+  }
+  @media screen and (max-width: 400px) {
+    
+    form{
+      width: 55%;
+    }
+  
+  } */
