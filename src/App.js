@@ -3,8 +3,9 @@ import "./App.css";
 import SignUp from "./component/SignUp/SignUp";
 import Dashboard from "./component/Dashboard/Dashboard";
 import Login from "./component/Login/Login";
-import Form from './component/Form';
+import Form from './component/Form/Form';
 import GetData from './component/GetData';
+import Announce from './component/Annoucement/Annouce';
 
 import {Route, Routes as Switch, BrowserRouter} from 'react-router-dom';
 import {auth} from './firebase';
@@ -29,6 +30,8 @@ function App() {
           <Route exact path='/facultyform' element={<Form />}/>
           <Route exact path='/admin' element={<Admin />}/>
           <Route exact path='/getdata' element={<GetData />}/>
+          <Route exact path='/announce' element={<Announce />}/>
+          
         
 
  </Switch>

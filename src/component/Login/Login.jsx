@@ -22,8 +22,7 @@ export default function Login() {
         try {
             // console.log(email+password)
             const result = await auth.signInWithEmailAndPassword(email, password);
-            if ( result.user.email=="admin@admin.com"&&
-            result.user.password=="admin1"){
+            if ( result.user.email=="admin@admin.com"){
                 history('/admin', { replace: true }) 
             }
             else{
@@ -43,14 +42,14 @@ export default function Login() {
                 <title>Login</title>
             </Helmet>
 
-            <h1 style={{ textAlign: 'center', margin: '5px' }}>Login</h1>
+          
 
 
 
             <div className="l_container container-sm ">
             <form className='l_form' onSubmit={(e) => handleSubmit(e)}>
 
-
+            <h1 style={{ textAlign: 'center', margin: '5px' }}>Login</h1>
               
                     <label for="uname" className='form-label'><b>Email</b></label>
                     <input className='l_input form-control' type="email" placeholder="Enter Email" name="uname" required onChange={(e) => setEmail(e.target.value)} />

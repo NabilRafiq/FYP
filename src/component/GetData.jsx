@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { db } from '../firebase';
 import { Navigate, useNavigate } from 'react-router';
+import {Link} from "react-router-dom";
 import './getdata.css';
 
 
@@ -29,7 +30,9 @@ export default function GetData() {
         await db.collection("facultyform").where("name", "==", name).get()
             .then(querySnapshot => {
                 querySnapshot.docs[0].ref.delete();
-                alert("Data deleted successfully");
+                
+               alert(" Data Deleted Successfully");
+               
 
 
             })
@@ -42,10 +45,47 @@ export default function GetData() {
 
 
     }
+    const handleUpdate = async (data) => {
+       
+        // {
+        //     <form >
+        //         <input type="text" placeholder='name' />
+        //     </form>
+        // }
 
-    function reload1() {
-        window.location.reload();
+
+
+        let newname = prompt("Please enter name", "Updated Name");
+if(newname == null || newname == "Updated Name"){
+    newname=data.name
+}
+  
+  await db.collection("facultyform").where("name", "==", data.name).get()
+  .then(querySnapshot => {
+    querySnapshot.docs[0].ref.update({
+        name:newname
+    });
+                
+ 
+    alert(" Data Updated Successfully");
+
+  })
+
+
+
+  .catch((error) => {
+      alert(error.message)
+  })
+
+       
+
+
     }
+
+
+ 
+
+  
 
 
 
@@ -55,16 +95,17 @@ export default function GetData() {
                 <title>Faculty Data</title>
             </Helmet>
 
-            <h3 style={{ textAlign: 'center' }}>Faculty Data</h3>
+           
 
             {console.log(info)}
-            <div style={{ marginTop: '100px' }} className="container">
+            <div style={{ marginTop: '70px' }} className="container">
+            <h3 style={{ textAlign: 'center', marginBottom: '50px' }}>Faculty Data</h3>
                 <table className='table table-striped'>
                     <thead>
                         <tr>
                             <th scope='col'>Name</th>
-                            <th scope='col'>Age</th>
                             <th scope='col'>Email</th>
+                            <th scope='col'>Field</th>
                         </tr></thead>
                     <tbody>
                         {
@@ -77,17 +118,20 @@ export default function GetData() {
                                         {data.name}
                                     </td>
                                     <td>
-                                        {data.age}
+                                        {data.email}
                                     </td>
                                     <td>
-                                        {data.email}
+                                        {data.field}
 
                                     </td>
                                     <th scope='col'>
                                         <button className="btn btn-danger" onClick={() => { handleDelete(data.name) }}><i class="bi bi-trash"></i></button>
                                     </th>
                                     <th scope='col'>
-                                        <button className="btn btn-primary" /*onClick={() => { handleDelete(data.name) }}*/><i class="bi bi-pencil-square"></i></button>
+                                      
+                                        <button className="btn btn-primary" onClick={()=>handleUpdate(data)}><i class="bi bi-pencil-square"></i></button>
+
+                                       
                                     </th>
                                 </tr>
                             ))
@@ -96,7 +140,9 @@ export default function GetData() {
                     <button className="btn gd_button" onClick={() => {
                         history('/Dashboard', { replace: true })
                     }}>Back</button></div>
+              
             </div>
+   
 
         </div>
     )

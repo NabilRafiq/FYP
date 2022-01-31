@@ -48,10 +48,10 @@ export default function SignUp() {
             <Helmet>
                 <title>SignUp</title>
             </Helmet>
-            <h1 style={{ textAlign: 'center' }}>SignUp</h1>
+         
             <div className="s_container container">
                 <form className='s_form' onSubmit={(e) => handleSubmit(e)}>
-
+                <h1 style={{ textAlign: 'center' }}>SignUp</h1>
 
 
                     <label style={{ marginTop: '10px' }} for="uname" className='form-label'><b>UserName</b></label>

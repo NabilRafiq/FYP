@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import {Helmet} from 'react-helmet';
-import {db} from '../firebase';
+import {db} from '../../firebase';
 import { Navigate, useNavigate } from 'react-router';
 import './form.css'
+import { Toast } from 'bootstrap';
 
 
 export default function Form(){
@@ -23,7 +24,7 @@ export default function Form(){
 
         })
         .then(()=>{
-            alert('Data has been submitted')
+           alert("Faculty Data added sucessfully")
         })
         .catch((error)=>{
             alert(error.message);
@@ -39,12 +40,12 @@ export default function Form(){
          <Helmet>
         <title>Faculty Form</title>
       </Helmet>
-      <h3 style={{textAlign:'center'}}>Faculty Form</h3>
+     
 
 <div className="container-sm f_container">
       <form className='f_form' onSubmit={(e)=>handleSubmit(e)}>
 
-
+      <h3 style={{textAlign:'center'}}>Faculty Form</h3>
 
   <label for="uname" className='f_label form-label'><b>Name</b></label>
   <input type="text" className='f_input  form-control' placeholder="Enter Name" name="uname" required value={name} onChange={(e)=>setName(e.target.value)} />
@@ -70,6 +71,7 @@ export default function Form(){
 
 
 </form>
+
 </div>
 </div>   
        
