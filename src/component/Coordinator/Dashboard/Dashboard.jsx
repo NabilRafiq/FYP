@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
-import './Admin.css'
-import * as firebase from '../../firebase';
+import './Dashboard.css';
+import * as firebase from '../../../firebase';
 import { Navigate, useNavigate } from 'react-router';
 import { Helmet } from 'react-helmet';
 export default function Dashboard(){
@@ -25,7 +25,7 @@ export default function Dashboard(){
   
       try {
           
-          await  firebase.db.collection("programmanager").where("email", "==", user.email).get()
+          await  firebase.db.collection("coordinator").where("email", "==", user.email).get()
           .then(querySnapshot => { 
                  
                       querySnapshot.forEach(element => {
@@ -47,9 +47,9 @@ export default function Dashboard(){
  
 
     return(
-        <div className="ada_container">
+        <div className="Dashboard">
                   <Helmet>
-        <title>Admin Dashboard</title>
+        <title>Coordinator Dashboard</title>
       </Helmet>
       
       <nav className="navbar navbar-expand-lg navbar-dark" style={{backgroundColor:'#192841'}}>
@@ -62,52 +62,27 @@ export default function Dashboard(){
         <li className="nav-item">
           <a className="nav-link active" aria-current="page" >Home</a>
         </li>
-      
-      
+   
         <li className="nav-item dropdown">
           <a className="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Faculty
           </a>
           <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a style={{cursor:'pointer'}} onClick={()=>{
-                history('/adminfaculty',{replace:true})}}
+                history('/facultyform',{replace:true})}}
                  className="dropdown-item" >
                 Faculty Form
                 </a></li>
                 <li><a style={{cursor:'pointer'}} onClick={()=>{
-                history('/admingdata',{replace:true})}}
+                history('/getdata',{replace:true})}}
                  className="dropdown-item" >
                 Faculty Data
                 </a></li>
                 <li><a style={{cursor:'pointer'}} onClick={()=>{
-                history('/search',{replace:true})}}
+                history('/csearch',{replace:true})}}
                  className="dropdown-item" >
                 Search Faculty
                 </a></li>
-   
-          </ul>
-        </li>
-        <li className="nav-item dropdown">
-          <a className="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Coordinator
-          </a>
-          <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a style={{cursor:'pointer'}} onClick={()=>{
-                history('/aaform',{replace:true})}}
-                 className="dropdown-item" >
-                Coordinator Form
-                </a></li>
-                <li><a style={{cursor:'pointer'}} onClick={()=>{
-                history('/aagetdata',{replace:true})}}
-                 className="dropdown-item" >
-                Coordinator Data
-                </a></li>
-                <li><a style={{cursor:'pointer'}} onClick={()=>{
-                history('/acsearch',{replace:true})}}
-                 className="dropdown-item" >
-                Search Coordinator
-                </a></li>
-                
 
           </ul>
         </li>
@@ -117,43 +92,24 @@ export default function Dashboard(){
           </a>
           <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a style={{cursor:'pointer'}} onClick={()=>{
-                history('/cform',{replace:true})}}
+                history('/ccourse',{replace:true})}}
                  className="dropdown-item" >
                 Course Form
                 </a></li>
                 <li><a style={{cursor:'pointer'}} onClick={()=>{
                 history('/getdata',{replace:true})}}
                  className="dropdown-item" >
-                Course Data
+                Faculty Data
                 </a></li>
-      
+             
+
           </ul>
         </li>
-        <li className="nav-item dropdown">
-          <a className="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Annoucement
-          </a>
-          <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a style={{cursor:'pointer'}} onClick={()=>{
-                history('/facultyform',{replace:true})}}
-                 className="dropdown-item" >
-                Annoucement Form
-                </a></li>
-                <li><a style={{cursor:'pointer'}} onClick={()=>{
-                history('/getdata',{replace:true})}}
-                 className="dropdown-item" >
-                Annoucement Data
-                </a></li>
-      
-          </ul>
-        </li>
-     
         <li className="nav-item">
-           <a onClick={handleLogin} style={{cursor:'pointer'}} className="nav-link active" aria-current="page" >
+          { <a onClick={handleLogin} style={{cursor:'pointer'}} className="nav-link active" aria-current="page" >
               Logout
           </a> 
-
-         
+        }
         </li>
       </ul>
     </div>
@@ -161,34 +117,43 @@ export default function Dashboard(){
 </nav>
           
             
-<div className="ad_container container">
+<div className="container">
 
 <h3 style={{ textAlign: "center", margin: '50px' }}>User's Information</h3>
 
-<button disabled={disable} className='fa_button btn d-grid gap-2 col-6 mx-auto' type='button' onClick={() => { userInformation() }}>Show Information</button>
+<button disabled={disable} id='da_button' style={{width:"25%"}} className='da_button btn d-grid gap-2 col-6 mx-auto' type='button' onClick={() => { userInformation() }}>Load Information</button>
 
 <div className="row">
 {
 
 
 info.map((data) => (
-    <form action="" className="ad_form">
+    <form action="" className="da_form">
     
-        <label for="uname" className='ad_label form-label'><b>Name</b></label>
-        <input type="text" readOnly value={data.name} className='fa_input form-control'  name="uname" />
-        <label for="program" className='ad_label form-label'><b>Program</b></label>
-        <input type="text" readOnly value={data.program} className='ad_input form-control' name="program" />
-        <label for="Email" className='ad_label form-label'><b>Email</b></label>
-        <input type="email" readOnly value={data.email} className='ad_input form-control'  name="Email" />
-        <label for="role" className='ad_label form-label' ><b>Role</b></label>
-        <input type="text" readOnly value={data.role} disabled className='ad_input form-control' readonly  name="role" />
+        <label for="uname" className='da_label form-label'><b>Name</b></label>
+        <input type="text" readOnly disabled value={data.name} className='da_input form-control' name="uname" />
+
+
+        <label for="age" className='da_label form-label'><b>Age</b></label>
+        <input type="number" readOnly disabled value={data.age} className='da_input form-control' name="age" />
+
+        <label for="gender" className='da_label form-label' ><b>Gender</b></label>
+     <input type="text" readOnly disabled value={data.gender} className='da_input form-control'  name="gender" />
+
+        <label for="num" className='da_label form-label' ><b>Number</b></label>
+     <input type="number" readOnly disabled value={data.number} className='da_input form-control'  name="num" />
+      
+        <label for="Email" className='da_label form-label'><b>Email</b></label>
+        <input type="email" readOnly disabled value={data.email} className='da_input form-control'  name="Email" />
+        <label for="role" className='f_label form-label' ><b>Role</b></label>
+        <input type="text" readOnly value={data.role} disabled className='da_input form-control' readonly  name="role" />
 
     </form>
 ))}
     </div>
 
 
-</div>  
+</div>   
 
             
 

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { db } from '../firebase';
+import { db, auth } from '../../../firebase';
 import { Navigate, useNavigate } from 'react-router';
 import {Link} from "react-router-dom";
-import './getdata.css';
+import './AdmingData.css';
 
 
-export default function GetData() {
+export default function AdmingData() {
 
 
     const [info, setInfo] = useState([]);
@@ -32,62 +32,15 @@ export default function GetData() {
                 querySnapshot.docs[0].ref.delete();
                 
                alert(" Data Deleted Successfully");
-               
-
 
             })
-
-
 
             .catch((error) => {
                 alert(error.message)
             })
 
-
     }
-    const handleUpdate = async (data) => {
-       
-        // {
-        //     <form >
-        //         <input type="text" placeholder='name' />
-        //     </form>
-        // }
-
-
-
-        let newname = prompt("Please enter name", "Updated Name");
-if(newname == null || newname == "Updated Name"){
-    newname=data.name
-}
   
-  await db.collection("facultyform").where("name", "==", data.name).get()
-  .then(querySnapshot => {
-    querySnapshot.docs[0].ref.update({
-        name:newname
-    });
-                
- 
-    alert(" Data Updated Successfully");
-
-  })
-
-
-
-  .catch((error) => {
-      alert(error.message)
-  })
-
-       
-
-
-    }
-
-
- 
-
-  
-
-
 
     return (
         <div>
@@ -106,6 +59,7 @@ if(newname == null || newname == "Updated Name"){
                             <th scope='col'>Name</th>
                             <th scope='col'>Email</th>
                             <th scope='col'>Field</th>
+                            <th scope='col'>Delete</th>
                         </tr></thead>
                     <tbody>
                         {
@@ -127,18 +81,18 @@ if(newname == null || newname == "Updated Name"){
                                     <th scope='col'>
                                         <button className="btn btn-danger" onClick={() => { handleDelete(data.name) }}><i class="bi bi-trash"></i></button>
                                     </th>
-                                    <th scope='col'>
+                                    {/* <th scope='col'>
                                       
                                         <button className="btn btn-primary" onClick={()=>handleUpdate(data)}><i class="bi bi-pencil-square"></i></button>
 
                                        
-                                    </th>
+                                    </th> */}
                                 </tr>
                             ))
                         } </tbody></table>
                 <div className="btncenter" style={{ textAlign: "center" }}>
-                    <button className="btn gd_button" onClick={() => {
-                        history('/Dashboard', { replace: true })
+                    <button className="btn adgd_button" onClick={() => {
+                        history('/Admin', { replace: true })
                     }}>Back</button></div>
               
             </div>

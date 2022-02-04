@@ -1,11 +1,21 @@
 import React,{useEffect, useState} from 'react';
 import "./App.css";
 import SignUp from "./component/SignUp/SignUp";
-import Dashboard from "./component/Dashboard/Dashboard";
+import Dashboard from "./component/Coordinator/Dashboard/Dashboard";
 import Login from "./component/Login/Login";
-import Form from './component/Form/Form';
-import GetData from './component/GetData';
-import Announce from './component/Annoucement/Annouce';
+import Form from './component/Coordinator/Form/Form';
+import GetData from './component/Coordinator/GetData/GetData';
+import Faculty from './component/Faculty/Faculty';
+import AdminFaculty from './component/Admin/AdminFaculty/AdminFaculty';
+import AdmingData from './component/Admin/AdmingData/AdmingData';
+import AAform from './component/Admin/Acoordinator/AAform';
+import AAgetdata from './component/Admin/Acoordinator/AAgetdata';
+import Cform from './component/Admin/Course/Cform';
+import Ccouse from './component/Coordinator/Ccourse/Ccourse';
+import Search from './component/Admin/Search';
+import Acsearch from './component/Admin/Acoordinator/Acsearch';
+import Csearch from './component/Coordinator/Search/Csearch';
+// import Announce from './component/Annoucement/Annouce';
 
 import {Route, Routes as Switch, BrowserRouter} from 'react-router-dom';
 import {auth} from './firebase';
@@ -30,7 +40,17 @@ function App() {
           <Route exact path='/facultyform' element={<Form />}/>
           <Route exact path='/admin' element={<Admin />}/>
           <Route exact path='/getdata' element={<GetData />}/>
-          <Route exact path='/announce' element={<Announce />}/>
+          <Route exact path='/faculty' element={<Faculty />}/>
+          <Route exact path='/adminfaculty' element={<AdminFaculty />}/>
+          <Route exact path='/admingdata' element={<AdmingData />}/>
+          <Route exact path='/aaform' element={<AAform />}/>
+          <Route exact path='/aagetdata' element={<AAgetdata />}/>
+          <Route exact path='/cform' element={<Cform />}/>
+          <Route exact path='/ccourse' element={<Ccouse />}/>
+          <Route exact path='/search' element={<Search />}/>
+          <Route exact path='/acsearch' element={<Acsearch />}/>
+          <Route exact path='/csearch' element={<Csearch />}/>
+          {/* <Route exact path='/announce' element={<Announce />}/> */}
           
         
 

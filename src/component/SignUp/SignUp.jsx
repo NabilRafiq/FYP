@@ -23,13 +23,23 @@ export default function SignUp() {
         try {
             await auth.createUserWithEmailAndPassword(email, password)
                 .then(() => {
+                    db.collection('coordinator').add({
+                        name: name,
+                        age:age,
+                        number:number,
+                        gender:gender,
+                        email: email,
+                        password: password,
+                        role:"coordinator"
+                    })
                     db.collection('users').add({
                         name: name,
                         age:age,
                         number:number,
                         gender:gender,
                         email: email,
-                        password: password
+                        password: password,
+                        role:"coordinator"
                     })
                   
                 })
@@ -74,6 +84,11 @@ export default function SignUp() {
                     <input type="email" className="s_input form-control" placeholder="Enter Email" name="email" required onChange={(e) => setEmail(e.target.value)} />
                     <label for="psw" className='form-label'><b>Password</b></label>
                     <input type="password" className="s_input form-control" placeholder="Enter Password" name="psw" required onChange={(e) => setPassword(e.target.value)} />
+                   
+                    <label for="role" className='form-label'><b>Role</b></label>
+                    <input type="text" className="s_input form-control" value="Coordinator" name="role" readOnly />
+                   
+                   
                     <div style={{ textAlign: 'center' }}>
 
                         <button className="s_button btn" type="submit" id='sbutton'>SignUp</button>

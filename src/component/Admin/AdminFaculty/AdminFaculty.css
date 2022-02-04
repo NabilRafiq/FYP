@@ -1,34 +1,28 @@
 *{
-
+    margin: 0;
+    padding: 0;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-
-nav{
-  background-color:#192841!important ;
-}
-
+  }
   
   
-  .ad_container{
+  .af_container{
 
       margin-top: 20px;
       width: 100%;
-
   }
 
-  .ad_form {
-  background-color: white;
+  .af_form {
+  
+    background-color: white;
+  border: 1px solid black;
   padding: 10px;
   border-radius: 3px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  border: 1px solid black;
-  margin: 20px;
-  
   } 
   
   
   
-  .ad_input {
+  .af_input {
     width: 100%;
     padding: 12px 15px;
     margin: 8px 0;
@@ -38,11 +32,11 @@ nav{
     border-radius: 3px;
   }
   
-  .ad_button {
+  .af_button {
   background-color: #192841;
   color: white;
   padding: 5px;
-  margin: 5px;
+  margin-top: 5px;
   border: none;
   cursor: pointer;
   font-size: 16px;
@@ -50,10 +44,10 @@ nav{
   border-radius: 3px;
   }
   
-  .ad_button:hover {
+  .af_button:hover {
   opacity: 0.8;
   }
-  #ad_button:hover{
+  #af_button:hover{
     color: white!important;
   }
   
