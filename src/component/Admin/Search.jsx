@@ -24,7 +24,7 @@ export default function Search() {
 
          
            
-         await db.collection("facultyform").where("email", "==", stext).get().then((querySnapshot) => {
+         await db.collection("facultyform").where("name", "==", stext).get().then((querySnapshot) => {
     
             if (!querySnapshot.empty) {
                 querySnapshot.forEach(element => {
@@ -67,7 +67,7 @@ export default function Search() {
 
                         <h3 style={{ textAlign: 'center' }}>Search Faculty Data</h3>
 
-                        <input class="form-control me-2 search_input" type="email" placeholder="Search Faculty Data" 
+                        <input class="form-control me-2 search_input" type="text" placeholder="Search Faculty Data" 
                         onChange={(e) => setStext(e.target.value)} aria-label="Search" required  />
                         
                         
@@ -81,47 +81,54 @@ export default function Search() {
 
             </div>
 
+            <br /> <hr/> <br />  
             <div className="container">
 
-           <div style={{display:"none"}}>        
-   {
-         info.map((data) => (
-              name = data.name,
-              email = data.email,
-              age = data.age,
-              qual = data.qualification,
-              field = data.field
-            
-         ))
-              }</div>
-            
+           
+        
+             <h4 style={{textAlign:"center", marginTop:"-10px"}}>Faculty Data</h4>
+
+      
+             <table style={{marginTop:"30px"}} className='table table-striped'>
+                    <thead>
+                        <tr>
+                            <th scope='col'>Name</th>
+                            <th scope='col'>Email</th>
+                            <th scope='col'>Field</th>
+                        </tr></thead>
+                    <tbody>
+
+                        {
+
+
+                            info.map((data) => (
+                                <tr>
+
+                                    <td>
+                                        {data.name}
+                                    </td>
+                                    <td>
+                                        {data.email}
+                                    </td>
+                                    <td>
+                                        {data.field}
+
+                                    </td>
+
+                                    {/* <th scope='col'>
+                                      
+                                        <button className="btn btn-primary" onClick={()=>handleUpdate(data)}><i class="bi bi-pencil-square"></i></button>
+
+                                       
+                                    </th> */}
+                                </tr>
+                            ))
+                        } </tbody></table>
            
          
-      <br /> <hr/> <br />
+     
                     
-                                <div className="row">
-                              <form className='search1_form mx-auto' action="" style={{}}>
-
-                <h4 style={{textAlign:"center"}}>Faculty Data</h4>
-
-
-                    <label for="uname" className='form-label'><b>Name</b></label>
-                    <input className='search1_input form-control' type="text" name="uname" value={name} readOnly disabled />
-
-                    <label for="email" className='form-label'><b>Email</b></label>
-                    <input type="email" className='search1_input form-control'  name="email" value={email} readOnly disabled />
-                    <label for="age" className='form-label'><b>Age</b></label>
-                    <input className='search1_input form-control' type="number"  name="age" value={age} readOnly disabled />
-
-                    <label for="field" className='form-label'><b>Field</b></label>
-                    <input type="text" className='search1_input form-control'  readOnly disabled name="field" value={field} />
-                    <label for="qual" className='form-label'><b>Qualification</b></label>
-                    <input className='search1_input form-control' type="text"  name="qual"  value={qual} readOnly disabled />
-
-                    <label for="role" className='form-label'><b>Role</b></label>
-                    <input type="text" className='search1_input form-control'  name="role" readOnly disabled value={"faculty"} />
-                    
-                              </form></div>
+                           
                        
             </div>
         </div>

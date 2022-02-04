@@ -11,11 +11,14 @@ export default function AAgetdata() {
 
     const [info, setInfo] = useState([]);
     const history = useNavigate();
+    const [loading,setLoading] = useState(false);
 
     window.addEventListener('load', () => {
         Fetchdata();
+        setLoading(true);
     });
     const Fetchdata = () => {
+        
         db.collection("coordinator").get().then((querySnapshot) => {
 
 
@@ -24,6 +27,7 @@ export default function AAgetdata() {
                 setInfo(arr => [...arr, data]);
 
             });
+            setLoading(false);
         })
     }
     const handleDelete = async (email) => {
@@ -53,6 +57,20 @@ export default function AAgetdata() {
             {console.log(info)}
             <div style={{ marginTop: '70px' }} className="container">
             <h3 style={{ textAlign: 'center', marginBottom: '50px' }}>Academic Coordinator Data</h3>
+               
+            {
+                (() => {
+                    if(loading) {
+                            return (
+                              <div class="text-center" style={{margin:"10px"}}>
+                              <div class="spinner-border" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div></div>
+                            )
+                        } 
+                })()  
+            }  
+               
                 <table className='table table-striped'>
                     <thead>
                         <tr>

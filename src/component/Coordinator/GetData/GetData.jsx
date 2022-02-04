@@ -10,11 +10,14 @@ export default function GetData() {
 
 
     const [info, setInfo] = useState([]);
+    const [loading, setLoading] = useState(false);
     const history = useNavigate();
 
     window.addEventListener('load', () => {
         Fetchdata();
+        setLoading(true);
     });
+    
     const Fetchdata = () => {
         db.collection("facultyform").get().then((querySnapshot) => {
 
@@ -24,7 +27,9 @@ export default function GetData() {
                 setInfo(arr => [...arr, data]);
 
             });
+            setLoading(false);
         })
+        
     }
     const handleDelete = async (name) => {
         await db.collection("facultyform").where("name", "==", name).get()
@@ -47,13 +52,6 @@ export default function GetData() {
     }
   
 
-
- 
-
-  
-
-
-
     return (
         <div>
             <Helmet>
@@ -65,6 +63,20 @@ export default function GetData() {
             {console.log(info)}
             <div style={{ marginTop: '70px' }} className="container">
             <h3 style={{ textAlign: 'center', marginBottom: '50px' }}>Faculty Data</h3>
+               
+            {(() => {
+                    if(loading) {
+                            return (
+                              <div class="text-center" style={{margin:"10px"}}>
+                              <div class="spinner-border" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div></div>
+                            )
+                        } 
+                })()  
+            }  
+               
+               
                 <table className='table table-striped'>
                     <thead>
                         <tr>
@@ -74,6 +86,7 @@ export default function GetData() {
                             <th scope='col'>Delete</th>
                         </tr></thead>
                     <tbody>
+
                         {
 
 

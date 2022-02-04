@@ -7,6 +7,7 @@ export default function Dashboard(){
     const history= useNavigate()
     const [info, setInfo] = useState([]);
     const [disable, setDisable] = React.useState(false);
+    const [loading,setLoading] = React.useState(false);
 
     const handleLogin = async (e) => {
         e.preventDefault()
@@ -22,7 +23,7 @@ export default function Dashboard(){
       const user = firebase.auth.currentUser;
 
       setDisable(true);
-  
+      setLoading(true);
       try {
           
           await  firebase.db.collection("programmanager").where("email", "==", user.email).get()
@@ -35,7 +36,8 @@ export default function Dashboard(){
                           
 
                       })
-                  });
+                  setLoading(false);
+                    });
                  
             
 
@@ -166,7 +168,18 @@ export default function Dashboard(){
 <h3 style={{ textAlign: "center", margin: '50px' }}>User's Information</h3>
 
 <button disabled={disable} className='fa_button btn d-grid gap-2 col-6 mx-auto' type='button' onClick={() => { userInformation() }}>Show Information</button>
-
+{
+                (() => {
+                    if(loading) {
+                            return (
+                              <div class="text-center" style={{margin:"10px"}}>
+                              <div class="spinner-border" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div></div>
+                            )
+                        } 
+                })()  
+            }  
 <div className="row">
 {
 
