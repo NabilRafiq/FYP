@@ -11,11 +11,13 @@ export default function GetData() {
 
     const [info, setInfo] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [show, setShow] = useState(false);
     const history = useNavigate();
 
     window.addEventListener('load', () => {
-        Fetchdata();
         setLoading(true);
+        Fetchdata();
+        
     });
     
     const Fetchdata = () => {
@@ -28,6 +30,7 @@ export default function GetData() {
 
             });
             setLoading(false);
+            setShow(true);
         })
         
     }
@@ -64,27 +67,36 @@ export default function GetData() {
             <div style={{ marginTop: '70px' }} className="container">
             <h3 style={{ textAlign: 'center', marginBottom: '50px' }}>Faculty Data</h3>
                
-            {(() => {
-                    if(loading) {
-                            return (
-                              <div class="text-center" style={{margin:"10px"}}>
-                              <div class="spinner-border" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div></div>
-                            )
-                        } 
-                })()  
-            }  
+      
                
                
-                <table className='table table-striped'>
+                <table className='table table-striped' id='getData'>
                     <thead>
-                        <tr>
-                            <th scope='col'>Name</th>
-                            <th scope='col'>Email</th>
-                            <th scope='col'>Field</th>
-                            <th scope='col'>Delete</th>
-                        </tr></thead>
+                    {
+                (() => {
+                    if(!show&&loading) {
+                       
+                            return (
+                                <div class="text-center" style={{margin:"10px"}}>
+                                <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div></div>
+                             
+                        
+                            )
+                            setShow(false);
+                            
+                        } 
+                        else if (show){
+                            return(   <tr>
+                                <th scope='col'>Name</th>
+                                <th scope='col'>Email</th>
+                                <th scope='col'>Field</th>
+                                <th scope='col'>Delete</th>
+                            </tr>)
+                        }
+                })()  
+            }  </thead>
                     <tbody>
 
                         {
@@ -103,9 +115,9 @@ export default function GetData() {
                                         {data.field}
 
                                     </td>
-                                    <th scope='col'>
+                                    <td scope='col'>
                                         <button className="btn btn-danger" onClick={() => { handleDelete(data.name) }}><i class="bi bi-trash"></i></button>
-                                    </th>
+                                    </td>
                                     {/* <th scope='col'>
                                       
                                         <button className="btn btn-primary" onClick={()=>handleUpdate(data)}><i class="bi bi-pencil-square"></i></button>

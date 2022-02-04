@@ -2,58 +2,51 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { db, auth } from '../../../firebase';
 import { Navigate, useNavigate } from 'react-router';
-import '../Search.css'
+import './../Search.css'
 
 
 
 export default function Acsearch() {
- 
+
     const history = useNavigate();
     const [stext, setStext] = useState('');
     const [info, setInfo] = useState([]);
-    // const eachItemDiplay = "inline-block";
-    // const eachItemDiplay1 = "none";
-    var name;
-    var email;
-    var age;
-    var gender;
-    var number
+    const [show, setShow] = useState(false);
+    const [loading, setLoading] = useState(false);
     const handleSubmit = async (e) => {
-            e.preventDefault();
-    
+        
+        e.preventDefault();
+        setLoading(true);
 
-         
-           
-         await db.collection("coordinator").where("email", "==", stext).get().then((querySnapshot) => {
-    
+        await db.collection("coordinator").where("name", "==", stext).get().then((querySnapshot) => {
+
             if (!querySnapshot.empty) {
+              
                 querySnapshot.forEach(element => {
                     var data = element.data();
                     setInfo(arr => [...arr, data]);
-                   
-                
+
+
                 });
+                setShow(true);
+                setLoading(false);
             }
             else {
+
                 alert("Profile Doesn't Exist");
-            
-         }
-         
+setLoading(false);
+            }
 
-            })
+        })
             .catch((error) => {
+
                 alert(error.message);
-               
-                
-           
+
             })
-        
-        
-        }
+
+    }
 
 
-    
-    
     return (
         <div className='Search'>
             <Helmet>
@@ -61,71 +54,93 @@ export default function Acsearch() {
             </Helmet>
 
 
-            <div className="container-sm search_container" style={{textAlign:"center"}}>
+            <div className="container-sm search_container" style={{ textAlign: "center" }}>
                 <div className="row">
                     <form className='search_form' onSubmit={(e) => handleSubmit(e)}>
 
-                        <h3 style={{ textAlign: 'center' }}>Search Coordinator Data</h3>
+                        <h4 style={{ textAlign: 'center' }}>Search Coordinator Data</h4>
 
-                        <input class="form-control me-2 search_input" type="email" placeholder="Search Faculty Data" 
-                        onChange={(e) => setStext(e.target.value)} aria-label="Search" required  />
-                        
-                        
+                        <input class="form-control me-2 search_input" type="text" placeholder="Search Faculty Data"
+                            onChange={(e) => setStext(e.target.value)} aria-label="Search" required />
+
+
                         <button class="btn btn-outline-success search_btn" type="submit"><i class="bi bi-search"></i></button>
 
                     </form> </div>
-                <button id='search_btn' style={{width:"15%"}} className='search_btn btn'
+                <button id='search_btn' style={{ width: "15%" }} className='search_btn btn'
                     onClick={() => {
                         history('/Admin', { replace: true })
                     }}>Back</button>
 
             </div>
 
+            <br /> <hr /> <br />
             <div className="container">
 
-           <div style={{display:"none"}}>        
-   {
-         info.map((data) => (
-              name = data.name,
-              email = data.email,
-              age = data.age,
-              number = data.number,
-              gender = data.gender
-            
-         ))
-              }</div>
-            
-           
-         
-      <br /> <hr/> <br />
-                    
-                                <div className="row">
-                              <form className='search1_form mx-auto' action="" style={{}}>
-
-                <h4 style={{textAlign:"center"}}>Academic Coordinator Data</h4>
 
 
-                    <label for="uname" className='form-label'><b>Name</b></label>
-                    <input className='search1_input form-control' type="text" name="uname" value={name} readOnly disabled />
+                <h4 style={{ textAlign: "center", marginTop: "-10px" }}>Coordinator Data</h4>
 
-                    <label for="email" className='form-label'><b>Email</b></label>
-                    <input type="email" className='search1_input form-control'  name="email" value={email} readOnly disabled />
-                    <label for="age" className='form-label'><b>Age</b></label>
-                    <input className='search1_input form-control' type="number"  name="age" value={age} readOnly disabled />
 
-                    <label for="num" className='form-label'><b>Number</b></label>
-                    <input type="number" className='search1_input form-control'  readOnly disabled name="num" value={number} />
-                    <label for="gen" className='form-label'><b>Gender</b></label>
-                    <input className='search1_input form-control' type="text"  name="gen"  value={gender} readOnly disabled />
-
-                    <label for="role" className='form-label'><b>Role</b></label>
-                    <input type="text" className='search1_input form-control'  name="role" readOnly disabled value={"coordinator"} />
-                    
-                              </form></div>
+                <table  style={{ marginTop: "30px" }} className='table table-striped'>
+                    <thead>
+                    {
+                (() => {
+                    if(!show&&loading) {
                        
+                            return (
+                                <div class="text-center" style={{margin:"10px"}}>
+                                <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div></div>
+                             
+                        
+                            )
+                            setShow(false);
+                            
+                        } 
+                        else if (show){
+                            return(   <tr>
+                                <th scope='col'>Name</th>
+                                <th scope='col'>Email</th>
+                                <th scope='col'>Field</th>
+                            </tr>)
+                        }
+                })()  
+            }  
+                      </thead>
+                    <tbody>
+
+                        {
+
+
+                            info.map((data) => (
+                                <tr>
+
+                                    <td>
+                                        {data.name}
+                                    </td>
+                                    <td>
+                                        {data.email}
+                                    </td>
+                                    <td>
+                                        {data.field}
+
+                                    </td>
+
+                                    {/* <th scope='col'>
+                                      
+                                        <button className="btn btn-primary" onClick={()=>handleUpdate(data)}><i class="bi bi-pencil-square"></i></button>
+
+                                       
+                                    </th> */}
+                                </tr>
+                            ))
+                        } </tbody></table>
+
             </div>
         </div>
-       
+
 
     )
 }

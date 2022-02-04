@@ -7,53 +7,45 @@ import './Search.css'
 
 
 export default function Search() {
- 
+
     const history = useNavigate();
     const [stext, setStext] = useState('');
     const [info, setInfo] = useState([]);
-    // const eachItemDiplay = "inline-block";
-    // const eachItemDiplay1 = "none";
-    var name;
-    var email;
-    var age;
-    var qual;
-    var field
+    const [show, setShow] = useState(false);
+    const [loading, setLoading] = useState(false);
     const handleSubmit = async (e) => {
-            e.preventDefault();
-    
+        
+        e.preventDefault();
+        setLoading(true);
 
-         
-           
-         await db.collection("facultyform").where("name", "==", stext).get().then((querySnapshot) => {
-    
+        await db.collection("facultyform").where("name", "==", stext).get().then((querySnapshot) => {
+
             if (!querySnapshot.empty) {
+              
                 querySnapshot.forEach(element => {
                     var data = element.data();
                     setInfo(arr => [...arr, data]);
-                   
-                
+
+
                 });
+                setShow(true);
+                setLoading(false);
             }
             else {
                 alert("Profile Doesn't Exist");
-            
-         }
-         
+                setLoading(false);
 
-            })
+            }
+
+        })
             .catch((error) => {
                 alert(error.message);
-               
-                
-           
+
             })
-        
-        
-        }
+
+    }
 
 
-    
-    
     return (
         <div className='Search'>
             <Helmet>
@@ -61,41 +53,61 @@ export default function Search() {
             </Helmet>
 
 
-            <div className="container-sm search_container" style={{textAlign:"center"}}>
+            <div className="container-sm search_container" style={{ textAlign: "center" }}>
                 <div className="row">
                     <form className='search_form' onSubmit={(e) => handleSubmit(e)}>
 
-                        <h3 style={{ textAlign: 'center' }}>Search Faculty Data</h3>
+                        <h4 style={{ textAlign: 'center' }}>Search Faculty Data</h4>
 
-                        <input class="form-control me-2 search_input" type="text" placeholder="Search Faculty Data" 
-                        onChange={(e) => setStext(e.target.value)} aria-label="Search" required  />
-                        
-                        
+                        <input class="form-control me-2 search_input" type="text" placeholder="Search Faculty Data"
+                            onChange={(e) => setStext(e.target.value)} aria-label="Search" required />
+
+
                         <button class="btn btn-outline-success search_btn" type="submit"><i class="bi bi-search"></i></button>
 
                     </form> </div>
-                <button id='search_btn' style={{width:"15%"}} className='search_btn btn'
+                <button id='search_btn' style={{ width: "15%" }} className='search_btn btn'
                     onClick={() => {
                         history('/Admin', { replace: true })
                     }}>Back</button>
 
             </div>
 
-            <br /> <hr/> <br />  
+            <br /> <hr /> <br />
             <div className="container">
 
-           
-        
-             <h4 style={{textAlign:"center", marginTop:"-10px"}}>Faculty Data</h4>
 
-      
-             <table style={{marginTop:"30px"}} className='table table-striped'>
+
+                <h4 style={{ textAlign: "center", marginTop: "-10px" }}>Faculty Data</h4>
+
+
+                <table  style={{ marginTop: "30px" }} className='table table-striped'>
                     <thead>
-                        <tr>
-                            <th scope='col'>Name</th>
-                            <th scope='col'>Email</th>
-                            <th scope='col'>Field</th>
-                        </tr></thead>
+                    {
+                (() => {
+                    if(!show&&loading) {
+                       
+                            return (
+                                <div class="text-center" style={{margin:"10px"}}>
+                                <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div></div>
+                             
+                        
+                            )
+                            setShow(false);
+                            
+                        } 
+                        else if (show){
+                            return(   <tr>
+                                <th scope='col'>Name</th>
+                                <th scope='col'>Email</th>
+                                <th scope='col'>Field</th>
+                            </tr>)
+                        }
+                })()  
+            }  
+                      </thead>
                     <tbody>
 
                         {
@@ -124,15 +136,10 @@ export default function Search() {
                                 </tr>
                             ))
                         } </tbody></table>
-           
-         
-     
-                    
-                           
-                       
+
             </div>
         </div>
-       
+
 
     )
 }
