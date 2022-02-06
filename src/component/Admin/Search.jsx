@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { db, auth } from '../../firebase';
+import * as firebase from '../../firebase';
 import { Navigate, useNavigate } from 'react-router';
 import './Search.css'
 
@@ -18,7 +18,7 @@ export default function Search() {
         e.preventDefault();
         setLoading(true);
 
-        await db.collection("facultyform").where("name", "==", stext).get().then((querySnapshot) => {
+        await firebase.db.collection("facultyform").where("name", "==", stext).get().then((querySnapshot) => {
 
             if (!querySnapshot.empty) {
               
@@ -45,6 +45,23 @@ export default function Search() {
 
     }
 
+    const handleUser = async (e) => {
+        const user = firebase.auth.currentUser;
+        await firebase.db.collection("users").where("email", "==", user.email).get().then(querySnapshot => {
+            querySnapshot.forEach(element => {
+                var data = element.data();
+                if (data.role === "admin") {
+                    history('/Admin', { replace: true })
+                }
+                else if (data.role === "coordinator") {
+                    history('/Dashboard', { replace: true })
+                }
+            
+
+            })
+        });
+    }
+
 
     return (
         <div className='Search'>
@@ -57,7 +74,7 @@ export default function Search() {
                 <div className="row">
                     <form className='search_form' onSubmit={(e) => handleSubmit(e)}>
 
-                        <h4 style={{ textAlign: 'center' }}>Search Faculty Data</h4>
+                        <h5 style={{ textAlign: 'center' }}>Search Faculty Data</h5>
 
                         <input class="form-control me-2 search_input" type="text" placeholder="Search Faculty Data"
                             onChange={(e) => setStext(e.target.value)} aria-label="Search" required />
@@ -66,10 +83,7 @@ export default function Search() {
                         <button class="btn btn-outline-success search_btn" type="submit"><i class="bi bi-search"></i></button>
 
                     </form> </div>
-                <button id='search_btn' style={{ width: "15%" }} className='search_btn btn'
-                    onClick={() => {
-                        history('/Admin', { replace: true })
-                    }}>Back</button>
+              
 
             </div>
 
@@ -81,7 +95,7 @@ export default function Search() {
                 <h4 style={{ textAlign: "center", marginTop: "-10px" }}>Faculty Data</h4>
 
 
-                <table  style={{ marginTop: "30px" }} className='table table-striped'>
+                <table  style={{ marginTop: "30px" }} id="search" className='table table-striped'>
                     <thead>
                     {
                 (() => {
@@ -99,10 +113,12 @@ export default function Search() {
                             
                         } 
                         else if (show){
-                            return(   <tr>
+                            return(   <tr >
                                 <th scope='col'>Name</th>
+                                <th scope='col'>Age</th>
                                 <th scope='col'>Email</th>
                                 <th scope='col'>Field</th>
+                                <th scope='col'>Qualification</th>
                             </tr>)
                         }
                 })()  
@@ -114,16 +130,23 @@ export default function Search() {
 
 
                             info.map((data) => (
-                                <tr>
+                                <tr >
 
                                     <td>
                                         {data.name}
+                                    </td>
+                                    <td>
+                                        {data.age}
                                     </td>
                                     <td>
                                         {data.email}
                                     </td>
                                     <td>
                                         {data.field}
+
+                                    </td>
+                                    <td>
+                                        {data.qualification}
 
                                     </td>
 
@@ -136,6 +159,11 @@ export default function Search() {
                                 </tr>
                             ))
                         } </tbody></table>
+                        <div className="d-flex justify-content-center">
+                          <button id='search_btn' style={{ width: "15%" }} className='search_btn btn'
+                    onClick={
+                    (e) => { handleUser(e) }
+                    }>Back</button></div>
 
             </div>
         </div>

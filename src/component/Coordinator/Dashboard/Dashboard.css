@@ -7,12 +7,18 @@ nav{
 background-color:#192841!important ;
 }
 
+.dashboard{
+  width: 100%;
+}
 
 
 .da_container{
 
-    margin-top: 20px;
-    width: 100%;
+  margin-top: 20px;
+  width: 100%;
+
+  border-radius: 5px;
+  padding: 20px;
 
 }
 
@@ -20,9 +26,8 @@ background-color:#192841!important ;
 background-color: white;
 padding: 10px;
 border-radius: 3px;
-box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 border: 1px solid black;
-margin: 20px;
+margin-top: 20px;
 
 } 
 

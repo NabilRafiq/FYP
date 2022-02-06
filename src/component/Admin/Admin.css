@@ -13,6 +13,9 @@ nav{
 
       margin-top: 20px;
       width: 100%;
+      background-color: "#e6e8e6";
+      border-radius: 5px;
+      padding: 20px;
 
   }
 
@@ -20,9 +23,8 @@ nav{
   background-color: white;
   padding: 10px;
   border-radius: 3px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border: 1px solid black;
-  margin: 20px;
+  margin-top: 20px;
   
   } 
   

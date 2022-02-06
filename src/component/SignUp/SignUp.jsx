@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { auth, db } from '../../firebase';
 import { useNavigate } from 'react-router';
 import { Helmet } from 'react-helmet';
 
 import './SignUp.css';
 export default function SignUp() {
+
+
+    useEffect(() => {
+        // change background color with a random color
+        const color =  "#f0f2f0";
+        document.body.style.background = color;
+      });
+
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -61,7 +69,7 @@ export default function SignUp() {
          
             <div className="s_container container">
                 <form className='s_form' onSubmit={(e) => handleSubmit(e)}>
-                <h1 style={{ textAlign: 'center' }}>SignUp</h1>
+                <h2 style={{ textAlign: 'center' }}><i class="bi bi-person-plus-fill"></i></h2>
 
 
                     <label style={{ marginTop: '10px' }} for="uname" className='form-label'><b>UserName</b></label>

@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import { db, auth } from '../../../firebase';
+import * as firebase from '../../../firebase';
 import { Navigate, useNavigate } from 'react-router';
 import './form.css'
 
 
 
 export default function Form() {
+
+    useEffect(() => {
+        // change background color with a random color
+        const color =  "#f0f2f0";
+        document.body.style.background = color;
+      });
+
+
+    
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [age, setAge] = useState("");
@@ -16,10 +25,10 @@ export default function Form() {
     const history = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await auth.createUserWithEmailAndPassword(email, password)
+        await firebase.auth.createUserWithEmailAndPassword(email, password)
 
             .then(() => {
-                db.collection('facultyform').add({
+                firebase.db.collection('facultyform').add({
                     name: name,
                     email: email,
                     age: age,
@@ -29,7 +38,7 @@ export default function Form() {
                     role: "faculty"
 
                 })
-                db.collection('users').add({
+                firebase.db.collection('users').add({
                     name: name,
                     email: email,
                     age: age,
@@ -52,6 +61,24 @@ export default function Form() {
         setPassword("");
 
     }
+
+    const handleUser = async (e) => {
+        const user = firebase.auth.currentUser;
+        await firebase.db.collection("users").where("email", "==", user.email).get().then(querySnapshot => {
+            querySnapshot.forEach(element => {
+                var data = element.data();
+                if (data.role === "admin") {
+                    history('/Admin', { replace: true })
+                }
+                else if (data.role === "coordinator") {
+                    history('/Dashboard', { replace: true })
+                }
+            
+
+            })
+        });
+    }
+
     return (
         <div className='Form'>
             <Helmet>
@@ -62,7 +89,7 @@ export default function Form() {
             <div className="container-sm f_container">
                 <form className='f_form' onSubmit={(e) => handleSubmit(e)}>
 
-                    <h3 style={{ textAlign: 'center' }}>Faculty Form</h3>
+                    <h3 style={{ textAlign: 'center' }}><i class="bi bi-person-plus-fill"></i></h3>
 
                     <label for="uname" className='f_label form-label'><b>Name</b></label>
                     <input type="text" className='f_input  form-control' placeholder="Enter Name" name="uname" required value={name} onChange={(e) => setName(e.target.value)} />
@@ -80,15 +107,15 @@ export default function Form() {
                     <label for="psw" className='f_label form-label'><b>Password</b></label>
                     <input type="password" className='f_input form-control' placeholder="Enter Password" name="psw" value={password} required onChange={(e) => setPassword(e.target.value)} />
                     <label for="role" className='f_label form-label' ><b>Role</b></label>
-                    <input type="text" disabled className='f_input form-control' readonly  value="Faculty" name="role" />
+                    <input type="text" disabled className='f_input form-control' readonly  value="faculty" name="role" />
 
 
 
                     <button id='f_button' type="submit" className='f_button btn'>Submit</button>
                     <button className='f_button btn' style={{ color: 'black', backgroundColor: 'white' }}
-                        onClick={() => {
-                            history('/Dashboard', { replace: true })
-                        }}>Back</button>
+                        onClick={
+                          (e)=> {handleUser(e)}
+                        }>Back</button>
 
 
 

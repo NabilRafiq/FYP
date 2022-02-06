@@ -1,9 +1,18 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import './Admin.css'
 import * as firebase from '../../firebase';
 import { Navigate, useNavigate } from 'react-router';
 import { Helmet } from 'react-helmet';
 export default function Dashboard(){
+
+  useEffect(() => {
+    // change background color with a random color
+    const color =  "#f0f2f0";
+    document.body.style.background = color;
+  });
+
+
+
     const history= useNavigate()
     const [info, setInfo] = useState([]);
     const [disable, setDisable] = React.useState(false);
@@ -72,12 +81,12 @@ export default function Dashboard(){
           </a>
           <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a style={{cursor:'pointer'}} onClick={()=>{
-                history('/adminfaculty',{replace:true})}}
+                history('/facultyform',{replace:true})}}
                  className="dropdown-item" >
                 Faculty Form
                 </a></li>
                 <li><a style={{cursor:'pointer'}} onClick={()=>{
-                history('/admingdata',{replace:true})}}
+                history('/getdata',{replace:true})}}
                  className="dropdown-item" >
                 Faculty Data
                 </a></li>
@@ -131,9 +140,9 @@ export default function Dashboard(){
       
           </ul>
         </li>
-        <li className="nav-item dropdown">
+        {/* <li className="nav-item dropdown">
           <a className="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Annoucement
+          <i class="fa fa-bullhorn" style={{fontSize:"large",color:"white"}} aria-hidden="true"></i>
           </a>
           <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a style={{cursor:'pointer'}} onClick={()=>{
@@ -148,7 +157,7 @@ export default function Dashboard(){
                 </a></li>
       
           </ul>
-        </li>
+        </li> */}
      
         <li className="nav-item">
            <a onClick={handleLogin} style={{cursor:'pointer'}} className="nav-link active" aria-current="page" >
@@ -163,7 +172,7 @@ export default function Dashboard(){
 </nav>
           
             
-<div className="ad_container container">
+<div className="ad_container container" >
 
 <h3 style={{ textAlign: "center", margin: '50px' }}>User's Information</h3>
 
@@ -180,12 +189,12 @@ export default function Dashboard(){
                         } 
                 })()  
             }  
-<div className="row">
+<div className="row" >
 {
 
 
 info.map((data) => (
-    <form action="" className="ad_form">
+    <form action=""  className="ad_form">
     
         <label for="uname" className='ad_label form-label'><b>Name</b></label>
         <input type="text" readOnly value={data.name} className='fa_input form-control'  name="uname" />

@@ -1,9 +1,18 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import './Dashboard.css';
 import * as firebase from '../../../firebase';
 import { Navigate, useNavigate } from 'react-router';
 import { Helmet } from 'react-helmet';
 export default function Dashboard(){
+
+
+  useEffect(() => {
+    // change background color with a random color
+    const color =  "#f0f2f0";
+    document.body.style.background = color;
+  });
+
+
     const history= useNavigate()
     const [info, setInfo] = useState([]);
     const [disable, setDisable] = React.useState(false);
@@ -52,7 +61,7 @@ export default function Dashboard(){
  
 
     return(
-        <div className="Dashboard">
+        <div className="Dashboard" >
                   <Helmet>
         <title>Coordinator Dashboard</title>
       </Helmet>
@@ -84,7 +93,7 @@ export default function Dashboard(){
                 Faculty Data
                 </a></li>
                 <li><a style={{cursor:'pointer'}} onClick={()=>{
-                history('/csearch',{replace:true})}}
+                history('/search',{replace:true})}}
                  className="dropdown-item" >
                 Search Faculty
                 </a></li>
@@ -122,7 +131,7 @@ export default function Dashboard(){
 </nav>
           
             
-<div className="container">
+<div className="container da_container"   >
 
 <h3 style={{ textAlign: "center", margin: '50px' }}>User's Information</h3>
 
@@ -148,7 +157,7 @@ export default function Dashboard(){
 
 
 info.map((data) => (
-    <form action="" className="da_form">
+    <form action="" className="da_form" >
     
         <label for="uname" className='da_label form-label'><b>Name</b></label>
         <input type="text" readOnly disabled value={data.name} className='da_input form-control' name="uname" />

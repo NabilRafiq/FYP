@@ -70,12 +70,36 @@
   #search_btn:hover{
     color: white!important;
   }
- .stable{
-   display: none;
- }
+ 
+ #search{
+  border-collapse: collapse;
+  width: 100%;
+border: 2px solid #192841;
   
+}
+
+#search th {
+
+  text-align: left;
+  background-color: #192841!important ;
+  color: white;
+}
+#search td, #search th {
+  border: 1px solid #ddd;
+
+}
+
+#search tr:nth-child(even){background-color: #f2f2f2;
+}
+
+#search tr:hover {background-color: #ddd;}
   
-  
+.form-control:active, .form-control:focus{
+  box-shadow: none;
+  border-color: none;
+  outline:#192841  auto 5px ;
+}
+ 
   
   
   

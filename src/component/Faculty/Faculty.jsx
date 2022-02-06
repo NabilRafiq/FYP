@@ -1,9 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Faculty.css'
 import * as firebase from '../../firebase';
 import { Navigate, useNavigate } from 'react-router';
 import { Helmet } from 'react-helmet';
 export default function Dashboard() {
+
+    useEffect(() => {
+        // change background color with a random color
+        const color =  "#f0f2f0";
+        document.body.style.background = color;
+      });
+
+
+
     const history = useNavigate()
 
     const [info, setInfo] = useState([]);

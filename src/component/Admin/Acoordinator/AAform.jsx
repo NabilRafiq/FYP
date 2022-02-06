@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { db, auth } from '../../../firebase';
 import { Navigate, useNavigate } from 'react-router';
@@ -7,6 +7,13 @@ import './AAform.css'
 
 
 export default function AAform() {
+
+    useEffect(() => {
+        // change background color with a random color
+        const color =  "#f0f2f0";
+        document.body.style.background = color;
+      });
+
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [age, setAge] = useState("");
@@ -62,7 +69,7 @@ export default function AAform() {
             <div className="container-sm aaf_container">
                 <form className='aaf_form' onSubmit={(e) => handleSubmit(e)}>
 
-                    <h3 style={{ textAlign: 'center' }}>Academic Coordinator Form</h3>
+                    <h3 style={{ textAlign: 'center' }}><i class="bi bi-person-plus-fill"></i></h3>
 
                     <label for="uname" className='aaf_label form-label'><b>Name</b></label>
                     <input type="text" className='aaf_input  form-control' placeholder="Enter Name" name="uname" required value={name} onChange={(e) => setName(e.target.value)} />
@@ -80,7 +87,7 @@ export default function AAform() {
                     <label for="psw" className='aaf_label form-label'><b>Password</b></label>
                     <input type="password" className='aaf_input form-control' placeholder="Enter Password" name="psw" value={password} required onChange={(e) => setPassword(e.target.value)} />
                     <label for="role" className='aaf_label form-label' ><b>Role</b></label>
-                    <input type="text" disabled className='aaf_input form-control' readonly  value="Faculty" name="role" />
+                    <input type="text" disabled className='aaf_input form-control' readonly  value="Coordinator" name="role" />
 
 
 

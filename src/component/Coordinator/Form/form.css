@@ -51,7 +51,11 @@
     color: white!important;
   }
   
-  
+  .form-control:active, .form-control:focus{
+    box-shadow: none;
+    border-color: none;
+    outline:#192841  auto 5px ;
+ }
   
   
   

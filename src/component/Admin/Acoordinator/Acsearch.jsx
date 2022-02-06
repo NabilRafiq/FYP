@@ -75,14 +75,14 @@ setLoading(false);
             </div>
 
             <br /> <hr /> <br />
-            <div className="container">
+            <div className="container" >
 
 
 
                 <h4 style={{ textAlign: "center", marginTop: "-10px" }}>Coordinator Data</h4>
 
 
-                <table  style={{ marginTop: "30px" }} className='table table-striped'>
+                <table  style={{ marginTop: "30px" }} id="search" className='table table-striped'>
                     <thead>
                     {
                 (() => {
@@ -102,8 +102,10 @@ setLoading(false);
                         else if (show){
                             return(   <tr>
                                 <th scope='col'>Name</th>
+                                <th scope='col'>Age</th>
+                                <th scope='col'>Gender</th>
                                 <th scope='col'>Email</th>
-                                <th scope='col'>Field</th>
+                                <th scope='col'>Number</th>
                             </tr>)
                         }
                 })()  
@@ -115,16 +117,24 @@ setLoading(false);
 
 
                             info.map((data) => (
-                                <tr>
+                                <tr >
 
                                     <td>
                                         {data.name}
                                     </td>
                                     <td>
-                                        {data.email}
+                                        {data.age}
                                     </td>
                                     <td>
-                                        {data.field}
+                                        {data.gender}
+
+                                    </td>
+                                    <td>
+                                        {data.email}
+
+                                    </td>
+                                    <td>
+                                        {data.number}
 
                                     </td>
 
