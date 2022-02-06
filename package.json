@@ -41,5 +41,18 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/NabilRafiq/FYP.git"
+  },
+  "author": "Nabeel,Izhar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NabilRafiq/FYP/issues"
+  },
+  "homepage": "https://github.com/NabilRafiq/FYP#readme"
 }
