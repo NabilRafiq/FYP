@@ -12,6 +12,8 @@ import Cform from './component/Admin/Course/Cform';
 import Ccouse from './component/Coordinator/Ccourse/Ccourse';
 import Search from './component/Admin/Search';
 import Acsearch from './component/Admin/Acoordinator/Acsearch';
+import Filter from './component/Admin/Filter';
+
 // import Announce from './component/Annoucement/Annouce';
 
 import { Route, Routes as Switch, BrowserRouter } from 'react-router-dom';
@@ -44,6 +46,7 @@ function App() {
         <Route exact path='/ccourse' element={<Ccouse />} />
         <Route exact path='/search' element={<Search />} />
         <Route exact path='/acsearch' element={<Acsearch />} />
+        <Route exact path='/filter' element={<Filter />} />
         {/* <Route exact path='/announce' element={<Announce />}/> */}
 
 

@@ -7,9 +7,6 @@ nav{
 background-color:#192841!important ;
 }
 
-.dashboard{
-  width: 100%;
-}
 
 
 .da_container{
@@ -28,6 +25,7 @@ padding: 10px;
 border-radius: 3px;
 border: 1px solid black;
 margin-top: 20px;
+width: 60%;
 
 } 
 

@@ -1,88 +1,124 @@
-import React, { useState, useEffect } from 'react';
-import './Faculty.css'
+import React,{useState, useEffect} from 'react';
+import './Faculty.css';
 import * as firebase from '../../firebase';
 import { Navigate, useNavigate } from 'react-router';
 import { Helmet } from 'react-helmet';
-export default function Dashboard() {
-
-    useEffect(() => {
-        // change background color with a random color
-        const color =  "#f0f2f0";
-        document.body.style.background = color;
-      });
+export default function Faculty(){
 
 
+  useEffect(() => {
+    // change background color with a random color
+    const color =  "#f0f2f0";
+    document.body.style.background = color;
+  });
 
-    const history = useNavigate()
-
+  const getInitialState = () => {
+    const value = "1";
+    return value;
+  };
+    const history= useNavigate()
     const [info, setInfo] = useState([]);
     const [disable, setDisable] = React.useState(false);
- 
-    const handleLogout = async (e) => {
+    const [loading, setLoading] = useState(false);
+    const [time, setTime] = useState(getInitialState);
+    let docid = "1"
+
+
+    const handleLogin = async (e) => {
         e.preventDefault()
         try {
-            await firebase.auth.signOut();
+             await firebase.auth.signOut();
             history('/', { replace: true })
         } catch (err) {
             alert(err.message);
         }
     }
-
-      
-  
-  
-
     const userInformation = async (e) => {
         
-        const user = firebase.auth.currentUser;
+      const user = firebase.auth.currentUser;
 
-        setDisable(true);
-    
-        try {
+      setDisable(true);
+  
+      try {
+        setLoading(true);
+
+          await  firebase.db.collection("facultyform").where("email", "==", user.email).get()
+          .then(querySnapshot => { 
+                 
+                      querySnapshot.forEach(element => {
+                 
+                          var data = element.data();
+                          setInfo(arr => [...arr, data]);
+                          
+                          
+
+                      })
+                      
+                      console.log(docid)
+                      setLoading(false);
+                 
+                          });
+                 
             
-            await  firebase.db.collection("facultyform").where("email", "==", user.email).get()
-            .then(querySnapshot => { 
-                   
-                        querySnapshot.forEach(element => {
-                            var data = element.data();
-                            setInfo(arr => [...arr, data]);
 
-                            
+      } catch (err) {
+          alert(err.message);
+      }
+  
+  }
 
-                        })
-                    });
-                   
+  const handleSubmit = async (e)=>{
+  
+    const user = firebase.auth.currentUser;
+    await  firebase.db.collection("facultyform").where("email", "==", user.email).get()
+    .then(querySnapshot => { 
+           
+                querySnapshot.forEach(element => {
+                  docid = element.id;
+                
+
+                })
+                
+                
               
+           
+                    });
+           
+    var washingtonRef = firebase.db.collection("facultyform").doc(docid);
 
-        } catch (err) {
-            alert(err.message);
-        }
-    
-    }
+    // Set the "capital" field of the city 'DC'
+    return washingtonRef.update({
+        timeslot: time
+    })
+    .then(function() {
+      alert("Data updated successfully")
+      setTimeout(function () { window.location.reload() }, 1500);
+    })
+    .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+    });
+  }
+ 
 
-return (
-    <div className="Dashboard">
-        <Helmet>
-            <title>Faculty Dashboard</title>
-        </Helmet>
-
-        <nav className="navbar navbar-expand-lg navbar-dark" style={{ backgroundColor: '#192841' }}>
-            <div className="container-fluid">
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className=" collapse navbar-collapse" id="navbarNavDropdown" >
-                    <ul className="navbar-nav">
-                        <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" >Home</a>
-                        </li>
-                        {/* <li className="nav-item">
-          <a className="nav-link" >Features</a>
-        </li>
+    return(
+        <div className="Dashboard" >
+                  <Helmet>
+        <title>Faculty Dashboard</title>
+      </Helmet>
+      
+      <nav className="navbar navbar-expand-lg navbar-dark" style={{backgroundColor:'#192841'}}>
+  <div className="container-fluid">
+    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span className="navbar-toggler-icon"></span>
+    </button>
+    <div className=" collapse navbar-collapse" id="navbarNavDropdown" >
+      <ul className="navbar-nav">
         <li className="nav-item">
-          <a className="nav-link" >Pricing</a>
-        </li> */}
-                        {/* <li className="nav-item dropdown">
+          <a className="nav-link active" aria-current="page" >Home</a>
+        </li>
+   
+        {/* <li className="nav-item dropdown">
           <a className="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Faculty
           </a>
@@ -97,68 +133,126 @@ return (
                  className="dropdown-item" >
                 Faculty Data
                 </a></li>
-            {/* <li><a className="dropdown-item" >Another action</a></li>
-            <li><a className="dropdown-item" >Something else here</a></li> */}
-                        {/* </ul>
+                <li><a style={{cursor:'pointer'}} onClick={()=>{
+                history('/search',{replace:true})}}
+                 className="dropdown-item" >
+                Search Faculty
+                </a></li>
+
+          </ul>
+        </li>
+        <li className="nav-item dropdown">
+          <a className="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Course
+          </a>
+          <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a style={{cursor:'pointer'}} onClick={()=>{
+                history('/ccourse',{replace:true})}}
+                 className="dropdown-item" >
+                Course Form
+                </a></li>
+                <li><a style={{cursor:'pointer'}} onClick={()=>{
+                history('/getdata',{replace:true})}}
+                 className="dropdown-item" >
+                Faculty Data
+                </a></li>
+             
+
+          </ul>
         </li> */}
-                        <li className="nav-item">
-                            {<a onClick={handleLogout} style={{ cursor: 'pointer' }} className="nav-link active" aria-current="page" >
-                                Logout
-                            </a>
-         /*   async function handleLogout  (){
-    await auth.signOut();
+        <li className="nav-item">
+          { <a onClick={handleLogin} style={{cursor:'pointer'}} className="nav-link active" aria-current="page" >
+              Logout
+          </a> 
+        }
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+          
+            
+<div className="container fa_container"   >
 
-    history("/login",{replace:true})
-  } 
-          */}
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+<h3 style={{ textAlign: "center", margin: '50px' }}>User's Information</h3>
 
+<button disabled={disable} id='fa_button' style={{width:"25%"}} className='fa_button btn d-grid gap-2 col-6 mx-auto' type='button' onClick={() => { userInformation() }}>Load Information</button>
 
-
-        <div className="container">
-
-            <h3 style={{ textAlign: "center", margin: '50px' }}>User's Information</h3>
-
-        <button disabled={disable} className='fa_button btn d-grid gap-2 col-6 mx-auto' type='button' onClick={() => { userInformation() }}>Load Information</button>
-
-            <div className="row">
+  
             {
+                (() => {
+                    if(loading) {
+                            return (
+                              <div class="text-center" style={{margin:"10px"}}>
+                              <div class="spinner-border" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div></div>
+                            )
+                        } 
+                })()  
+            }  
+<div className="row">
+
+
+{
 
 
 info.map((data) => (
-                <form action="" className="faform">
-                
-                    <label for="uname" className='fa_label form-label'><b>Name</b></label>
-                    <input type="text" readOnly value={data.name} className='fa_input form-control' placeholder="Enter Name" name="uname" />
+<div className='d-flex justify-content-center'>
+    <form action=""  className=" faform" >
+    
+        <label for="uname" className='fa_label form-label'><b>Name</b></label>
+        <input type="text" readOnly disabled value={data.name} className='fa_input form-control' name="uname" />
 
 
-                    <label for="age" className='fa_label form-label'><b>Age</b></label>
-                    <input type="number" readOnly value={data.age} className='fa_input form-control' placeholder="Enter Age" name="age" />
+        <label for="age" className='fa_label form-label'><b>Age</b></label>
+        <input type="number" readOnly disabled value={data.age} className='fa_input form-control' name="age" />
 
-                    <label for="qual" className='fa_label form-label' ><b>Qualification</b></label>
-                    <input type="text" readOnly value={data.qualification} className='fa_input form-control' placeholder="Enter Qualification" name="qual" />
-                    <label for="field" className='fa_label form-label'><b>Field</b></label>
-                    <input type="text" readOnly value={data.field} className='fa_input form-control' placeholder="Enter Field" name="field" />
-                    <label for="Email" className='fa_label form-label'><b>Email</b></label>
-                    <input type="email" readOnly value={data.email} className='fa_input form-control' placeholder="Enter Email" name="Email" />
-                    <label for="role" className='f_label form-label' ><b>Role</b></label>
-                    <input type="text" readOnly value={data.role} disabled className='fa_input form-control' readonly  name="role" />
+        <label for="field" className='fa_label form-label' ><b>Field</b></label>
+     <input type="text" readOnly disabled value={data.field} className='fa_input form-control'  name="field" />
 
-                </form>
+        <label for="qual" className='fa_label form-label' ><b>Qualification</b></label>
+     <input type="text" readOnly disabled value={data.qualification} className='fa_input form-control'  name="num" />
+      
+        <label for="Email" className='fa_label form-label'><b>Email</b></label>
+        <input type="email" readOnly disabled value={data.email} className='fa_input form-control'  name="Email" />
+        <label for="role" className='f_label form-label' ><b>Role</b></label>
+        <input type="text" readOnly value={data.role} disabled className='fa_input form-control' readonly  name="role" />
+      
+        <div class="input-group mb-3">
+  <label class="input-group-text" for="inputGroupSelect01"><i class="bi bi-alarm-fill" style={{fontSize:"large"}}></i></label>
+  <select onChange={(e) => setTime(e.target.value)} value={time} class="form-select" id="inputGroupSelect01">
+    <option value="1">8am-11:30am</option>
+    <option value="2">11am-1:30pm</option>
+    <option value="3">1:45pm-4:15pm</option>
+    <option value="4">4:30pm-7:00pm</option>
+  </select>
+</div>
+
+
+    </form></div>
 ))}
-                </div>
-
-
-        </div>
-
+          {
+                (() => {
+                    if(disable&&!loading) {
+                            return (
+                              <div className="d-flex justify-content-center">
+<button className='fa_button' onClick={(e)=>{handleSubmit(e)}}>Update</button></div>
+                            )
+                        } 
+                })()  
+            } 
 
     </div>
-)}
 
+
+</div>   
+
+            
+
+        </div>
+    )
+}
 
 
 

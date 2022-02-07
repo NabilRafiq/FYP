@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { db, auth } from '../../../firebase';
+import * as firebase from '../../../firebase';
 import { Navigate, useNavigate } from 'react-router';
 import {Link} from "react-router-dom";
 import '../../Coordinator/GetData/getdata.css';
@@ -13,6 +13,7 @@ export default function AAgetdata() {
     const [loading, setLoading] = useState(false);
     const [show, setShow] = useState(false);
     const history = useNavigate();
+   
 
     window.addEventListener('load', () => {
         setLoading(true);
@@ -21,7 +22,7 @@ export default function AAgetdata() {
     });
     
     const Fetchdata = () => {
-        db.collection("coordinator").get().then((querySnapshot) => {
+        firebase.db.collection("coordinator").get().then((querySnapshot) => {
 
 
             querySnapshot.forEach(element => {
@@ -34,8 +35,9 @@ export default function AAgetdata() {
         })
         
     }
-    const handleDelete = async (name) => {
-        await db.collection("coordinator").where("email", "==", name).get()
+    const handleDelete = async (name,password) => {
+        
+        await firebase.db.collection("coordinator").where("email", "==", name).get()
             .then(querySnapshot => {
                 querySnapshot.docs[0].ref.delete();
 
@@ -44,15 +46,17 @@ export default function AAgetdata() {
 
 
             })
-        await db.collection("users").where("email", "==", name).get()
+        await firebase.db.collection("users").where("email", "==", name).get()
             .then(querySnapshot => {
                 querySnapshot.docs[0].ref.delete();
 
                 alert("User Removed");
 
 
-
             })
+
+                
+            
 
 
 
@@ -130,7 +134,7 @@ export default function AAgetdata() {
 
                                     </td>
                                     <td scope='col'>
-                                        <button className="btn btn-warning" onClick={() => { handleDelete(data.email) }}><i class="bi bi-trash"></i></button>
+                                        <button className="btn btn-warning" onClick={() => { handleDelete(data.email,data.password) }}><i class="bi bi-trash"></i></button>
                                     </td>
                                     {/* <th scope='col'>
                                       

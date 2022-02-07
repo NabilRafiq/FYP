@@ -194,6 +194,7 @@ export default function Dashboard(){
 
 
 info.map((data) => (
+  <div className="d-flex justify-content-center">
     <form action=""  className="ad_form">
     
         <label for="uname" className='ad_label form-label'><b>Name</b></label>
@@ -205,7 +206,7 @@ info.map((data) => (
         <label for="role" className='ad_label form-label' ><b>Role</b></label>
         <input type="text" readOnly value={data.role} disabled className='ad_input form-control' readonly  name="role" />
 
-    </form>
+    </form></div>
 ))}
     </div>
 

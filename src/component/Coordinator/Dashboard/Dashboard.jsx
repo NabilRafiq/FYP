@@ -17,6 +17,7 @@ export default function Dashboard(){
     const [info, setInfo] = useState([]);
     const [disable, setDisable] = React.useState(false);
     const [loading, setLoading] = useState(false);
+    
     const handleLogin = async (e) => {
         e.preventDefault()
         try {
@@ -157,6 +158,7 @@ export default function Dashboard(){
 
 
 info.map((data) => (
+  <div className="d-flex justify-content-center">
     <form action="" className="da_form" >
     
         <label for="uname" className='da_label form-label'><b>Name</b></label>
@@ -177,7 +179,7 @@ info.map((data) => (
         <label for="role" className='f_label form-label' ><b>Role</b></label>
         <input type="text" readOnly value={data.role} disabled className='da_input form-control' readonly  name="role" />
 
-    </form>
+    </form></div>
 ))}
     </div>
 

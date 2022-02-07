@@ -67,7 +67,7 @@ export default function SignUp() {
                 <title>SignUp</title>
             </Helmet>
          
-            <div className="s_container container">
+            <div className="s_container container d-flex justify-content-center">
                 <form className='s_form' onSubmit={(e) => handleSubmit(e)}>
                 <h2 style={{ textAlign: 'center' }}><i class="bi bi-person-plus-fill"></i></h2>
 
@@ -82,7 +82,7 @@ export default function SignUp() {
                     <input type="tel" size="11" className="s_input form-control" placeholder="03xxxxxxxxx" name="number" required onChange={(e) => setNumber(e.target.value)} />
 
 <div class="input-group mb-3">
-  <label class="input-group-text" for="inputGroupSelect01">Gender</label>
+  <label class="input-group-text" for="inputGroupSelect01"><i class="bi bi-gender-ambiguous" style={{fontSize:"large"}}></i></label>
   <select onChange={(e) => setGender(e.target.value)} value={gender} class="form-select" id="inputGroupSelect01">
     <option value="Male">Male</option>
     <option value="Female">Female</option>

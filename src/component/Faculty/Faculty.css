@@ -7,10 +7,21 @@ nav{
   background-color:#192841!important ;
 }
   
+.faform {
+  
+  background-color: white;
+border: 1px solid black;
+padding: 10px;
+border-radius: 3px;
+box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+margin-top: 20px;
+width: 50%;
+
+} 
 
 .fa_input {
   width: 100%;
-  padding: 12px 15px;
+  padding: 5px 10px;
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #ccc;
@@ -22,7 +33,7 @@ nav{
 background-color: #192841;
 color: white;
 padding: 5px;
-margin-top: 5px;
+margin-top: 7px;
 border: none;
 cursor: pointer;
 font-size: 16px;

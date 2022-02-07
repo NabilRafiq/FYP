@@ -13,12 +13,13 @@ import 'firebase/firebase-firestore';
     appId: "1:337649609730:web:75ce8ee1596d2bc5294b1b"
   };
 
-firebase.initializeApp(firebaseConfig)
+ firebase.initializeApp(firebaseConfig)
 
 const auth = firebase.auth();
 const db = firebase.firestore();
 
 export {
   auth,
-  db
+  db,
+  
 }
