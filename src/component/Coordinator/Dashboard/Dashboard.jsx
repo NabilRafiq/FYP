@@ -242,7 +242,10 @@ info.map((data) => (
         <label for="num" className='da_label form-label' ><b>Number</b></label>
                   <input type="number" onChange={(e) => { handleNumber(e) }} placeholder={data.number} className='da_input form-control' name="num" />
       
-        <label for="Email" className='da_label form-label'><b>Email</b></label>
+                  <label  for="depart" className='form-label da_label'><b>Program</b></label>
+                    <input type="text" className="da_input form-control" value={data.department} name="depart" />
+
+                  <label for="Email" className='da_label form-label'><b>Email</b></label>
         <input type="email" readOnly disabled value={data.email} className='da_input form-control'  name="Email" />
         <label for="role" className='f_label form-label' ><b>Role</b></label>
         <input type="text" readOnly value={data.role} disabled className='da_input form-control' readonly  name="role" />

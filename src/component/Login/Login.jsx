@@ -47,6 +47,9 @@ export default function Login() {
                             else if (data.role === "faculty") {
                                 history('/Faculty', { replace: true })
                             }
+                            else  {
+                                alert("User doesn't exists")
+                            }
 
                         })
                     });

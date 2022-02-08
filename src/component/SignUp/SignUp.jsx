@@ -19,6 +19,7 @@ export default function SignUp() {
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
     const [age, setAge] = useState('');
+    const [depart, setDepart] = useState('');
    
     const getInitialState = () => {
         const value = "Male";
@@ -37,6 +38,7 @@ export default function SignUp() {
                         number:number,
                         gender:gender,
                         email: email,
+                        department:depart,
                         password: password,
                         role:"coordinator"
                     })
@@ -46,6 +48,7 @@ export default function SignUp() {
                         number:number,
                         gender:gender,
                         email: email,
+                        department:depart,
                         password: password,
                         role:"coordinator"
                     })
@@ -88,6 +91,9 @@ export default function SignUp() {
     <option value="Female">Female</option>
   </select>
 </div>
+
+<label  for="depart" className='form-label'><b>Program</b></label>
+                    <input type="text" className="s_input form-control" placeholder="Enter Department" name="depart" required onChange={(e) => setDepart(e.target.value)} />
                     <label for="email" className='form-label'><b>Email</b></label>
                     <input type="email" className="s_input form-control" placeholder="Enter Email" name="email" required onChange={(e) => setEmail(e.target.value)} />
                     <label for="psw" className='form-label'><b>Password</b></label>

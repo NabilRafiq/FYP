@@ -106,6 +106,8 @@ export default function AAgetdata() {
                                 <th scope='col'>Email</th>
                                 <th scope='col'>Age</th>
                                 <th scope='col'>Number</th>
+                                <th scope='col'>Gender</th>
+                                <th scope='col'>Program</th>
                                 <th scope='col'>Delete</th>
                             </tr>)
                         }
@@ -131,6 +133,14 @@ export default function AAgetdata() {
                                     </td>
                                     <td>
                                         {data.number}
+
+                                    </td>
+                                    <td>
+                                        {data.gender}
+
+                                    </td>
+                                    <td>
+                                        {data.department}
 
                                     </td>
                                     <td scope='col'>
