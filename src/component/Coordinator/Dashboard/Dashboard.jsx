@@ -17,7 +17,19 @@ export default function Dashboard(){
     const [info, setInfo] = useState([]);
     const [disable, setDisable] = React.useState(false);
     const [loading, setLoading] = useState(false);
+    const [name, setName] = useState();
+    const [number, setNumber] = useState();
+    let docid = "1";
+    let docid1 = "1"; 
     
+    
+    const  handleName = event => {
+      setName(event.target.value)
+    } 
+  
+    const  handleNumber = event => {
+      setNumber(event.target.value)
+    } 
     const handleLogin = async (e) => {
         e.preventDefault()
         try {
@@ -42,7 +54,8 @@ export default function Dashboard(){
                       querySnapshot.forEach(element => {
                           var data = element.data();
                           setInfo(arr => [...arr, data]);
-
+                        setName(data.name)
+                        setNumber(data.number)
                           
 
                       })
@@ -59,7 +72,62 @@ export default function Dashboard(){
       }
   
   }
- 
+  const handleSubmit = async (e) => {
+
+    const user = firebase.auth.currentUser;
+    await firebase.db.collection("coordinator").where("email", "==", user.email).get()
+      .then(querySnapshot => {
+
+        querySnapshot.forEach(element => {
+          docid = element.id;
+
+
+        })
+
+
+
+
+      });
+      await firebase.db.collection("users").where("email", "==", user.email).get()
+      .then(querySnapshot => {
+
+        querySnapshot.forEach(element => {
+          docid1 = element.id;
+
+
+        })
+
+
+
+      });
+
+
+    var washingtonRef = firebase.db.collection("coordinator").doc(docid);
+    var washingtonRef1 = firebase.db.collection("users").doc(docid1);
+  
+   
+    await washingtonRef.update({
+      name:name,
+      number:number
+    })
+    return washingtonRef1.update({
+      name:name,
+      number:number
+    })
+  
+      .then(function () {
+        alert("Data updated successfully")
+        setTimeout(function () { window.location.reload() }, 1500);
+      })
+      .catch(function (error) {
+        alert(error.message)
+        setTimeout(function () { window.location.reload() }, 1500);
+      })
+      
+     
+     
+
+  }
 
     return(
         <div className="Dashboard" >
@@ -134,7 +202,7 @@ export default function Dashboard(){
             
 <div className="container da_container"   >
 
-<h3 style={{ textAlign: "center", margin: '50px' }}>User's Information</h3>
+<h3 style={{ textAlign: "center", margin: '30px' }}>User's Information</h3>
 
 <button disabled={disable} id='da_button' style={{width:"25%"}} className='da_button btn d-grid gap-2 col-6 mx-auto' type='button' onClick={() => { userInformation() }}>Load Information</button>
 
@@ -161,8 +229,8 @@ info.map((data) => (
   <div className="d-flex justify-content-center">
     <form action="" className="da_form" >
     
-        <label for="uname" className='da_label form-label'><b>Name</b></label>
-        <input type="text" readOnly disabled value={data.name} className='da_input form-control' name="uname" />
+    <label for="uname" className='da_label form-label'><b>Name</b></label>
+                  <input type="text" onChange={(e) => { handleName(e) }} placeholder={data.name} className='da_input form-control' name="uname" />
 
 
         <label for="age" className='da_label form-label'><b>Age</b></label>
@@ -172,7 +240,7 @@ info.map((data) => (
      <input type="text" readOnly disabled value={data.gender} className='da_input form-control'  name="gender" />
 
         <label for="num" className='da_label form-label' ><b>Number</b></label>
-     <input type="number" readOnly disabled value={data.number} className='da_input form-control'  name="num" />
+                  <input type="number" onChange={(e) => { handleNumber(e) }} placeholder={data.number} className='da_input form-control' name="num" />
       
         <label for="Email" className='da_label form-label'><b>Email</b></label>
         <input type="email" readOnly disabled value={data.email} className='da_input form-control'  name="Email" />
@@ -182,6 +250,16 @@ info.map((data) => (
     </form></div>
 ))}
     </div>
+    {
+            (() => {
+              if (disable && !loading) {
+                return (
+                  <div className="d-flex justify-content-center">
+                    <button className='fa_button' onClick={(e) => { handleSubmit(e) }}>Update</button></div>
+                )
+              }
+            })()
+          }
 
 
 </div>   

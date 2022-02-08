@@ -85,7 +85,9 @@ export default function Login() {
                     <div style={{ textAlign: 'center' }}>
 
                         <button className="l_button btn" type="submit" id='lbutton' onClick={(e) => handleSubmit(e)}>Login</button>
-
+                        {/* <button className="l_button btn" style={{marginLeft:"2px",width:"40%"}} id='lbutton' onClick={() => {
+                            history('/ForgotPass', { replace: true })
+                        }}>Forgot Password</button> */}
 
 
 
