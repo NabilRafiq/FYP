@@ -34,10 +34,21 @@ export default function Login() {
             await auth.signInWithEmailAndPassword(email, password)
 
                 .then(() => {
+                    db.collection("users")
+                    .where("email", "==", email).get()
+                    .then(function(querySnapshot) {
+                        if (querySnapshot.empty) {
+                            alert("User doesn't exists");
+                        }
+                        else {
+                            
+                  
 
                     db.collection("users").where("email", "==", email).get().then(querySnapshot => {
                         querySnapshot.forEach(element => {
                             var data = element.data();
+
+
                             if (data.role === "admin") {
                                 history('/Admin', { replace: true })
                             }
@@ -47,16 +58,17 @@ export default function Login() {
                             else if (data.role === "faculty") {
                                 history('/Faculty', { replace: true })
                             }
-                            else  {
-                                alert("User doesn't exists")
+                            else {
+                                alert("Data doesn't exists")
                             }
+                            
 
                         })
                     });
-                })
+                }})})
 
 
-
+          
         } catch (err) {
             alert(err.message);
         }

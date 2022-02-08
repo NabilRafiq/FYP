@@ -166,6 +166,11 @@ export default function Dashboard(){
                  className="dropdown-item" >
                 Search Faculty
                 </a></li>
+                <li><a style={{cursor:'pointer'}} onClick={()=>{
+                history('/filter',{replace:true})}}
+                 className="dropdown-item" >
+                Filter Faculty Data
+                </a></li>
 
           </ul>
         </li>
@@ -179,11 +184,7 @@ export default function Dashboard(){
                  className="dropdown-item" >
                 Course Form
                 </a></li>
-                <li><a style={{cursor:'pointer'}} onClick={()=>{
-                history('/getdata',{replace:true})}}
-                 className="dropdown-item" >
-                Faculty Data
-                </a></li>
+  
              
 
           </ul>
