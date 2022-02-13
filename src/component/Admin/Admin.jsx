@@ -198,26 +198,39 @@ export default function Dashboard() {
             }
           })()
         }
-        <div className="row" >
-          {
+
+     
+                     {
 
 
-            info.map((data) => (
-              <div className="d-flex justify-content-center">
-                <form action="" className="ad_form">
+          info.map((data) => (
+            <div className="d-flex justify-content-center">
+        <table className="table" id="getData" style={{marginTop:"25px"}}> 
+          <tbody>
+            <tr>
+              <th>Name</th>
+            <td> {data.name} </td>
+            </tr>
+            <tr>
+              <th>Email</th>
+            <td> {data.email} </td>
+            </tr>
+            <tr>
+              <th>Program</th>
+            <td> {data.program} </td>
+            </tr>
+            <tr>
+              <th>Role</th>
+            <td> {data.role} </td>
+            </tr>
+          </tbody>
+        </table></div>
 
-                  <label for="uname" className='ad_label form-label'><b>Name</b></label>
-                  <input type="text" readOnly value={data.name} className='fa_input form-control' name="uname" />
-                  <label for="program" className='ad_label form-label'><b>Program</b></label>
-                  <input type="text" readOnly value={data.program} className='ad_input form-control' name="program" />
-                  <label for="Email" className='ad_label form-label'><b>Email</b></label>
-                  <input type="email" readOnly value={data.email} className='ad_input form-control' name="Email" />
-                  <label for="role" className='ad_label form-label' ><b>Role</b></label>
-                  <input type="text" readOnly value={data.role} disabled className='ad_input form-control' readonly name="role" />
-
-                </form></div>
+            
             ))}
-        </div>
+
+ 
+            
 
 
       </div>

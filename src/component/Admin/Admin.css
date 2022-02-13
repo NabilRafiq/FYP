@@ -19,20 +19,12 @@ nav{
 
   }
 
-  .ad_form {
-  background-color: white;
-  padding: 10px;
-  border-radius: 3px;
-  border: 1px solid black;
-  margin-top: 20px;
-  width: 60%;
-  
-  } 
+
   
   
   
   .ad_input {
-    width: 100%;
+    width: 50%;
     padding: 12px 15px;
     margin: 8px 0;
     display: inline-block;
@@ -59,8 +51,26 @@ nav{
   #ad_button:hover{
     color: white!important;
   }
+  #infotab{      
+  border-collapse: collapse;
+      width: 100%;
+border: 2px solid #192841;
+}
+#getData th {
   
-  
+  text-align: left;
+  background-color: #192841!important ;
+  color: white;
+}
+#getData td, #getData th {
+  border: 1px solid #ddd;
+
+}
+
+#getData tr:nth-child(even){background-color: #f2f2f2;
+}
+
+#getData tr:hover {background-color: #ddd;}
   
   
   
