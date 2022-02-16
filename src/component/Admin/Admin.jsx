@@ -15,8 +15,13 @@ export default function Dashboard() {
 
   const history = useNavigate()
   const [info, setInfo] = useState([]);
-  const [disable, setDisable] = React.useState(false);
+
   const [loading, setLoading] = React.useState(false);
+
+  useEffect(() => {
+    // Update the document title using the browser API
+    userInformation();
+  },[]);
 
   const handleLogin = async (e) => {
     e.preventDefault()
@@ -27,11 +32,10 @@ export default function Dashboard() {
       alert(err.message);
     }
   }
-  const userInformation = async (e) => {
+  const userInformation = async () => {
 
     const user = firebase.auth.currentUser;
 
-    setDisable(true);
     setLoading(true);
     try {
 
@@ -183,12 +187,12 @@ export default function Dashboard() {
 
       <div className="ad_container container" >
 
-        <h3 style={{ textAlign: "center", margin: '50px' }}>User's Information</h3>
+     
 
-        <button disabled={disable} className='fa_button btn d-grid gap-2 col-6 mx-auto' type='button' onClick={() => { userInformation() }}>Show Information</button>
+    
         {
           (() => {
-            if (loading) {
+              if (loading) {
               return (
                 <div class="text-center" style={{ margin: "10px" }}>
                   <div class="spinner-border" role="status">

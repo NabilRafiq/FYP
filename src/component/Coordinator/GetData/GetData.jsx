@@ -14,52 +14,90 @@ export default function GetData() {
     const [show, setShow] = useState(false);
     const history = useNavigate();
 
-    window.addEventListener('load', () => {
+
+    useEffect(() => {
+        // Update the document title using the browser API
         setLoading(true);
         Fetchdata();
-
-    });
-
-    const Fetchdata = () => {
-        firebase.db.collection("facultyform").get().then((querySnapshot) => {
+    }, []);
 
 
-            querySnapshot.forEach(element => {
-                var data = element.data();
-                setInfo(arr => [...arr, data]);
+    // window.addEventListener('load', () => {
 
-            });
-            setLoading(false);
-            setShow(true);
-        })
+
+    // });
+
+
+    const Fetchdata = async () => {
+        await firebase.db.collection("facultyform").get()
+            .then((querySnapshot) => {
+
+
+                querySnapshot.forEach(element => {
+                    var data = element.data();
+                    setInfo(arr => [...arr, data]);
+
+                });
+                setLoading(false);
+                setShow(true);
+            })
 
     }
     const handleDelete = async (name) => {
+
+        const confirmBox = window.confirm("Do you want to delete this data?");
+
+        if (confirmBox == true) {
+            await firebase.db.collection("facultyform").where("email", "==", name).get()
+                .then(querySnapshot => {
+                    querySnapshot.docs[0].ref.delete();
+
+                    alert(" Faculty Data Deleted Successfully");
+
+
+
+                })
+
+
+
+            await firebase.db.collection("users").where("email", "==", name).get()
+                .then(querySnapshot => {
+                    querySnapshot.docs[0].ref.delete();
+
+                    alert("User Removed");
+
+
+
+                })
+
+
+
+
+                .catch((error) => {
+                    alert(error.message)
+                })
+            setTimeout(function () { window.location.reload() }, 3500);
+        }
+
+    }
+    const handleUpdate = async (name) => {
+
+
+
         await firebase.db.collection("facultyform").where("email", "==", name).get()
             .then(querySnapshot => {
-                querySnapshot.docs[0].ref.delete();
+                querySnapshot.forEach(element => {
+                    var data = element.data();
+                    setInfo(arr => [...arr, data]);
 
-                alert(" Faculty Data Deleted Successfully");
-
-
-
-            })
-        await firebase.db.collection("users").where("email", "==", name).get()
-            .then(querySnapshot => {
-                querySnapshot.docs[0].ref.delete();
-
-                alert("User Removed");
-
-
+                });
+               
+                history('/Update', { state: info })
 
             })
-
-
-
             .catch((error) => {
                 alert(error.message)
             })
-        setTimeout(function () { window.location.reload() }, 3500);
 
     }
 
@@ -120,6 +158,7 @@ export default function GetData() {
                                         <th scope='col'>Email</th>
                                         <th scope='col'>Field</th>
                                         <th scope='col'>Qualification</th>
+                                        <th scope='col'>Update</th>
                                         <th scope='col'>Delete</th>
                                     </tr>)
                                 }
@@ -127,10 +166,12 @@ export default function GetData() {
                         }  </thead>
                     <tbody>
 
+
                         {
 
 
                             info.map((data) => (
+
                                 <tr>
 
                                     <td>
@@ -149,6 +190,9 @@ export default function GetData() {
                                     <td>
                                         {data.qualification}
 
+                                    </td>
+                                    <td scope='col'>
+                                        <button className="btn btn-success" onClick={() => { handleUpdate(data.email) }}><i class="bi bi-pencil-square"></i></button>
                                     </td>
                                     <td scope='col'>
                                         <button className="btn btn-warning" onClick={() => { handleDelete(data.email) }}><i class="bi bi-trash"></i></button>

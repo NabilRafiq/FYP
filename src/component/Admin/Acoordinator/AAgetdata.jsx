@@ -14,12 +14,11 @@ export default function AAgetdata() {
     const [show, setShow] = useState(false);
     const history = useNavigate();
    
-
-    window.addEventListener('load', () => {
+    useEffect(() => {
+        // Update the document title using the browser API
         setLoading(true);
         Fetchdata();
-        
-    });
+      },[]);
     
     const Fetchdata = () => {
         firebase.db.collection("coordinator").get().then((querySnapshot) => {
