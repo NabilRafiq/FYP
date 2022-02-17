@@ -6,11 +6,7 @@ import { Helmet } from 'react-helmet';
 export default function Dashboard() {
 
 
-  useEffect(() => {
-    // change background color with a random color
-    const color = "#f0f2f0";
-    document.body.style.background = color;
-  });
+
 
 
   const history = useNavigate()
@@ -23,9 +19,11 @@ export default function Dashboard() {
 
   useEffect(() => {
     // Update the document title using the browser API
+    const color = "#f0f2f0";
+    document.body.style.background = color;
     setLoading(true);
     userInformation();
-}, []);
+  }, []);
 
 
   const handleName = event => {
@@ -76,62 +74,62 @@ export default function Dashboard() {
     }
 
   }
-  const handleSubmit = async (e) => {
+  // const handleSubmit = async (e) => {
 
-    const user = firebase.auth.currentUser;
-    await firebase.db.collection("coordinator").where("email", "==", user.email).get()
-      .then(querySnapshot => {
+  //   const user = firebase.auth.currentUser;
+  //   await firebase.db.collection("coordinator").where("email", "==", user.email).get()
+  //     .then(querySnapshot => {
 
-        querySnapshot.forEach(element => {
-          docid = element.id;
-
-
-        })
+  //       querySnapshot.forEach(element => {
+  //         docid = element.id;
 
 
-
-
-      });
-    await firebase.db.collection("users").where("email", "==", user.email).get()
-      .then(querySnapshot => {
-
-        querySnapshot.forEach(element => {
-          docid1 = element.id;
-
-
-        })
-
-
-
-      });
-
-
-    var washingtonRef = firebase.db.collection("coordinator").doc(docid);
-    var washingtonRef1 = firebase.db.collection("users").doc(docid1);
-
-
-    await washingtonRef.update({
-      name: name,
-      number: number
-    })
-    return washingtonRef1.update({
-      name: name,
-      number: number
-    })
-
-      .then(function () {
-        alert("Data updated successfully")
-        setTimeout(function () { window.location.reload() }, 1500);
-      })
-      .catch(function (error) {
-        alert(error.message)
-        setTimeout(function () { window.location.reload() }, 1500);
-      })
+  //       })
 
 
 
 
-  }
+  //     });
+  //   await firebase.db.collection("users").where("email", "==", user.email).get()
+  //     .then(querySnapshot => {
+
+  //       querySnapshot.forEach(element => {
+  //         docid1 = element.id;
+
+
+  //       })
+
+
+
+  //     });
+
+
+  //   var washingtonRef = firebase.db.collection("coordinator").doc(docid);
+  //   var washingtonRef1 = firebase.db.collection("users").doc(docid1);
+
+
+  //   await washingtonRef.update({
+  //     name: name,
+  //     number: number
+  //   })
+  //   return washingtonRef1.update({
+  //     name: name,
+  //     number: number
+  //   })
+
+  //     .then(function () {
+  //       alert("Data updated successfully")
+  //       setTimeout(function () { window.location.reload() }, 1500);
+  //     })
+  //     .catch(function (error) {
+  //       alert(error.message)
+  //       setTimeout(function () { window.location.reload() }, 1500);
+  //     })
+
+
+
+
+  // }
 
   return (
     <div className="Dashboard" >
@@ -153,46 +151,46 @@ export default function Dashboard() {
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Faculty
-          </a>
+                </a>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                   <li><a style={{ cursor: 'pointer' }} onClick={() => {
                     history('/facultyform', { replace: true })
                   }}
                     className="dropdown-item" >
                     Faculty Form
-                </a></li>
+                  </a></li>
                   <li><a style={{ cursor: 'pointer' }} onClick={() => {
                     history('/getdata', { replace: true })
                   }}
                     className="dropdown-item" >
                     Faculty Data
-                </a></li>
+                  </a></li>
                   <li><a style={{ cursor: 'pointer' }} onClick={() => {
                     history('/search', { replace: true })
                   }}
                     className="dropdown-item" >
                     Search Faculty
-                </a></li>
+                  </a></li>
                   <li><a style={{ cursor: 'pointer' }} onClick={() => {
                     history('/filter', { replace: true })
                   }}
                     className="dropdown-item" >
                     Filter Faculty Data
-                </a></li>
+                  </a></li>
 
                 </ul>
               </li>
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Course
-          </a>
+                </a>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                   <li><a style={{ cursor: 'pointer' }} onClick={() => {
                     history('/ccourse', { replace: true })
                   }}
                     className="dropdown-item" >
                     Course Form
-                </a></li>
+                  </a></li>
 
 
 
@@ -201,7 +199,7 @@ export default function Dashboard() {
               <li className="nav-item">
                 {<a onClick={handleLogin} style={{ cursor: 'pointer' }} className="nav-link active" aria-current="page" >
                   Logout
-          </a>
+                </a>
                 }
               </li>
             </ul>
@@ -236,42 +234,41 @@ export default function Dashboard() {
 
             info.map((data) => (
               <div className="d-flex justify-content-center">
-                <form action="" className="da_form" >
-
-                  <label for="uname" className='da_label form-label'><b>Name</b></label>
-                  <input type="text" onChange={(e) => { handleName(e) }} placeholder={data.name} className='da_input form-control' name="uname" />
-
-
-                  <label for="age" className='da_label form-label'><b>Age</b></label>
-                  <input type="number" readOnly disabled value={data.age} className='da_input form-control' name="age" />
-
-                  <label for="gender" className='da_label form-label' ><b>Gender</b></label>
-                  <input type="text" readOnly disabled value={data.gender} className='da_input form-control' name="gender" />
-
-                  <label for="num" className='da_label form-label' ><b>Number</b></label>
-                  <input type="number" onChange={(e) => { handleNumber(e) }} placeholder={data.number} className='da_input form-control' name="num" />
-
-                  <label for="depart" className='form-label da_label'><b>Program</b></label>
-                  <input type="text" className="da_input form-control" value={data.department} name="depart" />
-
-                  <label for="Email" className='da_label form-label'><b>Email</b></label>
-                  <input type="email" readOnly disabled value={data.email} className='da_input form-control' name="Email" />
-                  <label for="role" className='f_label form-label' ><b>Role</b></label>
-                  <input type="text" readOnly value={data.role} disabled className='da_input form-control' readonly name="role" />
-
-                </form></div>
+     <table className="table" id="getData" style={{marginTop:"25px"}}> 
+          <tbody>
+            <tr>
+              <th>Name</th>
+            <td> {data.name} </td>
+            </tr>
+            <tr>
+              <th>Email</th>
+            <td> {data.email} </td>
+            </tr>
+            <tr>
+              <th>Department</th>
+            <td> {data.department} </td>
+            </tr>
+            <tr>
+              <th>Number</th>
+            <td> {data.number} </td>
+            </tr>
+            <tr>
+              <th>Age</th>
+            <td> {data.age} </td>
+            </tr>
+            <tr>
+              <th>Gender</th>
+            <td> {data.gender} </td>
+            </tr>
+            <tr>
+              <th>Role</th>
+            <td> {data.role} </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
             ))}
         </div>
-        {
-          (() => {
-            if (!loading) {
-              return (
-                <div className="d-flex justify-content-center">
-                  <button className='fa_button' onClick={(e) => { handleSubmit(e) }}>Update</button></div>
-              )
-            }
-          })()
-        }
 
 
       </div>

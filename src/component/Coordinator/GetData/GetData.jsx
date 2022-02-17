@@ -80,26 +80,26 @@ export default function GetData() {
         }
 
     }
-    const handleUpdate = async (name) => {
+    // const handleUpdate = async (name) => {
 
 
 
-        await firebase.db.collection("facultyform").where("email", "==", name).get()
-            .then(querySnapshot => {
-                querySnapshot.forEach(element => {
-                    var data = element.data();
-                    setInfo(arr => [...arr, data]);
+    //     await firebase.db.collection("facultyform").where("email", "==", name).get()
+    //         .then(querySnapshot => {
+    //             querySnapshot.forEach(element => {
+    //                 var data = element.data();
+    //                 setInfo(arr => [...arr, data]);
 
-                });
+    //             });
                
-                history('/Update', { state: info })
+    //             history('/Update', { state: info })
 
-            })
-            .catch((error) => {
-                alert(error.message)
-            })
+    //         })
+    //         .catch((error) => {
+    //             alert(error.message)
+    //         })
 
-    }
+    // }
 
     const handleUser = async (e) => {
         const user = firebase.auth.currentUser;
@@ -191,9 +191,9 @@ export default function GetData() {
                                         {data.qualification}
 
                                     </td>
-                                    <td scope='col'>
+                                    {/* <td scope='col'>
                                         <button className="btn btn-success" onClick={() => { handleUpdate(data.email) }}><i class="bi bi-pencil-square"></i></button>
-                                    </td>
+                                    </td> */}
                                     <td scope='col'>
                                         <button className="btn btn-warning" onClick={() => { handleDelete(data.email) }}><i class="bi bi-trash"></i></button>
                                     </td>

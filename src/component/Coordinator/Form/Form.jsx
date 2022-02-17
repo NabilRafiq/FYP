@@ -95,13 +95,27 @@ export default function Form() {
                     <input type="text" className='f_input  form-control' placeholder="Enter Name" name="uname" required value={name} onChange={(e) => setName(e.target.value)} />
 
 
-                    <label for="age" className='f_label form-label'><b>Age</b></label>
-                    <input type="number" className='f_input form-control' placeholder="Enter Age" name="age" value={age} required onChange={(e) => setAge(e.target.value)} />
-
-                    <label for="qual" className='f_label form-label' ><b>Qualification</b></label>
-                    <input type="text" className='f_input form-control' placeholder="Enter Qualification" name="qual" value={qualification} required onChange={(e) => setQualification(e.target.value)} />
-                    <label for="field" className='f_label form-label'><b>Field</b></label>
-                    <input type="text" className='f_input form-control' placeholder="Enter Field" name="field" value={field} required onChange={(e) => setField(e.target.value)} />
+                    <label for="age" className='f_label form-label'><b>Date of Birth</b></label>
+                    <input type="date" className="s_input form-control" max="1997-12-31" name="age" required onChange={(e) => setAge(e.target.value)} />
+                    
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="inputGroupSelect01"><i class='fas fa-graduation-cap'></i></label>
+                        <select onChange={(e) => setQualification(e.target.value)} value={qualification} class="form-select" name='form-select1' id="inputGroupSelect01">
+                            <option value="bachelors">Bachelors</option>
+                            <option value="masters">Master</option>
+                            <option value="mphil">Mphil</option>
+                            <option value="phd">PHD</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="inputGroupSelect01"><i class='fas fa-school'></i></label>
+                        <select onChange={(e) => setField(e.target.value)} value={field} class="form-select" name='form-select1' id="inputGroupSelect01">
+                            <option value="CS">ComputerScience</option>
+                            <option value="AI">Artificial Intelligence</option>
+                            <option value="MediaScience">MediaScience</option>
+                            <option value="BA">Buisness Adminstration</option>
+                        </select>
+                    </div>
                     <label for="Email" className='f_label form-label'><b>Email</b></label>
                     <input type="email" className='f_input form-control' placeholder="Enter Email" name="Email" value={email} required onChange={(e) => setEmail(e.target.value)} />
                     <label for="psw" className='f_label form-label'><b>Password</b></label>

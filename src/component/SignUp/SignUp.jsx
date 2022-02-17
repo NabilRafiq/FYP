@@ -78,8 +78,9 @@ export default function SignUp() {
                     <label style={{ marginTop: '10px' }} for="uname" className='form-label'><b>UserName</b></label>
                     <input type="text" className="s_input form-control" placeholder="Enter UserName" name="uname" required onChange={(e) => setName(e.target.value)} />
 
-                    <label for="age" className='form-label'><b>Date of Birth</b></label>
-                    <input type="date" className="s_input form-control" max="2000-12-31" name="age" required onChange={(e) => setAge(e.target.value)} />
+
+                    <label for="age" className='f_label form-label'><b>Date of Birth</b></label>
+                    <input type="date" className="s_input form-control" max="1997-12-31" name="age" required onChange={(e) => setAge(e.target.value)} />
 
                     <label for="number" className='form-label'><b>Mobile Number</b></label>
                     <input type="tel" size="11" className="s_input form-control" placeholder="03xxxxxxxxx" name="number" required onChange={(e) => setNumber(e.target.value)} />
@@ -91,9 +92,15 @@ export default function SignUp() {
                             <option value="Female">Female</option>
                         </select>
                     </div>
-
-                    <label for="depart" className='form-label'><b>Program</b></label>
-                    <input type="text" className="s_input form-control" placeholder="Enter Program" name="depart" required onChange={(e) => setDepart(e.target.value)} />
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="inputGroupSelect01"><i class="bi bi-building fa-lg" ></i></label>
+                        <select onChange={(e) => setDepart(e.target.value)} value={depart} class="form-select" name='form-select1' id="inputGroupSelect01">
+                            <option value="CS">Computer Science </option>
+                            <option value="MediaScience">Media Science </option>
+                            <option value="AI">Aritificial Intelligence</option>
+                            <option value="BA">Buisness Adminstration</option>
+                        </select>
+                    </div>
                     <label for="email" className='form-label'><b>Email</b></label>
                     <input type="email" className="s_input form-control" placeholder="Enter Email" name="email" required onChange={(e) => setEmail(e.target.value)} />
                     <label for="psw" className='form-label'><b>Password</b></label>

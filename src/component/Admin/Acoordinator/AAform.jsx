@@ -93,7 +93,7 @@ export default function AAform() {
   </select>
 </div>
 
-<label  for="depart" className='form-label'><b>Program</b></label>
+<label  for="depart" className='form-label'><b>Department</b></label>
                     <input type="text" className="s_input form-control" placeholder="Enter Department" name="depart" required onChange={(e) => setDepart(e.target.value)} />
                     <label for="email" className='form-label'><b>Email</b></label>
                     <input type="email" className="s_input form-control" placeholder="Enter Email" name="email" required onChange={(e) => setEmail(e.target.value)} />
