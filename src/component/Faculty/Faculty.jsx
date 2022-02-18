@@ -21,14 +21,12 @@ export default function Faculty() {
   const [disable, setDisable] = React.useState(false);
   const [loading, setLoading] = useState(false);
   const [time, setTime] = useState(getInitialState);
-  const [name, setName] = useState();
+  const [day, setDay] = useState([]);
   let docid = "1";
   let docid1 = "1";
 
 
-  const  handleInput = event => {
-    setName(event.target.value)
-  } 
+
 
 
   const handleLogin = async (e) => {
@@ -56,7 +54,6 @@ export default function Faculty() {
 
             var data = element.data();
             setInfo(arr => [...arr, data]);
-            setName(data.name)
 
 
 
@@ -91,7 +88,7 @@ export default function Faculty() {
 
 
       });
-      await firebase.db.collection("users").where("email", "==", user.email).get()
+    await firebase.db.collection("users").where("email", "==", user.email).get()
       .then(querySnapshot => {
 
         querySnapshot.forEach(element => {
@@ -107,17 +104,15 @@ export default function Faculty() {
 
     var washingtonRef = firebase.db.collection("facultyform").doc(docid);
     var washingtonRef1 = firebase.db.collection("users").doc(docid1);
-  
-   
+
+
     await washingtonRef.update({
       timeslot: time,
-      name:name
     })
     return washingtonRef1.update({
       timeslot: time,
-      name:name
     })
-  
+
       .then(function () {
         alert("Data updated successfully")
         setTimeout(function () { window.location.reload() }, 1500);
@@ -126,9 +121,9 @@ export default function Faculty() {
         alert(error.message)
         setTimeout(function () { window.location.reload() }, 1500);
       })
-      
-     
-     
+
+
+
 
   }
 
@@ -231,39 +226,72 @@ export default function Faculty() {
 
             info.map((data) => (
               <div className='d-flex justify-content-center'>
-                <form action="" className=" faform" >
+                <table className="table" id="getData" style={{ marginTop: "25px" }}>
+                  <tbody>
+                    <tr>
+                      <th>Name</th>
+                      <td> {data.name} </td>
+                    </tr>
+                    <tr>
+                      <th>Email</th>
+                      <td> {data.email} </td>
+                    </tr>
+                    <tr>
+                      <th>Program</th>
+                      <td> {data.program} </td>
+                    </tr>
+                    <tr>
+                      <th>Role</th>
+                      <td> {data.role} </td>
+                    </tr>
+                    <tr>
+                      <th><label for="role" className='f_label form-label' ><b>Timeslot</b></label></th>
 
-                  <label for="uname" className='fa_label form-label'><b>Name</b></label>
-                  <input type="text" onChange={(e) => { handleInput(e) }} placeholder={data.name} className='fa_input form-control' name="uname" />
+                      <td>  <br /><div className="form-switch">
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="monday" />
+                          <label class="form-check-label" for="inlineCheckbox1">Monday</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="tuesday" />
+                          <label class="form-check-label" for="inlineCheckbox2">Tuesday</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="wednesday" />
+                          <label class="form-check-label" for="inlineCheckbox3">Wednesday </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="thursday" />
+                          <label class="form-check-label" for="inlineCheckbox3">Thursday </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="friday" />
+                          <label class="form-check-label" for="inlineCheckbox3">Friday </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="saturday" />
+                          <label class="form-check-label" for="inlineCheckbox3">Saturday </label>
+                        </div></div>
 
 
-                  <label for="age" className='fa_label form-label'><b>Age</b></label>
-                  <input type="number" readOnly disabled value={data.age} className='fa_input form-control' name="age" />
+                        <br /><br />
 
-                  <label for="field" className='fa_label form-label' ><b>Field</b></label>
-                  <input type="text" readOnly disabled value={data.field} className='fa_input form-control' name="field" />
-
-                  <label for="qual" className='fa_label form-label' ><b>Qualification</b></label>
-                  <input type="text" readOnly disabled value={data.qualification} className='fa_input form-control' name="num" />
-
-                  <label for="Email" className='fa_label form-label'><b>Email</b></label>
-                  <input type="email" readOnly disabled value={data.email} className='fa_input form-control' name="Email" />
-                  <label for="role" className='f_label form-label' ><b>Role</b></label>
-                  <input type="text" readOnly value={data.role} disabled className='fa_input form-control' readonly name="role" />
-                  <label for="role" className='f_label form-label' ><b>Timeslot</b></label>
-                  <input type="text" readOnly value={data.timeslot} disabled className='fa_input form-control' readonly name="role" />
-                  <div class="input-group mb-3">
-                    <label class="input-group-text" for="inputGroupSelect01"><i class="bi bi-alarm-fill" style={{ fontSize: "large" }}></i></label>
-                    <select onChange={(e) => setTime(e.target.value)} value={time} class="form-select" id="inputGroupSelect01">
-                      <option value="8am-11:30am">8am-11:30am</option>
-                      <option value="11am-1:30pm">11am-1:30pm</option>
-                      <option value="1:45pm-4:15pm">1:45pm-4:15pm</option>
-                      <option value="4:30pm-7:00pm">4:30pm-7:00pm</option>
-                    </select>
-                  </div>
+                        <div class="input-group mb-3">
+                          <label class="input-group-text" for="inputGroupSelect01"><i class="bi bi-alarm-fill" style={{ fontSize: "large" }}></i></label>
+                          <select onChange={(e) => setTime(e.target.value)} value={time} class="form-select" id="inputGroupSelect01">
+                            <option value="8am-11:30am">8am-11:30am</option>
+                            <option value="11am-1:30pm">11am-1:30pm</option>
+                            <option value="1:45pm-4:15pm">1:45pm-4:15pm</option>
+                            <option value="4:30pm-7:00pm">4:30pm-7:00pm</option>
+                          </select>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
 
 
-                </form></div>
+              </div>
             ))}
           {
             (() => {
