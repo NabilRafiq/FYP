@@ -34,5 +34,32 @@
 border: 2px solid #192841;
       
     }
+
+    .srow{
+      margin: 10px;
+      padding: 5px;
+      text-align: right;
+    }
+    #search_btn{
+      padding: 5px;
+      margin-top: 5px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      width: 5px;
+      color: #192841;
+    }
+    #search_btn:hover{
+      color: #192841!important;
+    }
+    #search_btn:active{
+      outline: none!important;
+      background: none!important;
+      border: none!important;
+    }
+    #search_btn:focus{
+      outline: none!important;
+      box-shadow: none;
+    }
     
  
