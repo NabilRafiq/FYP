@@ -166,12 +166,6 @@ export default function Dashboard() {
                     Faculty Data
                   </a></li>
                   <li><a style={{ cursor: 'pointer' }} onClick={() => {
-                    history('/search', { replace: true })
-                  }}
-                    className="dropdown-item" >
-                    Search Faculty
-                  </a></li>
-                  <li><a style={{ cursor: 'pointer' }} onClick={() => {
                     history('/filter', { replace: true })
                   }}
                     className="dropdown-item" >

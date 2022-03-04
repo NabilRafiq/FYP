@@ -21,7 +21,7 @@ export default function Dashboard() {
   useEffect(() => {
     // Update the document title using the browser API
     userInformation();
-  },[]);
+  }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault()
@@ -97,12 +97,6 @@ export default function Dashboard() {
                     Faculty Data
                   </a></li>
                   <li><a style={{ cursor: 'pointer' }} onClick={() => {
-                    history('/search', { replace: true })
-                  }}
-                    className="dropdown-item" >
-                    Search Faculty
-                  </a></li>
-                  <li><a style={{ cursor: 'pointer' }} onClick={() => {
                     history('/filter', { replace: true })
                   }}
                     className="dropdown-item" >
@@ -128,14 +122,6 @@ export default function Dashboard() {
                     className="dropdown-item" >
                     Coordinator Data
                   </a></li>
-                  <li><a style={{ cursor: 'pointer' }} onClick={() => {
-                    history('/acsearch', { replace: true })
-                  }}
-                    className="dropdown-item" >
-                    Search Coordinator
-                  </a></li>
-
-
 
                 </ul>
               </li>
@@ -187,12 +173,12 @@ export default function Dashboard() {
 
       <div className="ad_container container" >
 
-     
 
-    
+
+
         {
           (() => {
-              if (loading) {
+            if (loading) {
               return (
                 <div class="text-center" style={{ margin: "10px" }}>
                   <div class="spinner-border" role="status">
@@ -203,38 +189,38 @@ export default function Dashboard() {
           })()
         }
 
-     
-                     {
+
+        {
 
 
           info.map((data) => (
             <div className="d-flex justify-content-center">
-        <table className="table" id="getData" style={{marginTop:"25px"}}> 
-          <tbody>
-            <tr>
-              <th>Name</th>
-            <td> {data.name} </td>
-            </tr>
-            <tr>
-              <th>Email</th>
-            <td> {data.email} </td>
-            </tr>
-            <tr>
-              <th>Program</th>
-            <td> {data.program} </td>
-            </tr>
-            <tr>
-              <th>Role</th>
-            <td> {data.role} </td>
-            </tr>
-          </tbody>
-        </table></div>
+              <table className="table" id="getData" style={{ marginTop: "25px" }}>
+                <tbody>
+                  <tr>
+                    <th>Name</th>
+                    <td> {data.name} </td>
+                  </tr>
+                  <tr>
+                    <th>Email</th>
+                    <td> {data.email} </td>
+                  </tr>
+                  <tr>
+                    <th>Program</th>
+                    <td> {data.program} </td>
+                  </tr>
+                  <tr>
+                    <th>Role</th>
+                    <td> {data.role} </td>
+                  </tr>
+                </tbody>
+              </table></div>
 
-            
-            ))}
 
- 
-            
+          ))}
+
+
+
 
 
       </div>

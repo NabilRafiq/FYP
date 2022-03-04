@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import * as firebase from '../../firebase';
 import { Navigate, useNavigate } from 'react-router';
-import './Search.css'
 
 
 

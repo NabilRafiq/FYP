@@ -10,8 +10,6 @@ import AAform from './component/Admin/Acoordinator/AAform';
 import AAgetdata from './component/Admin/Acoordinator/AAgetdata';
 import Cform from './component/Admin/Course/Cform';
 import Ccouse from './component/Coordinator/Ccourse/Ccourse';
-import Search from './component/Admin/Search';
-import Acsearch from './component/Admin/Acoordinator/Acsearch';
 import Filter from './component/Admin/Filter';
 
 
@@ -45,8 +43,6 @@ function App() {
         <Route exact path='/aagetdata' element={<AAgetdata />} />
         <Route exact path='/cform' element={<Cform />} />
         <Route exact path='/ccourse' element={<Ccouse />} />
-        <Route exact path='/search' element={<Search />} />
-        <Route exact path='/acsearch' element={<Acsearch />} />
         <Route exact path='/filter' element={<Filter />} />
 
         {/* <Route exact path='/announce' element={<Announce />}/> */}

@@ -10,25 +10,23 @@ export default function GetData() {
 
 
     const [info, setInfo] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [show, setShow] = useState(false);
     const [show1, setShow1] = useState(false);
-    const [stext, setStext] = useState();
+    const [stext, setStext] = useState("");
     const [search, setSearch] = useState([]);
     const history = useNavigate();
 
 
     useEffect(() => {
 
-        setLoading(true);
         Fetchdata();
     }, []);
 
 
     const Fetchdata = async () => {
-        setShow1(false);
-        setShow(true);
-        
+
+
         await firebase.db.collection("facultyform").get()
             .then((querySnapshot) => {
 
@@ -39,7 +37,7 @@ export default function GetData() {
 
                 });
                 setLoading(false);
-              
+                setShow(true);
             })
 
     }
@@ -100,46 +98,52 @@ export default function GetData() {
     }
 
     const handleSubmit = async (e) => {
-        setShow(false);
-        setShow1(false);
-        setLoading(true);
-        e.preventDefault();
-       
-      
 
-        await firebase.db.collection("facultyform").where("name", "==", stext).get().then((querySnapshot) => {
-
-            if (!querySnapshot.empty) {
-
-                querySnapshot.forEach(element => {
-                    var data = element.data();
-                    setSearch(arr => [...arr, data]);
+        if (stext != "") {
+            e.preventDefault();
+            setShow(false);
+            setShow1(false);
+            setLoading(true);
 
 
-                });
-                setLoading(false);
-                
-                setShow1(true);
-            }
-            else {
-                setLoading(false);
-                setShow1(false);
-                setShow(true);
-                alert("Profile Doesn't Exist");
-              
-                
 
-            }
 
-        })
-            .catch((error) => {
-                setShow1(false);
-                setShow(true);
-                alert(error.message);
-               
-                
+            await firebase.db.collection("facultyform").where("name", "==", stext).get().then((querySnapshot) => {
+
+                if (!querySnapshot.empty) {
+
+                    querySnapshot.forEach(element => {
+                        var data = element.data();
+                        setSearch(arr => [...arr, data]);
+
+
+                    });
+                    setLoading(false);
+
+                    setShow1(true);
+                }
+                else {
+                    setLoading(false);
+                    setShow1(false);
+                    setShow(true);
+                    alert("Profile Doesn't Exist");
+
+
+
+                }
 
             })
+                .catch((error) => {
+                    setLoading(false)
+                    setShow1(false);
+                    setShow(true);
+                    alert(error.message);
+
+
+
+                })
+
+        }
 
     }
 
@@ -154,124 +158,132 @@ export default function GetData() {
 
             {console.log(info)}
             <div style={{ marginTop: '70px' }} className="container">
-<div className="row">
-                <h4 style={{ textAlign: 'center', marginBottom: '50px' }}>Faculty<i class="bi bi-clipboard-data"></i></h4>
+                <div className="row">
+                    <h4 style={{ textAlign: 'center', marginBottom: '50px' }}>Faculty<i class="bi bi-clipboard-data"></i></h4>
                 </div>
                 <div className="row srow d-flex justify-content-end">
-        <form onSubmit={(e) => handleSubmit(e)}>
+                    <form onSubmit={(e) => handleSubmit(e)}>
 
-                    <input class="form-control me-2 search_input" type="text" placeholder="Search Faculty Data"
-                        onChange={(e) => setStext(e.target.value)} aria-label="Search"/>
+                        <input class="form-control me-2 search_input" type="text" placeholder="Search Faculty Data"
+                            onChange={(e) => setStext(e.target.value)} aria-label="Search" />
 
 
-                    <button class="btn" id='search_btn' type="submit" ><i class="fas fa-search"></i></button>
+                        <button class="btn" id='search_btn' type="submit" ><i class="fas fa-search"></i></button>
                     </form>
-                </div>
+                </div></div>
 
-                <div className="container-fluid">
 
-                    <table className='table table-striped' id='getData'>
-                        <thead>
+            <div className="container" style={{ overflowX: "auto" }}>
 
-                            {
-                                (() => {
-                                    if ( loading)
-                                        return (<div class="text-center" style={{ margin: "10px" }}>
-                                            <div class="spinner-border" role="status">
-                                                <span class="visually-hidden">Loading...</span>
-                                            </div></div>)
 
-                                    else
-                                        return (
-                                            <tr>
-                                                <th scope='col'>Name</th>
-                                                <th scope='col'>Age</th>
-                                                <th scope='col'>Email</th>
-                                                <th scope='col'>Field</th>
-                                                <th scope='col'>Qualification</th>
-                                                <th scope='col'>Update</th>
-                                                <th scope='col'>Delete</th>
-                                            </tr>
-                                        )
-                                })()
-                            }</thead>
-                        <tbody>
+                <table className='table table-striped' id='getData'>
+                    <thead>
 
-                            {
-                                (() => {
-                                    if (show && !show1)
-                                        return (info.map((data) => (
+                        {
+                            (() => {
+                                if (loading && !show && !show1)
+                                    return (<div class="text-center" style={{ margin: "10px" }}>
+                                        <div class="spinner-border" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div></div>)
 
-                                            <tr>
+                                else
+                                    return (
 
-                                                <td>
-                                                    {data.name}
-                                                </td>
-                                                <td>
-                                                    {data.age}
-                                                </td>
-                                                <td>
-                                                    {data.email}
-                                                </td>
-                                                <td>
-                                                    {data.field}
+                                        <tr>
+                                            <th scope='col'>Name</th>
+                                            <th scope='col'>Age</th>
+                                            <th scope='col'>Email</th>
+                                            <th scope='col'>Field</th>
+                                            <th scope='col'>Qualification</th>
+                                            <th scope='col'>Update</th>
+                                            <th scope='col'>Delete</th>
+                                        </tr>
+                                    )
+                            })()
+                        }</thead>
+                    <tbody>
 
-                                                </td>
-                                                <td>
-                                                    {data.qualification}
+                        {
+                            (() => {
+                                if (show && !show1 && !loading)
 
-                                                </td>
-                                                {/* <td scope='col'>
+                                    return (info.map((data) => (
+
+                                        <tr>
+
+                                            <td>
+                                                {data.name}
+                                            </td>
+                                            <td>
+                                                {data.age}
+                                            </td>
+                                            <td>
+                                                {data.email}
+                                            </td>
+                                            <td>
+                                                {data.field}
+
+                                            </td>
+                                            <td>
+                                                {data.qualification}
+
+                                            </td>
+                                            {/* <td scope='col'>
                                                     <button className="btn btn-success" onClick={() => { handleUpdate(data.email) }}><i class="bi bi-pencil-square"></i></button>
                                                 </td> */}
-                                                <td scope='col'>
-                                                    <button className="btn btn-warning" onClick={() => { handleDelete(data.email) }}><i class="bi bi-trash"></i></button>
-                                                </td>
-                     
-                                            </tr>
-                                        )))
+                                            <td scope='col'>
+                                                <button className="btn btn-warning" onClick={() => { handleDelete(data.email) }}><i class="bi bi-trash"></i></button>
+                                            </td>
 
-                                    if (show1 && !show)
+                                        </tr>
+                                    )))
+
+                                if (show1 && !show && !loading)
                                     console.log(search)
-                                        return (
-                                            search.map((data) => (
+                                return (
+                                    search.map((data) => (
 
-                                                <tr>
+                                        <tr>
 
-                                                    <td>
-                                                        {data.name}
-                                                    </td>
-                                                    <td>
-                                                        {data.age}
-                                                    </td>
-                                                    <td>
-                                                        {data.email}
-                                                    </td>
-                                                    <td>
-                                                        {data.field}
+                                            <td>
+                                                {data.name}
+                                            </td>
+                                            <td>
+                                                {data.age}
+                                            </td>
+                                            <td>
+                                                {data.email}
+                                            </td>
+                                            <td>
+                                                {data.field}
 
-                                                    </td>
-                                                    <td>
-                                                        {data.qualification}
+                                            </td>
+                                            <td>
+                                                {data.qualification}
 
-                                                    </td>
-                                                    {/* <td scope='col'>
+                                            </td>
+                                            {/* <td scope='col'>
                                                         <button className="btn btn-success" onClick={() => { handleUpdate(data.email) }}><i class="bi bi-pencil-square"></i></button>
                                                     </td> */}
-                                                    <td scope='col'>
-                                                        <button className="btn btn-warning" onClick={() => { handleDelete(data.email) }}><i class="bi bi-trash"></i></button>
-                                                    </td>
-  
-                                                </tr>
-                                            ))
-                                        )
-                                })()
-                            }</tbody>
+                                            <td scope='col'>
+                                                <button className="btn btn-warning" onClick={() => { handleDelete(data.email) }}><i class="bi bi-trash"></i></button>
+                                            </td>
+
+                                        </tr>
+                                    ))
+                                )
+                            })()
+                        }</tbody>
 
 
 
-                    </table>
-                </div>
+                </table></div>
+            <div className="d-flex justify-content-center">
+                <button id='search_btn' style={{ width: "15%" }} className='search_btn btn'
+                    onClick={
+                        (e) => { handleUser(e) }
+                    }>Back</button></div>
 
-            </div></div>)
+        </div>)
 }

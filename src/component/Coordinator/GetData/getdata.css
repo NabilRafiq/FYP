@@ -40,26 +40,36 @@ border: 2px solid #192841;
       padding: 5px;
       text-align: right;
     }
-    #search_btn{
+    .search_btn{
       padding: 5px;
       margin-top: 5px;
-      border: none;
+      border: 1px solid black;
       cursor: pointer;
       font-size: 16px;
       width: 5px;
       color: #192841;
     }
-    #search_btn:hover{
+    .search_btn:hover{
       color: #192841!important;
     }
-    #search_btn:active{
+    .search_btn:active{
       outline: none!important;
       background: none!important;
       border: none!important;
     }
-    #search_btn:focus{
+    .search_btn:focus{
       outline: none!important;
       box-shadow: none;
     }
-    
- 
+
+    .search_input {
+      margin-top: 10%;
+      width: 25%;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      border-radius: 3px;
+      
+    }
+  
