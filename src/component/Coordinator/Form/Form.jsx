@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import * as firebase from '../../../firebase';
 import { Navigate, useNavigate } from 'react-router';
@@ -10,12 +10,12 @@ export default function Form() {
 
     useEffect(() => {
         // change background color with a random color
-        const color =  "#f0f2f0";
+        const color = "#f0f2f0";
         document.body.style.background = color;
-      });
+    });
 
 
-    
+
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [age, setAge] = useState("");
@@ -73,7 +73,7 @@ export default function Form() {
                 else if (data.role === "coordinator") {
                     history('/Dashboard', { replace: true })
                 }
-            
+
 
             })
         });
@@ -97,23 +97,23 @@ export default function Form() {
 
                     <label for="age" className='f_label form-label'><b>Date of Birth</b></label>
                     <input type="date" className="s_input form-control" max="1997-12-31" name="age" required onChange={(e) => setAge(e.target.value)} />
-                    
+
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="inputGroupSelect01"><i class='fas fa-graduation-cap'></i></label>
                         <select onChange={(e) => setQualification(e.target.value)} value={qualification} class="form-select" name='form-select1' id="inputGroupSelect01">
-                            <option value="bachelors">Bachelors</option>
-                            <option value="masters">Master</option>
-                            <option value="mphil">Mphil</option>
-                            <option value="phd">PHD</option>
+                            <option value="Bachelors">Bachelors</option>
+                            <option value="Master">Master</option>
+                            <option value="Mphil">Mphil</option>
+                            <option value="PHD">PHD</option>
                         </select>
                     </div>
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="inputGroupSelect01"><i class='fas fa-school'></i></label>
                         <select onChange={(e) => setField(e.target.value)} value={field} class="form-select" name='form-select1' id="inputGroupSelect01">
-                            <option value="CS">ComputerScience</option>
-                            <option value="AI">Artificial Intelligence</option>
+                            <option value="ComputerScience">ComputerScience</option>
+                            <option value="Artificial Intelligence">Artificial Intelligence</option>
                             <option value="MediaScience">MediaScience</option>
-                            <option value="BA">Buisness Adminstration</option>
+                            <option value="Buisness Adminstration">Buisness Adminstration</option>
                         </select>
                     </div>
                     <label for="Email" className='f_label form-label'><b>Email</b></label>
@@ -121,14 +121,14 @@ export default function Form() {
                     <label for="psw" className='f_label form-label'><b>Password</b></label>
                     <input type="password" className='f_input form-control' placeholder="Enter Password" name="psw" value={password} required onChange={(e) => setPassword(e.target.value)} />
                     <label for="role" className='f_label form-label' ><b>Role</b></label>
-                    <input type="text" disabled className='f_input form-control' readonly  value="faculty" name="role" />
+                    <input type="text" disabled className='f_input form-control' readonly value="faculty" name="role" />
 
 
 
                     <button id='f_button' type="submit" className='f_button btn'>Submit</button>
                     <button className='f_button btn' style={{ color: 'black', backgroundColor: 'white' }}
                         onClick={
-                          (e)=> {handleUser(e)}
+                            (e) => { handleUser(e) }
                         }>Back</button>
 
 

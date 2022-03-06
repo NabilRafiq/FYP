@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import * as firebase from '../../../firebase';
-import { Navigate, useNavigate } from 'react-router';
-import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router';
+import { Button, Modal } from 'react-bootstrap';
 import './getdata.css';
 
 
@@ -13,10 +13,18 @@ export default function GetData() {
     const [loading, setLoading] = useState(true);
     const [show, setShow] = useState(false);
     const [show1, setShow1] = useState(false);
+    const [model, setModel] = useState(false);
     const [stext, setStext] = useState("");
+    const [name, setName] = useState("");
+    const [age, setAge] = useState("");
+    const [email, setEmail] = useState("");
+    const [qualification, setQualification] = useState("");
+    const [field, setField] = useState("");
     const [search, setSearch] = useState([]);
     const history = useNavigate();
-
+    let docid = "1";
+    let docid1 = "1";
+ 
 
     useEffect(() => {
 
@@ -34,6 +42,7 @@ export default function GetData() {
                 querySnapshot.forEach(element => {
                     var data = element.data();
                     setInfo(arr => [...arr, data]);
+
 
                 });
                 setLoading(false);
@@ -78,6 +87,68 @@ export default function GetData() {
         }
 
     }
+    const handleUpdate = async (email) => {
+
+
+
+        await firebase.db.collection("facultyform").where("email", "==", email).get()
+            .then(querySnapshot => {
+
+                querySnapshot.forEach(element => {
+                    docid = element.id;
+
+
+                })
+
+
+
+
+            });
+
+
+        await firebase.db.collection("users").where("email", "==", email).get()
+            .then(querySnapshot => {
+
+                querySnapshot.forEach(element => {
+                    docid1 = element.id;
+
+
+                })
+            });
+        var washingtonRef = firebase.db.collection("facultyform").doc(docid);
+        var washingtonRef1 = firebase.db.collection("users").doc(docid1);
+
+
+        await washingtonRef.update({
+            name: name,
+            age: age,
+            qualification: qualification,
+            field: field
+
+        })
+        return washingtonRef1.update({
+            name: name,
+            age: age,
+            qualification: qualification,
+            field: field
+        })
+            .then(function () {
+                alert("Data updated successfully")
+                setTimeout(function () { window.location.reload() }, 1500);
+            })
+            .catch(function (error) {
+                alert(error.message)
+                setTimeout(function () { window.location.reload() }, 1500);
+            })
+
+
+
+
+
+    }
+
+
+
 
 
     const handleUser = async (e) => {
@@ -104,6 +175,7 @@ export default function GetData() {
             setShow(false);
             setShow1(false);
             setLoading(true);
+           
 
 
 
@@ -147,6 +219,20 @@ export default function GetData() {
 
     }
 
+    const Update = (data) => {
+       
+        console.log("tapped")
+        setAge(data.age);
+        setName(data.name);
+        setField(data.field);
+        setQualification(data.qualification)
+        setEmail(data.email);
+        setModel(true);
+
+    }
+ 
+
+    const handleClose = () => setModel(false);
 
     return (
         <div>
@@ -233,6 +319,59 @@ export default function GetData() {
                                                     <button className="btn btn-success" onClick={() => { handleUpdate(data.email) }}><i class="bi bi-pencil-square"></i></button>
                                                 </td> */}
                                             <td scope='col'>
+                                                <button className="btn btn-success" onClick={() => { Update(data) }}><i class="bi bi-pencil-square"></i></button>
+
+                                                <Modal
+                                                    show={model}
+                                                    onHide={handleClose}
+                                                    backdrop="static"
+                                                    keyboard={false}
+                                                >
+                                                    <Modal.Header closeButton>
+                                                        <Modal.Title>Update Data</Modal.Title>
+                                                    </Modal.Header>
+                                                    <Modal.Body>
+                                                        <form className='f_form' >
+
+
+
+                                                            <label for="uname" className='f_label form-label'><b>Name</b></label>
+                                                            <input type="text" className='f_input  form-control' placeholder={name} name="uname" onChange={(e) => setName(e.target.value)} />
+
+
+                                                            <label for="age" className='f_label form-label'><b>Date of Birth</b></label>
+                                                            <input type="date" className="s_input form-control" max="1997-12-31" name="age" required onChange={(e) => setAge(e.target.value)} />
+
+                                                            <div class="input-group mb-3">
+                                                                <label class="input-group-text" for="inputGroupSelect01"><i class='fas fa-graduation-cap'></i></label>
+                                                                <select onChange={(e) => setQualification(e.target.value)} value={qualification} class="form-select" name='form-select1' id="inputGroupSelect01">
+                                                                    <option value="Bachelors">Bachelors</option>
+                                                                    <option value="Master">Master</option>
+                                                                    <option value="Mphil">Mphil</option>
+                                                                    <option value="PHD">PHD</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="input-group mb-3">
+                                                                <label class="input-group-text" for="inputGroupSelect01"><i class='fas fa-school'></i></label>
+                                                                <select onChange={(e) => setField(e.target.value)} value={field} class="form-select" name='form-select1' id="inputGroupSelect01">
+                                                                    <option value="ComputerScience">ComputerScience</option>
+                                                                    <option value="Artificial Intelligence">Artificial Intelligence</option>
+                                                                    <option value="MediaScience">MediaScience</option>
+                                                                    <option value="Buisness Adminstration">Buisness Adminstration</option>
+                                                                </select>
+                                                            </div>
+                                                        </form>
+                                                    </Modal.Body>
+                                                    <Modal.Footer>
+                                                        <Button variant="secondary" onClick={handleClose}>
+                                                            Close
+                                                        </Button>
+                                                        <button className="btn btn-primary" onClick={() => { handleUpdate(email) }}>Save Changes</button>
+                                                    </Modal.Footer>
+                                                </Modal>
+
+                                            </td>
+                                            <td scope='col'>
                                                 <button className="btn btn-warning" onClick={() => { handleDelete(data.email) }}><i class="bi bi-trash"></i></button>
                                             </td>
 
@@ -263,9 +402,59 @@ export default function GetData() {
                                                 {data.qualification}
 
                                             </td>
-                                            {/* <td scope='col'>
-                                                        <button className="btn btn-success" onClick={() => { handleUpdate(data.email) }}><i class="bi bi-pencil-square"></i></button>
-                                                    </td> */}
+                                           <td>
+                                           <button className="btn btn-success" onClick={() => { Update(data) }}><i class="bi bi-pencil-square"></i></button>
+
+<Modal
+    show={model}
+    onHide={handleClose}
+    backdrop="static"
+    keyboard={false}
+>
+    <Modal.Header closeButton>
+        <Modal.Title>Update Data</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+        <form className='f_form' >
+
+
+
+            <label for="uname" className='f_label form-label'><b>Name</b></label>
+            <input type="text" className='f_input  form-control' placeholder={name} name="uname" onChange={(e) => setName(e.target.value)} />
+
+
+            <label for="age" className='f_label form-label'><b>Date of Birth</b></label>
+            <input type="date" className="s_input form-control" max="1997-12-31" name="age" required onChange={(e) => setAge(e.target.value)} />
+
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupSelect01"><i class='fas fa-graduation-cap'></i></label>
+                <select onChange={(e) => setQualification(e.target.value)} value={qualification} class="form-select" name='form-select1' id="inputGroupSelect01">
+                    <option value="Bachelors">Bachelors</option>
+                    <option value="Master">Master</option>
+                    <option value="Mphil">Mphil</option>
+                    <option value="PHD">PHD</option>
+                </select>
+            </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupSelect01"><i class='fas fa-school'></i></label>
+                <select onChange={(e) => setField(e.target.value)} value={field} class="form-select" name='form-select1' id="inputGroupSelect01">
+                    <option value="ComputerScience">ComputerScience</option>
+                    <option value="Artificial Intelligence">Artificial Intelligence</option>
+                    <option value="MediaScience">MediaScience</option>
+                    <option value="Buisness Adminstration">Buisness Adminstration</option>
+                </select>
+            </div>
+        </form>
+    </Modal.Body>
+    <Modal.Footer>
+        <Button variant="secondary" onClick={handleClose}>
+            Close
+        </Button>
+        <button className="btn btn-primary" onClick={() => { handleUpdate(email) }}>Save Changes</button>
+    </Modal.Footer>
+</Modal>
+
+                                             </td>
                                             <td scope='col'>
                                                 <button className="btn btn-warning" onClick={() => { handleDelete(data.email) }}><i class="bi bi-trash"></i></button>
                                             </td>

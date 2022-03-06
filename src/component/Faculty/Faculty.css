@@ -48,11 +48,11 @@ margin-bottom: 5px;
   
   
 ::-webkit-input-placeholder {
-  color: red;
+
   font-weight: 800;
 }
 :-ms-input-placeholder {  
-  color: red;  
+
   font-weight: 800;
 }
 
