@@ -24,7 +24,7 @@ export default function GetData() {
     const history = useNavigate();
     let docid = "1";
     let docid1 = "1";
- 
+
 
     useEffect(() => {
 
@@ -175,7 +175,7 @@ export default function GetData() {
             setShow(false);
             setShow1(false);
             setLoading(true);
-           
+
 
 
 
@@ -220,7 +220,7 @@ export default function GetData() {
     }
 
     const Update = (data) => {
-       
+
         console.log("tapped")
         setAge(data.age);
         setName(data.name);
@@ -230,7 +230,7 @@ export default function GetData() {
         setModel(true);
 
     }
- 
+
 
     const handleClose = () => setModel(false);
 
@@ -402,59 +402,59 @@ export default function GetData() {
                                                 {data.qualification}
 
                                             </td>
-                                           <td>
-                                           <button className="btn btn-success" onClick={() => { Update(data) }}><i class="bi bi-pencil-square"></i></button>
+                                            <td>
+                                                <button className="btn btn-success" onClick={() => { Update(data) }}><i class="bi bi-pencil-square"></i></button>
 
-<Modal
-    show={model}
-    onHide={handleClose}
-    backdrop="static"
-    keyboard={false}
->
-    <Modal.Header closeButton>
-        <Modal.Title>Update Data</Modal.Title>
-    </Modal.Header>
-    <Modal.Body>
-        <form className='f_form' >
-
-
-
-            <label for="uname" className='f_label form-label'><b>Name</b></label>
-            <input type="text" className='f_input  form-control' placeholder={name} name="uname" onChange={(e) => setName(e.target.value)} />
+                                                <Modal
+                                                    show={model}
+                                                    onHide={handleClose}
+                                                    backdrop="static"
+                                                    keyboard={false}
+                                                >
+                                                    <Modal.Header closeButton>
+                                                        <Modal.Title>Update Data</Modal.Title>
+                                                    </Modal.Header>
+                                                    <Modal.Body>
+                                                        <form className='f_form' >
 
 
-            <label for="age" className='f_label form-label'><b>Date of Birth</b></label>
-            <input type="date" className="s_input form-control" max="1997-12-31" name="age" required onChange={(e) => setAge(e.target.value)} />
 
-            <div class="input-group mb-3">
-                <label class="input-group-text" for="inputGroupSelect01"><i class='fas fa-graduation-cap'></i></label>
-                <select onChange={(e) => setQualification(e.target.value)} value={qualification} class="form-select" name='form-select1' id="inputGroupSelect01">
-                    <option value="Bachelors">Bachelors</option>
-                    <option value="Master">Master</option>
-                    <option value="Mphil">Mphil</option>
-                    <option value="PHD">PHD</option>
-                </select>
-            </div>
-            <div class="input-group mb-3">
-                <label class="input-group-text" for="inputGroupSelect01"><i class='fas fa-school'></i></label>
-                <select onChange={(e) => setField(e.target.value)} value={field} class="form-select" name='form-select1' id="inputGroupSelect01">
-                    <option value="ComputerScience">ComputerScience</option>
-                    <option value="Artificial Intelligence">Artificial Intelligence</option>
-                    <option value="MediaScience">MediaScience</option>
-                    <option value="Buisness Adminstration">Buisness Adminstration</option>
-                </select>
-            </div>
-        </form>
-    </Modal.Body>
-    <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
-            Close
-        </Button>
-        <button className="btn btn-primary" onClick={() => { handleUpdate(email) }}>Save Changes</button>
-    </Modal.Footer>
-</Modal>
+                                                            <label for="uname" className='f_label form-label'><b>Name</b></label>
+                                                            <input type="text" className='f_input  form-control' placeholder={name} name="uname" onChange={(e) => setName(e.target.value)} />
 
-                                             </td>
+
+                                                            <label for="age" className='f_label form-label'><b>Date of Birth</b></label>
+                                                            <input type="date" className="s_input form-control" max="1997-12-31" name="age" required onChange={(e) => setAge(e.target.value)} />
+
+                                                            <div class="input-group mb-3">
+                                                                <label class="input-group-text" for="inputGroupSelect01"><i class='fas fa-graduation-cap'></i></label>
+                                                                <select onChange={(e) => setQualification(e.target.value)} value={qualification} class="form-select" name='form-select1' id="inputGroupSelect01">
+                                                                    <option value="Bachelors">Bachelors</option>
+                                                                    <option value="Master">Master</option>
+                                                                    <option value="Mphil">Mphil</option>
+                                                                    <option value="PHD">PHD</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="input-group mb-3">
+                                                                <label class="input-group-text" for="inputGroupSelect01"><i class='fas fa-school'></i></label>
+                                                                <select onChange={(e) => setField(e.target.value)} value={field} class="form-select" name='form-select1' id="inputGroupSelect01">
+                                                                    <option value="ComputerScience">ComputerScience</option>
+                                                                    <option value="Artificial Intelligence">Artificial Intelligence</option>
+                                                                    <option value="MediaScience">MediaScience</option>
+                                                                    <option value="Buisness Adminstration">Buisness Adminstration</option>
+                                                                </select>
+                                                            </div>
+                                                        </form>
+                                                    </Modal.Body>
+                                                    <Modal.Footer>
+                                                        <Button variant="secondary" onClick={handleClose}>
+                                                            Close
+                                                        </Button>
+                                                        <button className="btn btn-primary" onClick={() => { handleUpdate(email) }}>Save Changes</button>
+                                                    </Modal.Footer>
+                                                </Modal>
+
+                                            </td>
                                             <td scope='col'>
                                                 <button className="btn btn-warning" onClick={() => { handleDelete(data.email) }}><i class="bi bi-trash"></i></button>
                                             </td>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import * as firebase from '../../firebase';
 import { Navigate, useNavigate } from 'react-router';
+import '../Coordinator/GetData/getdata.css'
 
 
 
@@ -18,12 +19,21 @@ export default function Filter() {
     const [info, setInfo] = useState([]);
     const [show, setShow] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [day, setDay] = useState(false);
+    const [day1, setDay1] = useState(false);
+    const [day2, setDay2] = useState(false);
+    const [day3, setDay3] = useState(false);
+    const [day4, setDay4] = useState(false);
+    const [day5, setDay5] = useState(false);
+
+
     const handleSubmit = async (e) => {
 
         e.preventDefault();
+        const days = day + " " + day1 + " " + day2 + " " + day3 + " " + day4 + " " + day5;
         setLoading(true);
 
-        await firebase.db.collection("facultyform").where("timeslot", "==", time).get().then((querySnapshot) => {
+        await firebase.db.collection("facultyform").where("timeslot", "==", time).where("day", "==", days).get().then((querySnapshot) => {
 
             if (!querySnapshot.empty) {
 
@@ -76,25 +86,55 @@ export default function Filter() {
 
 
             <div className="container-sm search_container" style={{ textAlign: "center" }}>
-                <div className="row">
+            <h5 style={{ textAlign: 'center',padding:"10px",margin:"10px" }}>Search Faculty Data</h5>
+                <div className="row srow d-flex justify-content-center">
                     <form className='search_form' onSubmit={(e) => handleSubmit(e)}>
 
-                        <h5 style={{ textAlign: 'center' }}>Search Faculty Data</h5>
+                      
+
+                        <div className="container">
+                            <div className="form-switch">
+                                <div className="form-check form-check-inline">
+                                    <input className="form-check-input" type="checkbox" onChange={(e) => setDay(e.target.checked)} id="inlineCheckbox1" value="monday" />
+                                    <label className="form-check-label" htmlFor="inlineCheckbox1">Monday</label>
+                                </div>
+                                <div className="form-check form-check-inline">
+                                    <input className="form-check-input" type="checkbox" onChange={(e) => setDay1(e.target.checked)} id="inlineCheckbox2" value="tuesday" />
+                                    <label className="form-check-label" htmlFor="inlineCheckbox2">Tuesday</label>
+                                </div>
+                                <div className="form-check form-check-inline">
+                                    <input className="form-check-input" type="checkbox" onChange={(e) => setDay2(e.target.checked)} id="inlineCheckbox3" value="wednesday" />
+                                    <label className="form-check-label" htmlFor="inlineCheckbox3">Wednesday </label>
+                                </div>
+                                <div className="form-check form-check-inline">
+                                    <input className="form-check-input" type="checkbox" id="inlineCheckbox3" onChange={(e) => setDay3(e.target.checked)} value="thursday" />
+                                    <label className="form-check-label" htmlFor="inlineCheckbox3">Thursday </label>
+                                </div>
+                                <div className="form-check form-check-inline">
+                                    <input className="form-check-input" type="checkbox" onChange={(e) => setDay4(e.target.checked)} id="inlineCheckbox3" value="friday" />
+                                    <label className="form-check-label" htmlFor="inlineCheckbox3">Friday </label>
+                                </div>
+                                <div className="form-check form-check-inline">
+                                    <input className="form-check-input" type="checkbox" id="inlineCheckbox3" onChange={(e) => setDay5(e.target.checked)} value="saturday" />
+                                    <label className="form-check-label" htmlFor="inlineCheckbox3">Saturday </label>
+                                </div></div>
+                        </div>
 
                         <select onChange={(e) => setTime(e.target.value)} value={time} class="form-select" id="inputGroupSelect01">
-                            <option value="8:00am-11:30am">8:00am-11:30am</option>
+                            <option value="8:00am-10:30am">8:00am-10:30am</option>
                             <option value="11am-1:30pm">11am-1:30pm</option>
-                            <option value="11am-1:30pm">11am-1:30pm</option>
+                            <option value="1:45pm-4:15pm">1:45pm-4:15pm</option>
                             <option value="4:30pm-7:00pm">4:30pm-7:00pm</option>
                         </select>
 
-
-                        <button class="btn btn-outline-success search_btn" type="submit"><i class="bi bi-search"></i></button>
-
+                            <div className="d-flex justify-content-center">
+                        <button className="btn btn1 btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+                        </div>
                     </form> </div>
 
 
             </div>
+
 
             <br /> <hr /> <br />
             <div className="container">

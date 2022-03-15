@@ -8,9 +8,9 @@ export default function Faculty() {
 
   useEffect(() => {
     // change background color with a random color
-    const color = "#f0f2f0";
-    document.body.style.background = color;
-  });
+    setLoading(true);
+    userInformation();
+  },[]);
 
   const getInitialState = () => {
     const value = "8:00am-10:30am";
@@ -21,7 +21,14 @@ export default function Faculty() {
   const [disable, setDisable] = React.useState(false);
   const [loading, setLoading] = useState(false);
   const [time, setTime] = useState(getInitialState);
-  const [day, setDay] = useState([]);
+  const [day, setDay] = useState(false);
+  const [day1, setDay1] = useState(false);
+  const [day2, setDay2] = useState(false);
+  const [day3, setDay3] = useState(false);
+  const [day4, setDay4] = useState(false);
+  const [day5, setDay5] = useState(false);
+
+
   let docid = "1";
   let docid1 = "1";
 
@@ -108,9 +115,11 @@ export default function Faculty() {
 
     await washingtonRef.update({
       timeslot: time,
+      day: day + " " + day1 + " " + day2 + " " + day3 + " " + day4 + " " + day5,
     })
     return washingtonRef1.update({
       timeslot: time,
+      day: day + " " + day1 + " " + day2 + " " + day3 + " " + day4 + " " + day5,
     })
 
       .then(function () {
@@ -203,16 +212,14 @@ export default function Faculty() {
 
         <h3 style={{ textAlign: "center", margin: '30px' }}>User's Information</h3>
 
-        <button disabled={disable} id='fa_button' style={{ width: "25%" }} className='fa_button btn d-grid gap-2 col-6 mx-auto' type='button' onClick={() => { userInformation() }}>Load Information</button>
-
-
+        
         {
           (() => {
             if (loading) {
               return (
-                <div class="text-center" style={{ margin: "10px" }}>
-                  <div class="spinner-border" role="status">
-                    <span class="visually-hidden">Loading...</span>
+                <div className="text-center" style={{ margin: "10px" }}>
+                  <div className="spinner-border" role="status">
+                    <span className="visually-hidden">Loading...</span>
                   </div></div>
               )
             }
@@ -245,41 +252,41 @@ export default function Faculty() {
                       <td> {data.role} </td>
                     </tr>
                     <tr>
-                      <th><label for="role" className='f_label form-label' ><b>Timeslot</b></label></th>
+                      <th><label htmlFor="role" className='f_label form-label' ><b>Timeslot</b></label></th>
 
                       <td>  <br /><div className="form-switch">
-                        <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="monday" />
-                          <label class="form-check-label" for="inlineCheckbox1">Monday</label>
+                        <div className="form-check form-check-inline">
+                          <input className="form-check-input" type="checkbox" onChange={(e) => setDay(e.target.checked)} id="inlineCheckbox1" value="monday" />
+                          <label className="form-check-label" htmlFor="inlineCheckbox1">Monday</label>
                         </div>
-                        <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="tuesday" />
-                          <label class="form-check-label" for="inlineCheckbox2">Tuesday</label>
+                        <div className="form-check form-check-inline">
+                          <input className="form-check-input" type="checkbox" onChange={(e) => setDay1(e.target.checked)} id="inlineCheckbox2" value="tuesday" />
+                          <label className="form-check-label" htmlFor="inlineCheckbox2">Tuesday</label>
                         </div>
-                        <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="wednesday" />
-                          <label class="form-check-label" for="inlineCheckbox3">Wednesday </label>
+                        <div className="form-check form-check-inline">
+                          <input className="form-check-input" type="checkbox" onChange={(e) => setDay2(e.target.checked)} id="inlineCheckbox3" value="wednesday" />
+                          <label className="form-check-label" htmlFor="inlineCheckbox3">Wednesday </label>
                         </div>
-                        <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="thursday" />
-                          <label class="form-check-label" for="inlineCheckbox3">Thursday </label>
+                        <div className="form-check form-check-inline">
+                          <input className="form-check-input" type="checkbox" id="inlineCheckbox3" onChange={(e) => setDay3(e.target.checked)} value="thursday" />
+                          <label className="form-check-label" htmlFor="inlineCheckbox3">Thursday </label>
                         </div>
-                        <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="friday" />
-                          <label class="form-check-label" for="inlineCheckbox3">Friday </label>
+                        <div className="form-check form-check-inline">
+                          <input className="form-check-input" type="checkbox" onChange={(e) => setDay4(e.target.checked)} id="inlineCheckbox3" value="friday" />
+                          <label className="form-check-label" htmlFor="inlineCheckbox3">Friday </label>
                         </div>
-                        <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="saturday" />
-                          <label class="form-check-label" for="inlineCheckbox3">Saturday </label>
+                        <div className="form-check form-check-inline">
+                          <input className="form-check-input" type="checkbox" id="inlineCheckbox3" onChange={(e) => setDay5(e.target.checked)} value="saturday" />
+                          <label className="form-check-label" htmlFor="inlineCheckbox3">Saturday </label>
                         </div></div>
 
 
                         <br /><br />
 
-                        <div class="input-group mb-3">
-                          <label class="input-group-text" for="inputGroupSelect01"><i class="bi bi-alarm-fill" style={{ fontSize: "large" }}></i></label>
-                          <select onChange={(e) => setTime(e.target.value)} value={time} class="form-select" id="inputGroupSelect01">
-                            <option value="8am-11:30am">8am-11:30am</option>
+                        <div className="input-group mb-3">
+                          <label className="input-group-text" htmlFor="inputGroupSelect01"><i className="bi bi-alarm-fill" style={{ fontSize: "large" }}></i></label>
+                          <select onChange={(e) => setTime(e.target.value)} value={time} className="form-select" id="inputGroupSelect01">
+                            <option value="8am-10:30am">8am-10:30am</option>
                             <option value="11am-1:30pm">11am-1:30pm</option>
                             <option value="1:45pm-4:15pm">1:45pm-4:15pm</option>
                             <option value="4:30pm-7:00pm">4:30pm-7:00pm</option>
