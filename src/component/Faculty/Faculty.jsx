@@ -10,7 +10,7 @@ export default function Faculty() {
     // change background color with a random color
     setLoading(true);
     userInformation();
-  },[]);
+  }, []);
 
   const getInitialState = () => {
     const value = "8:00am-10:30am";
@@ -21,12 +21,40 @@ export default function Faculty() {
   const [disable, setDisable] = React.useState(false);
   const [loading, setLoading] = useState(false);
   const [time, setTime] = useState(getInitialState);
-  const [day, setDay] = useState(false);
-  const [day1, setDay1] = useState(false);
-  const [day2, setDay2] = useState(false);
-  const [day3, setDay3] = useState(false);
-  const [day4, setDay4] = useState(false);
-  const [day5, setDay5] = useState(false);
+  const [state, setState] = useState({
+    days: 
+    [
+        {
+          id: 1,
+          mon: false
+        },
+        {
+          id: 2,
+          tues: false
+        },
+        {
+          id: 3,
+        
+          wed: false 
+        },
+        {
+          id: 4,
+        
+          thur: false 
+        },
+        {
+          id: 5,
+        
+          fri: false 
+        },
+        {
+          id: 6,
+        
+          sat: false 
+        },
+
+    ]
+  })
 
 
   let docid = "1";
@@ -115,11 +143,12 @@ export default function Faculty() {
 
     await washingtonRef.update({
       timeslot: time,
-      day: day + " " + day1 + " " + day2 + " " + day3 + " " + day4 + " " + day5,
+      day: state.days
+
     })
     return washingtonRef1.update({
       timeslot: time,
-      day: day + " " + day1 + " " + day2 + " " + day3 + " " + day4 + " " + day5,
+      day: state.days
     })
 
       .then(function () {
@@ -135,6 +164,18 @@ export default function Faculty() {
 
 
   }
+  const handleday = async(day1) =>{
+    let updatedList = state.days.map(item => 
+      {
+        if (item.id == day1){
+          return {...item, done: !item.done}; //gets everything that was already in item, and updates "done"
+        }
+        return item; // else return unmodified item 
+      });
+  
+    setState({days: updatedList}); // set state to new object with updated list
+  }
+  
 
 
   return (
@@ -154,17 +195,17 @@ export default function Faculty() {
                 <a className="nav-link active" aria-current="page" >Home</a>
               </li>
 
-              {/* <li className="nav-item dropdown">
+              <li className="nav-item dropdown">
           <a className="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Faculty
+            Course
           </a>
           <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a style={{cursor:'pointer'}} onClick={()=>{
-                history('/facultyform',{replace:true})}}
+                history('/course',{replace:true})}}
                  className="dropdown-item" >
-                Faculty Form
+                Course Registration
                 </a></li>
-                <li><a style={{cursor:'pointer'}} onClick={()=>{
+                {/* <li><a style={{cursor:'pointer'}} onClick={()=>{
                 history('/getdata',{replace:true})}}
                  className="dropdown-item" >
                 Faculty Data
@@ -173,11 +214,11 @@ export default function Faculty() {
                 history('/search',{replace:true})}}
                  className="dropdown-item" >
                 Search Faculty
-                </a></li>
+                </a></li> */}
 
           </ul>
         </li>
-        <li className="nav-item dropdown">
+        {/* <li className="nav-item dropdown">
           <a className="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Course
           </a>
@@ -212,7 +253,7 @@ export default function Faculty() {
 
         <h3 style={{ textAlign: "center", margin: '30px' }}>User's Information</h3>
 
-        
+
         {
           (() => {
             if (loading) {
@@ -256,27 +297,27 @@ export default function Faculty() {
 
                       <td>  <br /><div className="form-switch">
                         <div className="form-check form-check-inline">
-                          <input className="form-check-input" type="checkbox" onChange={(e) => setDay(e.target.checked)} id="inlineCheckbox1" value="monday" />
+                          <input className="form-check-input" type="checkbox" onChange={(e) => { handleday(1) }} id="inlineCheckbox1" value="monday" />
                           <label className="form-check-label" htmlFor="inlineCheckbox1">Monday</label>
                         </div>
                         <div className="form-check form-check-inline">
-                          <input className="form-check-input" type="checkbox" onChange={(e) => setDay1(e.target.checked)} id="inlineCheckbox2" value="tuesday" />
+                          <input className="form-check-input" type="checkbox" onChange={(e) => { handleday(2) }} id="inlineCheckbox2" value="tuesday" />
                           <label className="form-check-label" htmlFor="inlineCheckbox2">Tuesday</label>
                         </div>
                         <div className="form-check form-check-inline">
-                          <input className="form-check-input" type="checkbox" onChange={(e) => setDay2(e.target.checked)} id="inlineCheckbox3" value="wednesday" />
+                          <input className="form-check-input" type="checkbox" onChange={(e) => { handleday(3) }} id="inlineCheckbox3" value="wednesday" />
                           <label className="form-check-label" htmlFor="inlineCheckbox3">Wednesday </label>
                         </div>
                         <div className="form-check form-check-inline">
-                          <input className="form-check-input" type="checkbox" id="inlineCheckbox3" onChange={(e) => setDay3(e.target.checked)} value="thursday" />
+                          <input className="form-check-input" type="checkbox" id="inlineCheckbox3" onChange={(e) => { handleday(4) }} value="thursday" />
                           <label className="form-check-label" htmlFor="inlineCheckbox3">Thursday </label>
                         </div>
                         <div className="form-check form-check-inline">
-                          <input className="form-check-input" type="checkbox" onChange={(e) => setDay4(e.target.checked)} id="inlineCheckbox3" value="friday" />
+                          <input className="form-check-input" type="checkbox" onChange={(e) => { handleday(5) }} id="inlineCheckbox3" value="friday" />
                           <label className="form-check-label" htmlFor="inlineCheckbox3">Friday </label>
                         </div>
                         <div className="form-check form-check-inline">
-                          <input className="form-check-input" type="checkbox" id="inlineCheckbox3" onChange={(e) => setDay5(e.target.checked)} value="saturday" />
+                          <input className="form-check-input" type="checkbox" id="inlineCheckbox3" onChange={(e) => { handleday(6) }} value="saturday" />
                           <label className="form-check-label" htmlFor="inlineCheckbox3">Saturday </label>
                         </div></div>
 

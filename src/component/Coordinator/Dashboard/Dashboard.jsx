@@ -178,9 +178,9 @@ export default function Dashboard() {
                 <a className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Course
                 </a>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                {/* <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                   <li><a style={{ cursor: 'pointer' }} onClick={() => {
-                    history('/ccourse', { replace: true })
+                    history('/course', { replace: true })
                   }}
                     className="dropdown-item" >
                     Course Form
@@ -188,7 +188,7 @@ export default function Dashboard() {
 
 
 
-                </ul>
+                </ul> */}
               </li>
               <li className="nav-item">
                 {<a onClick={handleLogin} style={{ cursor: 'pointer' }} className="nav-link active" aria-current="page" >

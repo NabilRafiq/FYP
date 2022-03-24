@@ -19,21 +19,49 @@ export default function Filter() {
     const [info, setInfo] = useState([]);
     const [show, setShow] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [day, setDay] = useState(false);
-    const [day1, setDay1] = useState(false);
-    const [day2, setDay2] = useState(false);
-    const [day3, setDay3] = useState(false);
-    const [day4, setDay4] = useState(false);
-    const [day5, setDay5] = useState(false);
+    const [state, setState] = useState({
+        days: 
+        [
+            {
+              id: 1,
+              mon: false
+            },
+            {
+              id: 2,
+              tues: false
+            },
+            {
+              id: 3,
+            
+              wed: false 
+            },
+            {
+              id: 4,
+            
+              thur: false 
+            },
+            {
+              id: 5,
+            
+              fri: false 
+            },
+            {
+              id: 6,
+            
+              sat: false 
+            },
+    
+        ]
+      })
 
 
     const handleSubmit = async (e) => {
 
         e.preventDefault();
-        const days = day + " " + day1 + " " + day2 + " " + day3 + " " + day4 + " " + day5;
+        
         setLoading(true);
 
-        await firebase.db.collection("facultyform").where("timeslot", "==", time).where("day", "==", days).get().then((querySnapshot) => {
+        await firebase.db.collection("facultyform").where("timeslot", "==", time).where("day", "==", state.days).get().then((querySnapshot) => {
 
             if (!querySnapshot.empty) {
 
@@ -77,6 +105,18 @@ export default function Filter() {
         });
     }
 
+    const handleday = async(day1) =>{
+        let updatedList = state.days.map(item => 
+          {
+            if (item.id == day1){
+              return {...item, done: !item.done}; //gets everything that was already in item, and updates "done"
+            }
+            return item; // else return unmodified item 
+          });
+      
+        setState({days: updatedList}); // set state to new object with updated list
+      }
+
 
     return (
         <div className='Search'>
@@ -93,31 +133,31 @@ export default function Filter() {
                       
 
                         <div className="container">
-                            <div className="form-switch">
-                                <div className="form-check form-check-inline">
-                                    <input className="form-check-input" type="checkbox" onChange={(e) => setDay(e.target.checked)} id="inlineCheckbox1" value="monday" />
-                                    <label className="form-check-label" htmlFor="inlineCheckbox1">Monday</label>
-                                </div>
-                                <div className="form-check form-check-inline">
-                                    <input className="form-check-input" type="checkbox" onChange={(e) => setDay1(e.target.checked)} id="inlineCheckbox2" value="tuesday" />
-                                    <label className="form-check-label" htmlFor="inlineCheckbox2">Tuesday</label>
-                                </div>
-                                <div className="form-check form-check-inline">
-                                    <input className="form-check-input" type="checkbox" onChange={(e) => setDay2(e.target.checked)} id="inlineCheckbox3" value="wednesday" />
-                                    <label className="form-check-label" htmlFor="inlineCheckbox3">Wednesday </label>
-                                </div>
-                                <div className="form-check form-check-inline">
-                                    <input className="form-check-input" type="checkbox" id="inlineCheckbox3" onChange={(e) => setDay3(e.target.checked)} value="thursday" />
-                                    <label className="form-check-label" htmlFor="inlineCheckbox3">Thursday </label>
-                                </div>
-                                <div className="form-check form-check-inline">
-                                    <input className="form-check-input" type="checkbox" onChange={(e) => setDay4(e.target.checked)} id="inlineCheckbox3" value="friday" />
-                                    <label className="form-check-label" htmlFor="inlineCheckbox3">Friday </label>
-                                </div>
-                                <div className="form-check form-check-inline">
-                                    <input className="form-check-input" type="checkbox" id="inlineCheckbox3" onChange={(e) => setDay5(e.target.checked)} value="saturday" />
-                                    <label className="form-check-label" htmlFor="inlineCheckbox3">Saturday </label>
-                                </div></div>
+                        <div className="form-switch">
+                        <div className="form-check form-check-inline">
+                          <input className="form-check-input" type="checkbox" onChange={(e) => { handleday(1) }} id="inlineCheckbox1" value="monday" />
+                          <label className="form-check-label" htmlFor="inlineCheckbox1">Monday</label>
+                        </div>
+                        <div className="form-check form-check-inline">
+                          <input className="form-check-input" type="checkbox" onChange={(e) => { handleday(2) }} id="inlineCheckbox2" value="tuesday" />
+                          <label className="form-check-label" htmlFor="inlineCheckbox2">Tuesday</label>
+                        </div>
+                        <div className="form-check form-check-inline">
+                          <input className="form-check-input" type="checkbox" onChange={(e) => { handleday(3) }} id="inlineCheckbox3" value="wednesday" />
+                          <label className="form-check-label" htmlFor="inlineCheckbox3">Wednesday </label>
+                        </div>
+                        <div className="form-check form-check-inline">
+                          <input className="form-check-input" type="checkbox" id="inlineCheckbox3" onChange={(e) => { handleday(4) }} value="thursday" />
+                          <label className="form-check-label" htmlFor="inlineCheckbox3">Thursday </label>
+                        </div>
+                        <div className="form-check form-check-inline">
+                          <input className="form-check-input" type="checkbox" onChange={(e) => { handleday(5) }} id="inlineCheckbox3" value="friday" />
+                          <label className="form-check-label" htmlFor="inlineCheckbox3">Friday </label>
+                        </div>
+                        <div className="form-check form-check-inline">
+                          <input className="form-check-input" type="checkbox" id="inlineCheckbox3" onChange={(e) => { handleday(6) }} value="saturday" />
+                          <label className="form-check-label" htmlFor="inlineCheckbox3">Saturday </label>
+                        </div></div>
                         </div>
 
                         <select onChange={(e) => setTime(e.target.value)} value={time} class="form-select" id="inputGroupSelect01">
