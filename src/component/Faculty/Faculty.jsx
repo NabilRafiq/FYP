@@ -285,12 +285,20 @@ export default function Faculty() {
                       <td> {data.email} </td>
                     </tr>
                     <tr>
-                      <th>Program</th>
-                      <td> {data.program} </td>
+                      <th>Field</th>
+                      <td> {data.field} </td>
+                    </tr>
+                    <tr>
+                      <th>Qualification</th>
+                      <td> {data.qualification} </td>
                     </tr>
                     <tr>
                       <th>Role</th>
                       <td> {data.role} </td>
+                    </tr>
+                    <tr>
+                      <th>Date of Birth</th>
+                      <td> {data.age} </td>
                     </tr>
                     <tr>
                       <th><label htmlFor="role" className='f_label form-label' ><b>Timeslot</b></label></th>

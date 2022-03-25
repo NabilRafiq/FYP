@@ -11,28 +11,71 @@ export default function Cform() {
     const [hour, setHour] = useState(1);
     const [field, setField] = useState("ComputerScience");
     const [qualification, setQual] = useState("Bachelors");
+    const [faculty, setFaculty] = useState("");
+    const [copy, setCopy] = useState(true);
+
     // const [depart, setDepart] = useState("");
     const history = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        await db.collection('course').add({
-            name: name,
-            hour: hour,
-            field:field,
-            qualification:qualification
-            // depart : depart
+         db.collection("course").get().then((querySnapshot) => {
+          
+            if (!querySnapshot.empty) {
+
+                for (var i in querySnapshot.docs) {
+                    const doc = querySnapshot.docs[i]
+                    var dete = doc.data();
+
+
+                    if (dete.name == name) {
+                        console.log(dete.name==name);
+                        setCopy(true);
+                        break;
+
+                    }
+                    else{
+                        setCopy(false)
+                    }
+                }
+            }
+            else{
+                setCopy(false)
+            }
+
+
 
         })
-            .then(() => {
-
-                alert("Course data added successfully")
-            })
             .catch((error) => {
                 alert(error.message);
             })
+
+
+        if (copy != false) {
+             
+                alert("Course already exists")
+        }
+        else {
+            await db.collection('course').add({
+                name: name,
+                hour: hour,
+                field: field,
+                qualification: qualification,
+                // depart : depart
+
+                    })
+                .then(() => {
+
+                    alert("Course data added successfully")
+                })
+                .catch((error) => {
+                    alert(error.message);
+                })
+        }
+
         setName("");
         setHour("");
+        console.log(copy)
         // setDepart("");
 
     }
@@ -60,11 +103,11 @@ export default function Cform() {
                             <option value="4">4</option>
                         </select>
                     </div>
-                    
+
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="inputGroupSelect01"><b>Field</b></label>
                         <select onChange={(e) => setField(e.target.value)} class="form-select" id="inputGroupSelect01">
-                        <option value="ComputerScience">ComputerScience</option>
+                            <option value="ComputerScience">ComputerScience</option>
                             <option value="Artificial Intelligence">Artificial Intelligence</option>
                             <option value="MediaScience">MediaScience</option>
                             <option value="Buisness Adminstration">Buisness Adminstration</option>
@@ -72,7 +115,7 @@ export default function Cform() {
                     </div>
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="inputGroupSelect01"><i class='fas fa-graduation-cap'></i></label>
-                        <select onChange={(e) => setQual(e.target.value)}  class="form-select" name='form-select1' id="inputGroupSelect01">
+                        <select onChange={(e) => setQual(e.target.value)} class="form-select" name='form-select1' id="inputGroupSelect01">
                             <option value="Bachelors">Bachelors</option>
                             <option value="Master">Master</option>
                             <option value="Mphil">Mphil</option>

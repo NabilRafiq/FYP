@@ -278,7 +278,7 @@ export default function GetData() {
 
                                         <tr>
                                             <th scope='col'>Name</th>
-                                            <th scope='col'>Age</th>
+                                            <th scope='col'>Date of Birth</th>
                                             <th scope='col'>Email</th>
                                             <th scope='col'>Field</th>
                                             <th scope='col'>Qualification</th>
@@ -340,7 +340,7 @@ export default function GetData() {
 
 
                                                             <label for="age" className='f_label form-label'><b>Date of Birth</b></label>
-                                                            <input type="date" className="s_input form-control" max="1997-12-31" name="age" required onChange={(e) => setAge(e.target.value)} />
+                                                            <input type="date" className="s_input form-control" value={age} max="1997-12-31" name="age" required onChange={(e) => setAge(e.target.value)} />
 
                                                             <div class="input-group mb-3">
                                                                 <label class="input-group-text" for="inputGroupSelect01"><i class='fas fa-graduation-cap'></i></label>

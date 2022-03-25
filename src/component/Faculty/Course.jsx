@@ -14,7 +14,7 @@ export default function Course() {
 
     const [loading, setLoading] = useState(true);
     const [show, setShow] = useState(false);
-    const [nul, setNull] = useState(false);
+    const [err, setErr] = useState(false);
     const history = useNavigate()
     // const [show1, setShow1] = useState(false);
     // const [model, setModel] = useState(false);
@@ -32,6 +32,10 @@ export default function Course() {
 
     useEffect(() => {
         setLoading(true);
+
+        setErr(false);
+        setShow(false)
+
         Fetchdata();
 
     }, []);
@@ -52,10 +56,16 @@ const user = firebase.auth.currentUser;
         console.log(dete.field + " "+dete.qualification + " "+dete1.field + " "+dete1.qualification + " ")
         if (dete1.field == dete.field && dete1.qualification == dete.qualification ){
             setInfo(arr => [...arr, dete]);
+            setLoading(false);
+            setErr(false);
+            setShow(true);
         }
         else{
-            setInfo([])
-            alert("No course found")
+            setInfo([]);
+            setLoading(false);
+            setErr(true);
+            setShow(false);
+        
         }
    })   
 })
@@ -65,13 +75,12 @@ const user = firebase.auth.currentUser;
 
 
                 });
-                setShow(true);
-                setLoading(false);
+            
             }
             else {
-                alert("No Course for you!");
                 setLoading(false);
-
+            setErr(true);
+            setShow(false);
             }
 
         })
@@ -84,6 +93,7 @@ const user = firebase.auth.currentUser;
 
 
 
+
     return (
         <div>
             <Helmet>
@@ -92,14 +102,18 @@ const user = firebase.auth.currentUser;
 
 
 
-            {console.log(info)}
+          
             <div style={{ marginTop: '70px' }} className="container">
                 <div className="row">
                     <h4 style={{ textAlign: 'center', marginBottom: '50px' }}>Course Registration</h4>
                 </div>
             </div>
+            {console.log("show:"+show+"loading:"+loading+"error:"+err)}
 
-
+            {
+                            (() => {
+                                if (show && !err && !loading)
+                                return(
             <div className="container" style={{ overflowX: "auto" }}>
 
             
@@ -117,6 +131,7 @@ const user = firebase.auth.currentUser;
                                 <th scope='col'>Chrs</th>
                                 <th scope='col'>Field</th>
                                 <th scope='col'>Qualification</th>
+                                <th scope='col'>Register</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -141,6 +156,10 @@ const user = firebase.auth.currentUser;
                                         {data.qualification}
 
                                     </td>
+                                    <td>
+                                        
+                                    <button className="btn btn-success" ><i class="bi bi-check2-circle"></i></button>
+                                    </td>
                                     {/* <td scope='col'>
                                                 <button className="btn btn-success" onClick={() => { handleUpdate(data.email) }}><i class="bi bi-pencil-square"></i></button>
                                             </td> */}
@@ -160,10 +179,26 @@ const user = firebase.auth.currentUser;
 
 
 
-               </div>
+               </div>)
+             if(!show && err && !loading)
+                return(
+                    <div className="d-flex justify-content-center">
+                    <div class="alert alert-danger" role="alert">
+                    No Course available at this moment please check back later!
+                  </div></div>)
+            
+             if (!show && !err && loading)
+             
+                return(
+                    <div className="d-flex justify-content-center">
+                <div class="spinner-border text-dark" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div></div>)
+            
+            })()}
             <div className="d-flex justify-content-center">
                 <button className="col-2 a_button btn" style={{ padding: '2px', color: 'black', background: 'none' }} onClick={() => {
-                    history('/admin', { replace: true })
+                    history('/faculty', { replace: true })
                 }}>Back</button></div></div>
 
     )
