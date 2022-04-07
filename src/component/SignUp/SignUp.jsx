@@ -67,23 +67,23 @@ export default function SignUp() {
 
         <div className="SignUp">
             <Helmet>
-                <title>SignUp</title>
+                <title>Sign Up</title>
             </Helmet>
 
-            <div className="s_container container d-flex justify-content-center">
+            <div className="s_container">
                 <form className='s_form' onSubmit={(e) => handleSubmit(e)}>
-                    <h2 style={{ textAlign: 'center' }}><i class="bi bi-person-plus-fill"></i></h2>
+                    <h2 style={{ textAlign: 'left' }}><i class="bi bi-person-plus-fill"></i>Sign Up</h2>
 
 
-                    <label style={{ marginTop: '10px' }} for="uname" className='form-label'><b>UserName</b></label>
-                    <input type="text" className="s_input form-control" placeholder="Enter UserName" name="uname" required onChange={(e) => setName(e.target.value)} />
+                  
+                    <input type="text" id='txt1' className="s_input form-control" placeholder="Username" name="uname" required onChange={(e) => setName(e.target.value)} />
 
 
-                    <label for="age" className='f_label form-label'><b>Date of Birth</b></label>
+                    {/* <label for="age" className='f_label form-label'><b>Date of Birth</b></label> */}
                     <input type="date" className="s_input form-control" max="1997-12-31" name="age" required onChange={(e) => setAge(e.target.value)} />
 
-                    <label for="number" className='form-label'><b>Mobile Number</b></label>
-                    <input type="tel" size="11" className="s_input form-control" placeholder="03xxxxxxxxx" name="number" required onChange={(e) => setNumber(e.target.value)} />
+                    {/* <label for="number" className='form-label'><b>Mobile Number</b></label> */}
+                    <input type="tel" size="11" className="s_input form-control" placeholder="Phone number" name="number" required onChange={(e) => setNumber(e.target.value)} />
 
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="inputGroupSelect01"><i class="bi bi-gender-ambiguous" style={{ fontSize: "large" }}></i></label>
@@ -92,6 +92,7 @@ export default function SignUp() {
                             <option value="Female">Female</option>
                         </select>
                     </div>
+                    {/* <label  className='form-label'><b>Department</b></label> */}
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="inputGroupSelect01"><i class="bi bi-building fa-lg" ></i></label>
                         <select onChange={(e) => setDepart(e.target.value)} value={depart} class="form-select" name='form-select1' id="inputGroupSelect01">
@@ -101,16 +102,16 @@ export default function SignUp() {
                             <option value="BA">Buisness Adminstration</option>
                         </select>
                     </div>
-                    <label for="email" className='form-label'><b>Email</b></label>
+                    {/* <label for="email" className='form-label'><b>Email</b></label> */}
                     <input type="email" className="s_input form-control" placeholder="Enter Email" name="email" required onChange={(e) => setEmail(e.target.value)} />
-                    <label for="psw" className='form-label'><b>Password</b></label>
+                    {/* <label for="psw" className='form-label'><b>Password</b></label> */}
                     <input type="password" className="s_input form-control" placeholder="Enter Password" name="psw" required onChange={(e) => setPassword(e.target.value)} />
 
-                    <label for="role" className='form-label'><b>Role</b></label>
+                    {/* <label for="role" className='form-label'><b>Role</b></label> */}
                     <input type="text" className="s_input form-control" value="Coordinator" name="role" readOnly />
 
 
-                    <div style={{ textAlign: 'center' }}>
+                    <div style={{ textAlign: 'left' }}>
 
                         <button className="s_button btn" type="submit" id='sbutton'>SignUp</button>
                         <p className='form-text'>Already have a account? <button className="s_button btn" style={{ width: '5%', color: '#178dee ', background: 'none' }} onClick={() => {

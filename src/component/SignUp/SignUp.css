@@ -6,41 +6,54 @@
 
 
 .s_container {
-padding: 10px;
+margin: auto;
+width: 70%;
+
 
 } 
 .s_form {
 
   background-color: white;
-  border: 1px solid black;
+  height: 80vh;
   padding: 10px;
-  border-radius: 3px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  width: 60%;
+  margin:auto;
+  box-shadow: rgb(0 0 0 / 70%) 0px 5px 15px;
+  width: 70%;
+  padding: 3%;
+  border-radius: 50px;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 } 
 
-
+#txt1{
+  width: 100%;
+}
 
 .s_input {
-width: 100%;
-padding: 12px 15px;
-margin: 8px 0;
+width: 50%;
+padding: 15px 15px;
+margin: 25px 0;
 display: inline-block;
 border: 1px solid #ccc;
 box-sizing: border-box;
-border-radius: 3px;
+border-radius: 50px;
 }
 
 .s_button {
-background-color: #192841;
-color: white;
-padding: 5px;
-margin-top: 5px;
-border: none;
-cursor: pointer;
-font-size: 16px;
-width: 50%;
-border-radius: 3px;
+  background-color: #192841;
+  color: white;
+  padding: 1%;
+  margin-top: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  width: 20%;
+  border-radius: 30px;
+  background-color: #4c4177;
+  background-image: linear-gradient(315deg, #4c4177 0%, #2a5470 74%);
 }
 
 .s_button:hover {
@@ -58,5 +71,11 @@ opacity: 0.8;
 
 
 
+.input-group:not(.has-validation)>.dropdown-toggle:nth-last-child(n+3), .input-group:not(.has-validation)>:not(:last-child):not(.dropdown-toggle):not(.dropdown-menu) {
+  border-top-left-radius: 22px;
+  border-bottom-left-radius: 22px;
+}
 
-
+#inputGroupSelect01{
+  border-radius: 0px 50px 50px 0px;
+}

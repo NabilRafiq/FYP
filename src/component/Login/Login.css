@@ -4,16 +4,38 @@ padding: 10px;
 
 } 
 .l_form {
-  left      : 50%;
-  top       : 40%;
-  position  : absolute;
-  transform : translate(-50%, -50%);
+  left: 50%;
+  top: 40%;
+  position: absolute;
+  transform: translate(-50%, -50%);
   background-color: white;
-  border: 1px solid black;
-  padding: 10px;
-  border-radius: 3px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  /* border: 1px solid black; */
+  padding: 3%;
+  border-radius: 50px;
+  box-shadow: rgb(0 0 0 / 70%) 0px 5px 15px;
+  width: 26%;
+  height: 60%;
+  /* border-radius: 20px; */
+ 
 } 
+
+@media screen and (max-width:525px){
+  .l_form {
+    left: 50%;
+    top: 40%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    /* border: 1px solid black; */
+    padding: 3%;
+    border-radius: 50px;
+    box-shadow: rgb(0 0 0 / 70%) 0px 5px 15px;
+    width: 50%;
+    height: 60%;
+    /* border-radius: 20px; */
+   
+  } 
+}
 
 
 
@@ -24,19 +46,21 @@ margin: 8px 0;
 display: inline-block;
 border: 1px solid #ccc;
 box-sizing: border-box;
-border-radius: 3px;
+border-radius: 50px;
 }
 
 .l_button {
 background-color: #192841;
 color: white;
-padding: 5px;
+padding: 3%;
 margin-top: 5px;
 border: none;
 cursor: pointer;
 font-size: 16px;
-width: 50%;
-border-radius: 3px;
+width: 100%;
+border-radius: 30px;
+background-color: #4c4177;
+background-image: linear-gradient(315deg, #4c4177 0%, #2a5470 74%);
 }
 .l_button1 {
   padding: 5px;
@@ -58,14 +82,30 @@ opacity: 0.8;
   opacity: 0.8;
   }
 
-
+.form-label{
+margin-top:0.5rem;
+margin-bottom:0.5rem;
+}
 .form-control:active, .form-control:focus{
   box-shadow: none;
   border-color: none;
   outline:#192841  auto 5px ;
 }
 
+.login-btn-nd-text{
+  text-align: center;
+  margin:3rem 0
+}
 
+*{
+  font-family: 'Montserrat', sans-serif;
+}
 
+.text-gap{
+  margin-top: 2em;
+}
 
-
+.background-grad{
+  background-color: #537895;
+  background-image: linear-gradient(315deg, #537895 0%, #09203f 74%);
+}

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { auth, db } from '../../firebase';
 import { Navigate, useNavigate } from 'react-router';
 import { Helmet } from 'react-helmet';
+
+
 import './Login.css';
 
 
@@ -77,39 +79,34 @@ export default function Login() {
 
 
     return (
+      
         <div className="Login">
-            <Helmet>
-                <title>Login</title>
+            <Helmet >
+            <title>Login</title>
             </Helmet>
-
-
-
-
-
-            <div className="l_container container-sm ">
+                <div className="  l_container container-sm">
                 <form className='l_form' >
-
-                    <h2 style={{ textAlign: 'center', margin: '5px' }}><i class="bi bi-person-fill"></i></h2>
-
+              
+                    <h3 style={{ textAlign: 'left', margin: '10px' }}>Sign In</h3>
                     <label htmlFor="uname" className='form-label'><b>Email</b></label>
-
-                    <input className='l_input form-control' type="email" placeholder="Enter Email" name="uname" required onChange={(e) => setEmail(e.target.value)} />
-
+                  
+                    <input  className='l_input form-control' type="email" placeholder="Enter a valid Email address" name="uname" required onChange={(e) => setEmail(e.target.value)} />
+                    
                     <label htmlFor="psw" className='form-label'><b>Password</b></label>
                     <input type="password" className='l_input form-control' placeholder="Enter Password" name="psw" required onChange={(e) => setPassword(e.target.value)} />
-                    <div style={{ textAlign: 'center' }}>
+                    <div /*style={{ textAlign: 'center' }}*/ className='login-btn-nd-text'>
 
-                        <button className="l_button btn" type="submit" id='lbutton' onClick={(e) => handleSubmit(e)}>Login</button>
+                        <button className="l_button btn" type="submit" id='lbutton' onClick={(e) => handleSubmit(e)}>Submit</button>
                         {/* <button className="l_button btn" style={{marginLeft:"2px",width:"40%"}} id='lbutton' onClick={() => {
                             history('/ForgotPass', { replace: true })
                         }}>Forgot Password</button> */}
 
 
+                        
 
-
-                        <p className='form-text col'>Don't have an account? <button className="col-2 l_button btn" style={{ padding: '2px', width: '17%', color: '#178dee ', background: 'none' }} onClick={() => {
+                        <p className='form-text col text-gap'>Don't have an account? <button className="col-2 l_button btn" style={{ padding: '2px', width: '17%', color: '#178dee ', background: 'none' }} onClick={() => {
                             history('/SignUp', { replace: true })
-                        }}>SignUp</button></p>
+                        }}>Register</button></p>
 
 
 
@@ -124,5 +121,6 @@ export default function Login() {
             </div>
 
         </div>
+      
     )
 }
