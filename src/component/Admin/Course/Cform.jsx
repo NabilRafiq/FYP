@@ -7,19 +7,22 @@ import './Cform.css'
 
 
 export default function Cform() {
+
+
+
     const [name, setName] = useState("");
     const [hour, setHour] = useState(1);
     const [field, setField] = useState("ComputerScience");
     const [qualification, setQual] = useState("Bachelors");
     const [faculty, setFaculty] = useState("");
-    const [copy, setCopy] = useState(true);
+    const [copy, setCopy] = useState(false);
 
     // const [depart, setDepart] = useState("");
     const history = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-         db.collection("course").get().then((querySnapshot) => {
+         db.collection("course1").get().then((querySnapshot) => {
           
             if (!querySnapshot.empty) {
 
@@ -57,10 +60,12 @@ export default function Cform() {
         }
         else {
             await db.collection('course').add({
+                
                 name: name,
                 hour: hour,
                 field: field,
                 qualification: qualification,
+                faculty:faculty
                 // depart : depart
 
                     })
@@ -85,7 +90,7 @@ export default function Cform() {
                 <title>Course Form</title>
             </Helmet>
 
-
+{console.log(hour)}
             <div className="container-sm cf_container">
                 <form className='cf_form' onSubmit={(e) => handleSubmit(e)}>
 
@@ -97,10 +102,10 @@ export default function Cform() {
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="inputGroupSelect01"><b>Credit Hour</b></label>
                         <select onChange={(e) => setHour(e.target.value)} value={hour} class="form-select" id="inputGroupSelect01">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
+                            <option value={1}>1</option>
+                            <option value={2}>2</option>
+                            <option value={3}>3</option>
+                            <option value={4}>4</option>
                         </select>
                     </div>
 

@@ -8,11 +8,6 @@ import './AAform.css'
 
 export default function AAform() {
 
-    useEffect(() => {
-        // change background color with a random color
-        const color =  "#f0f2f0";
-        document.body.style.background = color;
-      });
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");

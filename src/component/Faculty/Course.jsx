@@ -10,8 +10,9 @@ export default function Course() {
 
 
     const [info, setInfo] = useState([]);
-    const [info1, setInfo1] = useState([]);
-
+    const [info1, setInfo1] = useState(0);
+    const [course1, setCourse1] = useState("");
+    const user = firebase.auth.currentUser;
     const [loading, setLoading] = useState(true);
     const [show, setShow] = useState(false);
     const [err, setErr] = useState(false);
@@ -26,8 +27,9 @@ export default function Course() {
     // const [field, setField] = useState("");
     // const [search, setSearch] = useState([]);
     // const history = useNavigate();
-    // let docid = "1";
-    // let docid1 = "1";
+     let docid = "1";
+    let docid1 = "1";
+
 
 
     useEffect(() => {
@@ -40,7 +42,7 @@ export default function Course() {
 
     }, []);
 
-  
+
     const Fetchdata = async () => {
         await firebase.db.collection("course").get().then((querySnapshot) => {
         
@@ -49,31 +51,30 @@ export default function Course() {
                 querySnapshot.forEach(element => {
                     var dete = element.data();
 const user = firebase.auth.currentUser;
- firebase.db.collection("users").where("email", "==", user.email).get().then((querySnapshot) => {
+ firebase.db.collection("facultyform").where("email", "==", user.email).get().then((querySnapshot) => {
 
     querySnapshot.forEach(element => {
         var dete1 = element.data();
-        console.log(dete.field + " "+dete.qualification + " "+dete1.field + " "+dete1.qualification + " ")
-        if (dete1.field == dete.field && dete1.qualification == dete.qualification ){
+           
+      
+        if (dete1.field === dete.field && dete1.qualification === dete.qualification && dete.faculty == "" ){
+            
             setInfo(arr => [...arr, dete]);
             setLoading(false);
             setErr(false);
             setShow(true);
+            setInfo1(1);
+          
         }
-        else{
-            setInfo([]);
-            setLoading(false);
-            setErr(true);
-            setShow(false);
+      
         
-        }
-   })   
+   })  
+   if(info1 == 0){
+    setLoading(false);
+    setErr(true);
+    setShow(false);
+   } 
 })
-
-                 
-
-
-
                 });
             
             }
@@ -91,6 +92,56 @@ const user = firebase.auth.currentUser;
 
     }
 
+    const handleRegister = async (course) => {
+
+        await firebase.db.collection("course").where("name", "==", course).get()
+            .then(querySnapshot => {
+
+                querySnapshot.forEach(element => {
+                    docid = element.id;
+
+
+                })})
+                await firebase.db.collection("facultyform").where("email", "==", user.email).get()
+                .then(querySnapshot => {
+    
+                    querySnapshot.forEach(element => {
+                        docid1 = element.id;
+    
+    
+                    })
+
+
+
+
+            });
+        var washingtonRef = firebase.db.collection("course").doc(docid);
+        var washingtonRef1 = firebase.db.collection("facultyform").doc(docid1);
+        await washingtonRef.update({
+            faculty: user.email
+        })
+            .then(function () {
+                alert("Data updated successfully")
+
+            })
+            .catch(function (error) {
+                alert(error.message)
+
+            })
+            await washingtonRef1.update({
+                [course1]: course
+            })
+                .then(function () {
+
+                    alert("Data updated successfully")
+    
+                })
+                .catch(function (error) {
+                    alert(error.message)
+    
+                })
+    }
+   
 
 
 
@@ -102,100 +153,100 @@ const user = firebase.auth.currentUser;
 
 
 
-          
+
             <div style={{ marginTop: '70px' }} className="container">
                 <div className="row">
                     <h4 style={{ textAlign: 'center', marginBottom: '50px' }}>Course Registration</h4>
                 </div>
             </div>
-            {console.log("show:"+show+"loading:"+loading+"error:"+err)}
+           
 
             {
-                            (() => {
-                                if (show && !err && !loading)
-                                return(
-            <div className="container" style={{ overflowX: "auto" }}>
-
-            
-
-                    <table className='table table-striped' id='getData'>
-                        <thead>
+                (() => {
+                    if (show && !loading && !err || info1 == 1)
+                        return (
+                            <div className="container" style={{ overflowX: "auto" }}>
 
 
+
+                                <table className='table table-striped' id='getData'>
+                                    <thead>
 
 
 
 
-                            <tr>
-                                <th scope='col'>Title</th>
-                                <th scope='col'>Chrs</th>
-                                <th scope='col'>Field</th>
-                                <th scope='col'>Qualification</th>
-                                <th scope='col'>Register</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+
+
+                                        <tr>
+                                            <th scope='col'>Title</th>
+                                            <th scope='col'>Chrs</th>
+                                            <th scope='col'>Field</th>
+                                            <th scope='col'>Qualification</th>
+                                            <th scope='col'>Register</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
 
 
-                            {info.map((data) => (
+                                        {info.map((data) => (
 
-                                <tr>
+                                            <tr>
 
-                                    <td>
-                                        {data.name}
-                                    </td>
-                                    <td>
-                                        {data.hour}
-                                    </td>
-                                    <td>
-                                        {data.field}
+                                                <td>
+                                                    {data.name}
+                                                </td>
+                                                <td>
+                                                    {data.hour}
+                                                </td>
+                                                <td>
+                                                    {data.field}
 
-                                    </td>
-                                    <td>
-                                        {data.qualification}
+                                                </td>
+                                                <td>
+                                                    {data.qualification}
 
-                                    </td>
-                                    <td>
-                                        
-                                    <button className="btn btn-success" ><i class="bi bi-check2-circle"></i></button>
-                                    </td>
-                                    {/* <td scope='col'>
+                                                </td>
+                                                <td>
+
+                                                    <button className="btn btn-success" onClick={() => { handleRegister(data.name) }}><i class="bi bi-check2-circle"></i></button>
+                                                </td>
+                                                {/* <td scope='col'>
                                                 <button className="btn btn-success" onClick={() => { handleUpdate(data.email) }}><i class="bi bi-pencil-square"></i></button>
                                             </td> */}
 
 
 
-                                </tr>
-                            ))
+                                            </tr>
+                                        ))
 
 
 
-                            }</tbody>
+                                        }</tbody>
 
 
 
-                    </table>
+                                </table>
 
 
 
-               </div>)
-             if(!show && err && !loading)
-                return(
-                    <div className="d-flex justify-content-center">
-                    <div class="alert alert-danger" role="alert">
-                    No Course available at this moment please check back later!
-                  </div></div>)
-            
-             if (!show && !err && loading)
-             
-                return(
-                    <div className="d-flex justify-content-center">
-                <div class="spinner-border text-dark" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div></div>)
-            
-            })()}
+                            </div>)
+                    if ( err && !loading && !show &&info1 !=1)
+                        return (
+                            <div className="d-flex justify-content-center">
+                                <div class="alert alert-danger" role="alert">
+                                    No Course available at this moment please check back later!
+                                </div></div>)
+
+                    if (!show && !err && loading)
+
+                        return (
+                            <div className="d-flex justify-content-center">
+                                <div class="spinner-border text-dark" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div></div>)
+
+                })()}
             <div className="d-flex justify-content-center">
                 <button className="col-2 a_button btn" style={{ padding: '2px', color: 'black', background: 'none' }} onClick={() => {
                     history('/faculty', { replace: true })

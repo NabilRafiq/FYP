@@ -18,7 +18,7 @@ export default function Faculty() {
   };
   const history = useNavigate()
   const [info, setInfo] = useState([]);
-  const [disable, setDisable] = React.useState(false);
+  const [disable, setDisable] = useState(false);
   const [loading, setLoading] = useState(false);
   const [time, setTime] = useState(getInitialState);
   const [state, setState] = useState({

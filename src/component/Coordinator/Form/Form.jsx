@@ -35,7 +35,10 @@ export default function Form() {
                     qualification: qualification,
                     field: field,
                     password: password,
-                    role: "faculty"
+                    role: "faculty",
+                    course1:"",
+                    course2:"",
+                    course3:""
 
                 })
                 firebase.db.collection('users').add({
@@ -45,7 +48,8 @@ export default function Form() {
                     qualification: qualification,
                     field: field,
                     password: password,
-                    role: "faculty"
+                    role: "faculty",
+                   
 
                 })
                 alert("Faculty data added successfully")
@@ -69,6 +73,7 @@ export default function Form() {
                 var data = element.data();
                 if (data.role === "admin") {
                     history('/Admin', { replace: true })
+                    
                 }
                 else if (data.role === "coordinator") {
                     history('/Dashboard', { replace: true })
@@ -92,7 +97,7 @@ export default function Form() {
                     <h3 style={{ textAlign: 'center' }}><i class="bi bi-person-plus-fill"></i></h3>
 
                     <label for="uname" className='f_label form-label'><b>Name</b></label>
-                    <input type="text" className='f_input  form-control' placeholder="Enter Name" name="uname" required value={name} onChange={(e) => setName(e.target.value)} />
+                    <input type="text" className='f_input  form-control' placeholder="Enter Name" name="uname" required onChange={(e) => setName(e.target.value)} />
 
 
                     <label for="age" className='f_label form-label'><b>Date of Birth</b></label>
@@ -126,15 +131,15 @@ export default function Form() {
 
 
                     <button id='f_button' type="submit" className='f_button btn'>Submit</button>
-                    <button className='f_button btn' style={{ color: 'black', backgroundColor: 'white' }}
-                        onClick={
-                            (e) => { handleUser(e) }
-                        }>Back</button>
+                
 
 
 
                 </form>
-
+                <button className='f_button btn' style={{ color: 'black', backgroundColor: 'white' }}
+                        onClick={
+                            (e) => { handleUser(e) }
+                        }>Back</button>
             </div>
         </div>
 

@@ -6,9 +6,9 @@ import { Helmet } from "react-helmet";
 export default function Dashboard() {
   useEffect(() => {
     // change background color with a random color
-    const color = "#f0f2f0";
-    document.body.style.background = color;
-  });
+    setLoading(true);
+    userInformation();
+  }, []);
 
   const history = useNavigate();
   const user = firebase.auth.currentUser;
@@ -251,16 +251,6 @@ export default function Dashboard() {
           User's Information
         </h3>
 
-        <button
-          disabled={disable}
-          className="fa_button btn d-grid gap-2 col-6 mx-auto"
-          type="button"
-          onClick={() => {
-            userInformation();
-          }}
-        >
-          Show Information
-        </button>
         {(() => {
           if (loading) {
             return (
