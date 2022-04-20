@@ -40,6 +40,7 @@ display: inline-block;
 border: 1px solid #ccc;
 box-sizing: border-box;
 border-radius: 50px;
+margin: 15px 0;
 }
 
 .s_button {
@@ -78,4 +79,5 @@ opacity: 0.8;
 
 #inputGroupSelect01{
   border-radius: 0px 50px 50px 0px;
+  padding:12px 0;
 }

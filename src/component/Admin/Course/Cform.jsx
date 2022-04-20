@@ -96,10 +96,10 @@ export default function Cform() {
 
                     <h3 style={{ textAlign: 'center' }}>Course Form</h3>
 
-                    <label for="uname" className='cf_label form-label'><b>Course Name</b></label>
-                    <input type="text" className='cf_input  form-control' placeholder="Enter Course Name" name="uname" required value={name} onChange={(e) => setName(e.target.value)} />
+                    <label for="uname" className='cf_label form-label '><b>Course Name</b></label>
+                    <input type="text" className='cf_input  form-control inp inp-brd' placeholder="Enter Course Name" name="uname" required value={name} onChange={(e) => setName(e.target.value)} />
 
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3 inp">
                         <label class="input-group-text" for="inputGroupSelect01"><b>Credit Hour</b></label>
                         <select onChange={(e) => setHour(e.target.value)} value={hour} class="form-select" id="inputGroupSelect01">
                             <option value={1}>1</option>
@@ -109,7 +109,7 @@ export default function Cform() {
                         </select>
                     </div>
 
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3 inp">
                         <label class="input-group-text" for="inputGroupSelect01"><b>Field</b></label>
                         <select onChange={(e) => setField(e.target.value)} class="form-select" id="inputGroupSelect01">
                             <option value="ComputerScience">ComputerScience</option>
@@ -118,7 +118,7 @@ export default function Cform() {
                             <option value="Buisness Adminstration">Buisness Adminstration</option>
                         </select>
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3 inp">
                         <label class="input-group-text" for="inputGroupSelect01"><i class='fas fa-graduation-cap'></i></label>
                         <select onChange={(e) => setQual(e.target.value)} class="form-select" name='form-select1' id="inputGroupSelect01">
                             <option value="Bachelors">Bachelors</option>
@@ -132,8 +132,8 @@ export default function Cform() {
                     <input type="text" className='cf_input form-control' placeholder="Enter Program" name="depart" value={depart} required onChange={(e) => setDepart(e.target.value)} /> */}
 
 
-                    <button id='cf_button' type="submit" className='cf_button btn'>Submit</button>
-                    <button className='cf_button btn' style={{ color: 'black', backgroundColor: 'white' }}
+                    <button id='cf_button' type="submit" className='cf_button btn inp inp-brd'>Submit</button>
+                    <button id='back' className='cf_button btn inp inp-brd' style={{ color: 'black', backgroundColor: 'white' }}
                         onClick={() => {
                             history('/Admin', { replace: true })
                         }}>Back</button>

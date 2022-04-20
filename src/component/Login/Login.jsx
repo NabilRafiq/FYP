@@ -90,10 +90,10 @@ export default function Login() {
                     <h3 style={{ textAlign: 'left', margin: '10px' }}>Sign In</h3>
                     <label htmlFor="uname" className='form-label'><b>Email</b></label>
                   
-                    <input  className='l_input form-control' type="email" placeholder="Enter a valid Email address" name="uname" required onChange={(e) => setEmail(e.target.value)} />
+                    <input  className='l_input form-control' type="email"  name="uname" required onChange={(e) => setEmail(e.target.value)} />
                     
                     <label htmlFor="psw" className='form-label'><b>Password</b></label>
-                    <input type="password" className='l_input form-control' placeholder="Enter Password" name="psw" required onChange={(e) => setPassword(e.target.value)} />
+                    <input type="password" className='l_input form-control'name="psw" required onChange={(e) => setPassword(e.target.value)} />
                     <div /*style={{ textAlign: 'center' }}*/ className='login-btn-nd-text'>
 
                         <button className="l_button btn" type="submit" id='lbutton' onClick={(e) => handleSubmit(e)}>Submit</button>

@@ -64,23 +64,23 @@ export default function AAform() {
             <div className="container-sm aaf_container">
                 <form className='aaf_form' onSubmit={(e) => handleSubmit(e)}>
 
-                    <h3 style={{ textAlign: 'center' }}><i class="bi bi-person-plus-fill"></i></h3>
+                    <h3 style={{ textAlign: 'center' }}><i class="bi bi-person-plus-fill"></i>Cordinator registration</h3>
 
                     <label for="uname" className='aaf_label form-label'><b>Name</b></label>
-                    <input type="text" className='aaf_input  form-control' placeholder="Enter Name" name="uname" required value={name} onChange={(e) => setName(e.target.value)} />
+                    <input type="text" className='aaf_input  form-control' name="uname" required value={name} onChange={(e) => setName(e.target.value)} />
 
 
                     <label for="age" className='aaf_label form-label'><b>Age</b></label>
-                    <input type="number" className='aaf_input form-control' placeholder="Enter Age" name="age" value={age} required onChange={(e) => setAge(e.target.value)} />
+                    <input type="number" className='aaf_input form-control'  name="age" value={age} required onChange={(e) => setAge(e.target.value)} />
 
                     <label for="qual" className='aaf_label form-label' ><b>Qualification</b></label>
-                    <input type="text" className='aaf_input form-control' placeholder="Enter Mobile Number" name="qual" value={qualification} required onChange={(e) => setQualification(e.target.value)} />
+                    <input type="text" className='aaf_input form-control'  name="qual" value={qualification} required onChange={(e) => setQualification(e.target.value)} />
                     <label for="field" className='aaf_label form-label'><b>Field</b></label>
-                    <input type="text" className='aaf_input form-control' placeholder="Enter " name="field" value={field} required onChange={(e) => setField(e.target.value)} />
+                    <input type="text" className='aaf_input form-control'  name="field" value={field} required onChange={(e) => setField(e.target.value)} />
                     <label for="Email" className='aaf_label form-label'><b>Email</b></label>
-                    <input type="email" className='aaf_input form-control' placeholder="Enter Email" name="Email" value={email} required onChange={(e) => setEmail(e.target.value)} />
+                    <input type="email" className='aaf_input form-control'  name="Email" value={email} required onChange={(e) => setEmail(e.target.value)} />
                     <label for="psw" className='aaf_label form-label'><b>Password</b></label>
-                    <input type="password" className='aaf_input form-control' placeholder="Enter Password" name="psw" value={password} required onChange={(e) => setPassword(e.target.value)} />
+                    <input type="password" className='aaf_input form-control'  name="psw" value={password} required onChange={(e) => setPassword(e.target.value)} />
                     <label for="role" className='aaf_label form-label' ><b>Role</b></label>
                     <input type="text" disabled className='aaf_input form-control' readonly  value="Coordinator" name="role" />
 
