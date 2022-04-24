@@ -29,7 +29,7 @@
   }
   
   .aaf_button {
-  color: white;
+  color: white!important;
   padding: 12px;
   margin-top: 1rem;
   border: none;

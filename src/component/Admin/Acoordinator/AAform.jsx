@@ -87,7 +87,7 @@ export default function AAform() {
 
 
                     <button id='aaf_button' type="submit" className='aaf_button btn'>Submit</button>
-                    <button className='aaf_button btn' style={{ color: 'black', backgroundColor: 'white' }}
+                    <button className='aaf_button btn ms-3' style={{ color: 'black', backgroundColor: 'white' }}
                         onClick={() => {
                             history('/Admin', { replace: true })
                         }}>Back</button>

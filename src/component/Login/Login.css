@@ -109,3 +109,7 @@ margin-bottom:0.5rem;
   background-color: #537895;
   background-image: linear-gradient(315deg, #537895 0%, #09203f 74%);
 }
+.dropdown-item:hover{
+  background-color: #222851;
+  color: white;
+}

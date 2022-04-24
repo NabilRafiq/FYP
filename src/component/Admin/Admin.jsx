@@ -55,7 +55,7 @@ export default function Dashboard() {
       <nav
         className="navbar navbar-expand-lg navbar-dark"
         style={{ backgroundColor: "#192841" }}
-      >
+      > 
         <div className="container-fluid">
           <button
             className="navbar-toggler"
@@ -84,7 +84,7 @@ export default function Dashboard() {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Faculty
+                  Visiting Faculty
                 </a>
                 <ul
                   className="dropdown-menu"
@@ -124,7 +124,7 @@ export default function Dashboard() {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Coordinator
+                  Manage Cordinator
                 </a>
                 <ul
                   className="dropdown-menu"
@@ -163,7 +163,7 @@ export default function Dashboard() {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Course
+                  Course registration
                 </a>
                 <ul
                   className="dropdown-menu"
@@ -177,7 +177,7 @@ export default function Dashboard() {
                       }}
                       className="dropdown-item"
                     >
-                      Course Form
+                      Create a Course
                     </a>
                   </li>
                   <li>
@@ -188,7 +188,7 @@ export default function Dashboard() {
                       }}
                       className="dropdown-item"
                     >
-                      Course Data
+                      Courses info
                     </a>
                   </li>
                 </ul>
@@ -218,8 +218,11 @@ export default function Dashboard() {
                   style={{ cursor: "pointer" }}
                   className="nav-link active"
                   aria-current="page"
+                  id="logout"
                 >
                   Logout
+
+                  <i class="fa-solid fa-right-from-bracket ms-3" ></i>
                 </a>
               </li>
             </ul>

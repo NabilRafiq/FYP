@@ -190,8 +190,8 @@ export default function Dashboard() {
 
                 </ul> */}
               </li>
-              <li className="nav-item">
-                {<a onClick={handleLogin} style={{ cursor: 'pointer' }} className="nav-link active" aria-current="page" >
+              <li className="nav-item ms-auto" >
+                {<a onClick={handleLogin} style={{ cursor: 'pointer' }}  className="nav-link active" aria-current="page"  >
                   Logout
                 </a>
                 }

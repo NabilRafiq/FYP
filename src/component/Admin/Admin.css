@@ -9,9 +9,12 @@
 
   }
 
+#logout{
+  background-color: darkcyan;
+  padding: 8px 42px;
+}
+  
 
-  
-  
   
   .ad_input {
     width: 50%;
@@ -47,16 +50,15 @@
 border: 2px solid #192841;
 }
 #getData th {
-  
+  padding: 18px;
   text-align: left;
-  background-color: #192841!important ;
+  background-color: #222851!important ;
   color: white;
 }
 #getData td, #getData th {
   border: 1px solid rgb(128, 126, 126);
 
 }
-
 
 
 #getData tr:hover {background-color: #ddd;}
