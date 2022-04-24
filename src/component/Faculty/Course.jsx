@@ -12,22 +12,15 @@ export default function Course() {
     const [info, setInfo] = useState([]);
     const [info1, setInfo1] = useState(0);
     const [course1, setCourse1] = useState("");
+    const [course2, setCourse2] = useState("");
+    const [course3, setCourse3] = useState("");
     const user = firebase.auth.currentUser;
     const [loading, setLoading] = useState(true);
     const [show, setShow] = useState(false);
     const [err, setErr] = useState(false);
     const history = useNavigate()
-    // const [show1, setShow1] = useState(false);
-    // const [model, setModel] = useState(false);
-    // const [stext, setStext] = useState("");
-    // const [name, setName] = useState("");
-    // const [age, setAge] = useState("");
-    // const [email, setEmail] = useState("");
-    // const [qualification, setQualification] = useState("");
-    // const [field, setField] = useState("");
-    // const [search, setSearch] = useState([]);
-    // const history = useNavigate();
-     let docid = "1";
+
+    let docid = "1";
     let docid1 = "1";
 
 
@@ -45,43 +38,46 @@ export default function Course() {
 
     const Fetchdata = async () => {
         await firebase.db.collection("course").get().then((querySnapshot) => {
-        
+
             if (!querySnapshot.empty) {
 
                 querySnapshot.forEach(element => {
                     var dete = element.data();
-const user = firebase.auth.currentUser;
- firebase.db.collection("facultyform").where("email", "==", user.email).get().then((querySnapshot) => {
+                    const user = firebase.auth.currentUser;
+                    firebase.db.collection("facultyform").where("email", "==", user.email).get().then((querySnapshot) => {
 
-    querySnapshot.forEach(element => {
-        var dete1 = element.data();
-           
-      
-        if (dete1.field === dete.field && dete1.qualification === dete.qualification && dete.faculty == "" ){
-            
-            setInfo(arr => [...arr, dete]);
-            setLoading(false);
-            setErr(false);
-            setShow(true);
-            setInfo1(1);
-          
-        }
-      
-        
-   })  
-   if(info1 == 0){
-    setLoading(false);
-    setErr(true);
-    setShow(false);
-   } 
-})
+                        querySnapshot.forEach(element => {
+                            var dete1 = element.data();
+                            setCourse1(dete1.course1);
+                            setCourse2(dete1.course2);
+                            setCourse3(dete1.course3);
+                            console.log(course3)
+
+                            if (dete1.field === dete.field && dete1.qualification === dete.qualification && dete.faculty == "") {
+
+                                setInfo(arr => [...arr, dete]);
+                                setLoading(false);
+                                setErr(false);
+                                setShow(true);
+                                setInfo1(1);
+
+                            }
+
+
+                        })
+                        if (info1 == 0) {
+                            setLoading(false);
+                            setErr(true);
+                            setShow(false);
+                        }
+                    })
                 });
-            
+
             }
             else {
                 setLoading(false);
-            setErr(true);
-            setShow(false);
+                setErr(true);
+                setShow(false);
             }
 
         })
@@ -94,54 +90,95 @@ const user = firebase.auth.currentUser;
 
     const handleRegister = async (course) => {
 
-        await firebase.db.collection("course").where("name", "==", course).get()
-            .then(querySnapshot => {
+        if (course3 == "" || course2 == "" || course1 == "" ) {
 
-                querySnapshot.forEach(element => {
-                    docid = element.id;
-
-
-                })})
-                await firebase.db.collection("facultyform").where("email", "==", user.email).get()
+            await firebase.db.collection("course").where("name", "==", course).get()
                 .then(querySnapshot => {
-    
+
+                    querySnapshot.forEach(element => {
+                        docid = element.id;
+
+
+                    })
+                })
+            await firebase.db.collection("facultyform").where("email", "==", user.email).get()
+                .then(querySnapshot => {
+
                     querySnapshot.forEach(element => {
                         docid1 = element.id;
-    
-    
+
+
                     })
 
 
 
 
-            });
-        var washingtonRef = firebase.db.collection("course").doc(docid);
-        var washingtonRef1 = firebase.db.collection("facultyform").doc(docid1);
-        await washingtonRef.update({
-            faculty: user.email
-        })
-            .then(function () {
-                alert("Data updated successfully")
+                });
+            var washingtonRef = firebase.db.collection("course").doc(docid);
+            var washingtonRef1 = firebase.db.collection("facultyform").doc(docid1);
 
-            })
-            .catch(function (error) {
-                alert(error.message)
 
-            })
-            await washingtonRef1.update({
-                [course1]: course
+            await washingtonRef.update({
+                faculty: user.email
             })
                 .then(function () {
-
                     alert("Data updated successfully")
-    
+
                 })
                 .catch(function (error) {
                     alert(error.message)
-    
+
                 })
+
+            if (course1 == "") {
+
+                await washingtonRef1.update({
+                    course1: course
+                })
+                    .then(function () {
+
+                        alert("Data updated successfully")
+
+                    })
+                    .catch(function (error) {
+                        alert(error.message)
+
+                    })
+            }
+            else if (course1 != "" && course2 == "") {
+                await washingtonRef1.update({
+                    course2: course
+                })
+                    .then(function () {
+
+                        alert("Data updated successfully")
+
+                    })
+                    .catch(function (error) {
+                        alert(error.message)
+
+                    })
+            }
+            else if (course1 != "" && course2 != "" && course3 == "") {
+                await washingtonRef1.update({
+                    course3: course
+                })
+                    .then(function () {
+
+                        alert("Data updated successfully")
+
+                    })
+                    .catch(function (error) {
+                        alert(error.message)
+
+                    })
+            }
+        }
+        else {
+            alert("Course limit reached")
+        }
     }
-   
+
 
 
 
@@ -159,7 +196,7 @@ const user = firebase.auth.currentUser;
                     <h4 style={{ textAlign: 'center', marginBottom: '50px' }}>Course Registration</h4>
                 </div>
             </div>
-           
+
 
             {
                 (() => {
@@ -231,7 +268,7 @@ const user = firebase.auth.currentUser;
 
 
                             </div>)
-                    if ( err && !loading && !show &&info1 !=1)
+                    if (err && !loading && !show && info1 != 1)
                         return (
                             <div className="d-flex justify-content-center">
                                 <div class="alert alert-danger" role="alert">

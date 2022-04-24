@@ -22,7 +22,7 @@ export default function Cform() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-         db.collection("course1").get().then((querySnapshot) => {
+         db.collection("course").get().then((querySnapshot) => {
           
             if (!querySnapshot.empty) {
 

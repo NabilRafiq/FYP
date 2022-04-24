@@ -218,15 +218,15 @@ export default function Faculty() {
 
           </ul>
         </li>
-        {/* <li className="nav-item dropdown">
+         <li className="nav-item dropdown">
           <a className="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Course
+            Annoucement
           </a>
           <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a style={{cursor:'pointer'}} onClick={()=>{
-                history('/ccourse',{replace:true})}}
+                history('/announcement',{replace:true})}}
                  className="dropdown-item" >
-                Course Form
+                Annoucement
                 </a></li>
                 <li><a style={{cursor:'pointer'}} onClick={()=>{
                 history('/getdata',{replace:true})}}
@@ -236,7 +236,7 @@ export default function Faculty() {
              
 
           </ul>
-        </li> */}
+        </li> 
               <li className="nav-item">
                 {<a onClick={handleLogin} style={{ cursor: 'pointer' }} className="nav-link active" aria-current="page" >
                   Logout
