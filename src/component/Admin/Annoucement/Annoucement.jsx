@@ -115,94 +115,99 @@ export default function Announcement() {
 
 
 
-            <div className="s_container">
+            <div className="s_container d-flex justify-content-center">
 
                 {(() => {
                     if (loading && !show && !err) {
+                        return (
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>)
 
-                        <div class="spinner-border" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-
                     }
 
-                    else if (!loading && !show && err){
-                        <div className="d-flex justify-content-center">
-                                <div class="alert alert-danger" role="alert">
-                                    No Course available at this moment please check back later!
-                                </div></div>
+                    else if (!loading && !show && err) {
+                        return (<div className="d-flex justify-content-center">
+                            <div class="alert alert-danger" role="alert">
+                                No Course available at this moment please check back later!
+                            </div></div>)
                     }
-                    else if (!loading && show && !err){
-                        
-                        info.map((data) => (
-                            
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="headingOne">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                {data.title}
-      </button>
-    </h2>
-    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-                {data.detail}
-      </div>
-    </div>
-  </div>
-                        ))
-                    }
-                    else if (!loading && !show && !err &&show1){
-                        
-                        info1.map((data) => (
-                            
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="headingOne">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                {data.title}
-      </button>
-    </h2>
-    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-                {data.detail}
-      </div>
-    </div>
-  </div>
-                        ))
-                    }
-                    else if (!loading && show && !err && show1){
-                        
-                        info1.map((data) => (
-                            
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="headingOne">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                {data.title}
-      </button>
-    </h2>
-    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-                {data.detail}
-      </div>
-    </div>
-  </div>
-                        ))
-                        info.map((data) => (
-                            
-                            <div class="accordion-item">
-                              <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                          {data.title}
-                                </button>
-                              </h2>
-                              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                          {data.detail}
+                    else if (!loading && show && !err) {
+                        return (
+                            info.map((data) => (
+
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingOne">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            {data.title}
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            {data.detail}
+                                        </div>
+                                    </div>
                                 </div>
-                              </div>
-                            </div>
-                                                  ))
+                            )))
+                    }
+                    else if (!loading && !show && !err && show1) {
+                        return (
+                            info1.map((data) => (
+
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingOne">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            {data.title}
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            {data.detail}
+                                        </div>
+                                    </div>
+                                </div>
+                            )))
+                    }
+                    else if (!loading && show && !err && show1) {
+                        return (
+                            <div>
+                                {info1.map((data) => (
+
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingOne">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                {data.title}
+                                            </button>
+                                        </h2>
+                                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                {data.detail}
+                                            </div>
+                                        </div>
+                                    </div>))}
+                                {info.map((data) => (
+
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingOne">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                {data.title}
+                                            </button>
+                                        </h2>
+                                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                {data.detail}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                ))}</div>)
+
+
                     }
 
                 })()}
+
+
             </div>
         </div>
     )
