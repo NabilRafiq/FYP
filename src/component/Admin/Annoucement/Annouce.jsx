@@ -14,14 +14,16 @@ export default function Announce() {
 
     const [title, setTitle] = useState("");
     const [detail, setDetail] = useState("");
-    const [role, setRole] = useState("");
-
+    const [faculty, setFaculty] = useState(false);
+    const [coord, setCoord] = useState(false);
     const handleSubmit = (e) => {
         e.preventDefault();
         db.collection('annoucement').add({
             title: title,
             detail: detail,
-            role: role
+            faculty:faculty,
+            coordinator:coord
+        
         })
             .then(() => {
                 alert("Annoucement made succuessfully")
@@ -64,14 +66,15 @@ export default function Announce() {
                     </div>
 
                     <label className='f_label form-label'><b>Role</b></label><br />
-                    <div class="input-group mb-3">
-                        <label class="input-group-text" for="inputGroupSelect01"><i class='fas fa-school'></i></label>
-                        <select onChange={(e) => setRole(e.target.value)} class="form-select" name='form-select1' id="inputGroupSelect01">
-                            <option value="faculty">faculty</option>
-                            <option value="coordinator">coordinator</option>
-                            <option value="both">both</option>
-                        </select>
-                    </div>
+                    <div className="form-check form-check-inline">
+                          <input className="form-check-input" type="checkbox" id="inlineCheckbox3" onChange={() => setFaculty((prevCheck) => !prevCheck)} value="faculty" />
+                          <label className="form-check-label" htmlFor="inlineCheckbox3">Faculty</label>
+                          {console.log(faculty)}
+                        </div>
+                        <div className="form-check form-check-inline">
+                          <input className="form-check-input" type="checkbox" id="inlineCheckbox4" onChange={() => setCoord((prevCheck) => !prevCheck)} value="coordinator" />
+                          <label className="form-check-label" htmlFor="inlineCheckbox4">Coordinator</label>
+                        </div>
 
                     <div style={{ textAlign: 'center' }}>
 
