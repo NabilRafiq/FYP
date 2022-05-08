@@ -8,12 +8,6 @@ import './form.css'
 
 export default function Form() {
 
-    useEffect(() => {
-        // change background color with a random color
-        const color = "#f0f2f0";
-        document.body.style.background = color;
-    });
-
 
 
     const [name, setName] = useState("");
@@ -134,14 +128,14 @@ export default function Form() {
 
                     <button id='f_button' type="submit" className='f_button btn my-3'>Submit</button>
                 
-                    <button  className='ms-3 my-2' style={{ color: 'black', backgroundColor: 'white',border:'none' } }
-                        onClick={
-                            (e) => { handleUser(e) }
-                        }>Back</button>
+                  
 
 
                 </form>
-               
+                <button  className='ms-3 my-2' style={{ color: 'black', backgroundColor: 'white',border:'none' } }
+                        onClick={
+                            (e) => { handleUser(e) }
+                        }>Back</button>
             </div>
         </div>
 

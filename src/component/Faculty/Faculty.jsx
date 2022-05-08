@@ -218,24 +218,11 @@ export default function Faculty() {
 
           </ul>
         </li>
-         <li className="nav-item dropdown">
-          <a className="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+         <li className="nav-item">
+          <a className="nav-link active" style={{cursor:'pointer'}} onClick={()=>{
+                history('/announcement',{replace:true})}} Annoucement role="button" aria-expanded="false">
             Annoucement
           </a>
-          <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a style={{cursor:'pointer'}} onClick={()=>{
-                history('/announcement',{replace:true})}}
-                 className="dropdown-item" >
-                Annoucement
-                </a></li>
-                <li><a style={{cursor:'pointer'}} onClick={()=>{
-                history('/getdata',{replace:true})}}
-                 className="dropdown-item" >
-                Faculty Data
-                </a></li>
-             
-
-          </ul>
         </li> 
               <li className="nav-item">
                 {<a onClick={handleLogin} style={{ cursor: 'pointer' }} className="nav-link active" aria-current="page" >

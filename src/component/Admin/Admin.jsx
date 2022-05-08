@@ -55,7 +55,7 @@ export default function Dashboard() {
       <nav
         className="navbar navbar-expand-lg navbar-dark"
         style={{ backgroundColor: "#192841" }}
-      > 
+      >
         <div className="container-fluid">
           <button
             className="navbar-toggler"
@@ -112,8 +112,8 @@ export default function Dashboard() {
                       Faculty Data
                     </a>
                   </li>
-               
-          
+
+
                 </ul>
               </li>
               <li className="nav-item dropdown">
@@ -152,7 +152,7 @@ export default function Dashboard() {
                       Coordinator Data
                     </a>
                   </li>
-            
+
                 </ul>
               </li>
               <li className="nav-item dropdown">
@@ -193,24 +193,26 @@ export default function Dashboard() {
                   </li>
                 </ul>
               </li>
-              {/* <li className="nav-item dropdown">
-          <a className="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="fa fa-bullhorn" style={{fontSize:"large",color:"white"}} aria-hidden="true"></i>
-          </a>
-          <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a style={{cursor:'pointer'}} onClick={()=>{
-                history('/facultyform',{replace:true})}}
-                 className="dropdown-item" >
-                Annoucement Form
-                </a></li>
-                <li><a style={{cursor:'pointer'}} onClick={()=>{
-                history('/getdata',{replace:true})}}
-                 className="dropdown-item" >
-                Annoucement Data
-                </a></li>
-      
-          </ul>
-        </li> */}
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fa fa-bullhorn" style={{ fontSize: "large", color: "white" }} aria-hidden="true"></i>
+                </a>
+                <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <li><a style={{ cursor: 'pointer' }} onClick={() => {
+                    history('/announce', { replace: true })
+                  }}
+                    className="dropdown-item" >
+                    Make an Announcement
+                  </a></li>
+                  <li><a style={{ cursor: 'pointer' }} onClick={() => {
+                    history('/annoucedata', { replace: true })
+                  }}
+                    className="dropdown-item" >
+                    View Announcements
+                  </a></li>
+
+                </ul>
+              </li>
 
               <li className="nav-item">
                 <a
@@ -248,34 +250,34 @@ export default function Dashboard() {
         })()}
         <div className="row">
           {info.map((data) => (
-        <div className='d-flex justify-content-center'>
-        <table className="table" id="getData" style={{ marginTop: "25px" }}>
-          <tbody>
-            <tr>
-              <th>Name</th>
-              <td> {data.name} </td>
-            </tr>
-            <tr>
-              <th>Email</th>
-              <td> {data.email} </td>
-            </tr>
-            <tr>
-              <th>Program</th>
-              <td> {data.program} </td>
-            </tr>
-     
-      
-            <tr>
-              <th>Role</th>
-              <td> {data.role} </td>
-            </tr>
-        
-  
-          </tbody>
-        </table>
+            <div className='d-flex justify-content-center'>
+              <table className="table" id="getData" style={{ marginTop: "25px" }}>
+                <tbody>
+                  <tr>
+                    <th>Name</th>
+                    <td> {data.name} </td>
+                  </tr>
+                  <tr>
+                    <th>Email</th>
+                    <td> {data.email} </td>
+                  </tr>
+                  <tr>
+                    <th>Program</th>
+                    <td> {data.program} </td>
+                  </tr>
 
 
-      </div>
+                  <tr>
+                    <th>Role</th>
+                    <td> {data.role} </td>
+                  </tr>
+
+
+                </tbody>
+              </table>
+
+
+            </div>
           ))}
         </div>
       </div>

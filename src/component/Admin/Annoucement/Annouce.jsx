@@ -14,16 +14,14 @@ export default function Announce() {
 
     const [title, setTitle] = useState("");
     const [detail, setDetail] = useState("");
-    const [faculty, setFaculty] = useState(false);
-    const [coord, setCoord] = useState(false);
+    const [role, setRole] = useState("all");
     const handleSubmit = (e) => {
         e.preventDefault();
         db.collection('annoucement').add({
             title: title,
             detail: detail,
-            faculty:faculty,
-            coordinator:coord
-        
+            role: role
+
         })
             .then(() => {
                 alert("Annoucement made succuessfully")
@@ -66,15 +64,15 @@ export default function Announce() {
                     </div>
 
                     <label className='f_label form-label'><b>Role</b></label><br />
-                    <div className="form-check form-check-inline">
-                          <input className="form-check-input" type="checkbox" id="inlineCheckbox3" onChange={() => setFaculty((prevCheck) => !prevCheck)} value="faculty" />
-                          <label className="form-check-label" htmlFor="inlineCheckbox3">Faculty</label>
-                          {console.log(faculty)}
-                        </div>
-                        <div className="form-check form-check-inline">
-                          <input className="form-check-input" type="checkbox" id="inlineCheckbox4" onChange={() => setCoord((prevCheck) => !prevCheck)} value="coordinator" />
-                          <label className="form-check-label" htmlFor="inlineCheckbox4">Coordinator</label>
-                        </div>
+
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="inputGroupSelect01"></label>
+                        <select onChange={(e) => setRole(e.target.value)} value={role} class="form-select" id="inputGroupSelect01">
+                            <option value="faculty">Faculty</option>
+                            <option value="coordinator">Coordinator</option>
+                            <option value="all" selected>All</option>
+                        </select>
+                    </div>
 
                     <div style={{ textAlign: 'center' }}>
 

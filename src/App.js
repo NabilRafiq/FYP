@@ -13,6 +13,7 @@ import Filter from './component/Admin/Filter';
 import Course from './component/Faculty/Course';
 import Announce from './component/Admin/Annoucement/Annouce';
 import Announcement from './component/Admin/Annoucement/Annoucement';
+import AnnouceData from './component/Admin/Annoucement/AnnouceData';
 
 
 // import Announce from './component/Annoucement/Annouce';
@@ -49,6 +50,7 @@ function App() {
 
          <Route exact path='/announce' element={<Announce />}/> 
          <Route exact path='/announcement' element={<Announcement/>}/> 
+         <Route exact path='/annoucedata' element={<AnnouceData/>}/> 
 
 
 
