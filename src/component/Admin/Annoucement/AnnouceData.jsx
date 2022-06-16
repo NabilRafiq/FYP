@@ -19,12 +19,17 @@ export default function AnnouceData() {
     const [detail, setDetail] = useState("");
     const [role, setRole] = useState("");
     const [search, setSearch] = useState([]);
+    const [user, setUser] = useState("");
     const history = useNavigate();
     let docid = "1";
 
     useEffect(() => {
 
-        Fetchdata();
+        firebase.auth.onAuthStateChanged(user => {
+            if (user) setUser(user.email)
+            else setUser(null)
+          })
+        Fetchdata(user);
     }, []);
 
 

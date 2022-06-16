@@ -51,6 +51,7 @@ function App() {
          <Route exact path='/announce' element={<Announce />}/> 
          <Route exact path='/announcement' element={<Announcement/>}/> 
          <Route exact path='/annoucedata' element={<AnnouceData/>}/> 
+    
 
 
 

@@ -8,8 +8,7 @@ export default function Dashboard() {
 
 
 
-
-  const history = useNavigate()
+const history = useNavigate()
   const [info, setInfo] = useState([]);
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState();
@@ -19,20 +18,12 @@ export default function Dashboard() {
 
   useEffect(() => {
     // Update the document title using the browser API
-    const color = "#f0f2f0";
-    document.body.style.background = color;
     setLoading(true);
+
     userInformation();
   }, []);
 
 
-  const handleName = event => {
-    setName(event.target.value)
-  }
-
-  const handleNumber = event => {
-    setNumber(event.target.value)
-  }
   const handleLogin = async (e) => {
     e.preventDefault()
     try {
@@ -44,6 +35,7 @@ export default function Dashboard() {
   }
   const userInformation = async (e) => {
 
+  
     const user = firebase.auth.currentUser;
 
 

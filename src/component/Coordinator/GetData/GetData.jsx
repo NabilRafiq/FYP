@@ -21,6 +21,7 @@ export default function GetData() {
     const [qualification, setQualification] = useState("");
     const [field, setField] = useState("");
     const [search, setSearch] = useState([]);
+    const [user, setUser] = useState("");
     const history = useNavigate();
     let docid = "1";
     let docid1 = "1";
@@ -28,7 +29,11 @@ export default function GetData() {
 
     useEffect(() => {
 
-        Fetchdata();
+        firebase.auth.onAuthStateChanged(user => {
+            if (user) setUser(user.email)
+            else setUser(null)
+          })
+        Fetchdata(user);
     }, []);
 
 

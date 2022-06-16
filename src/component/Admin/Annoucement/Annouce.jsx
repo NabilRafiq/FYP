@@ -56,10 +56,10 @@ export default function Announce() {
                     <h3 style={{ textAlign: 'center', margin: '5px' }}>Annoucements</h3>
 
                     <label for="title" className='form-label'><b>Title</b></label>
-                    <input className='s_input form-control' type="text" placeholder="Enter Title" name="title" required value={title} onChange={(e) => setTitle(e.target.value)} />
+                    <input className='s_input form-control' type="text"  name="title" required value={title} onChange={(e) => setTitle(e.target.value)} />
 
                     <div class="form-floating">
-                        <textarea style={{ width: "100%" }} rows="100" cols="100" class="form-control" placeholder="Give details" id="floatingTextarea" value={detail} onChange={(e) => setDetail(e.target.value)}></textarea>
+                        <textarea style={{ width: "100%", borderRadius:"30px" }} rows="100" cols="100" class="form-control" placeholder="Give details" id="floatingTextarea" value={detail} onChange={(e) => setDetail(e.target.value)}></textarea>
                         <label for="floatingTextarea">Please write details of the annoucement</label>
                     </div>
 

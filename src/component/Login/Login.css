@@ -94,7 +94,7 @@ margin-bottom:0.5rem;
 
 .login-btn-nd-text{
   text-align: center;
-  margin:3rem 0
+  margin: 0
 }
 
 *{
@@ -102,7 +102,7 @@ margin-bottom:0.5rem;
 }
 
 .text-gap{
-  margin-top: 2em;
+  margin-top: 0em;
 }
 
 .background-grad{

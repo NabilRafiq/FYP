@@ -6,16 +6,19 @@ import { Helmet } from "react-helmet";
 export default function Dashboard() {
   useEffect(() => {
     // change background color with a random color
+
     setLoading(true);
+
+ 
     userInformation();
   }, []);
 
   const history = useNavigate();
-  const user = firebase.auth.currentUser;
 
   const [info, setInfo] = useState([]);
   const [disable, setDisable] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
+  
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -27,9 +30,13 @@ export default function Dashboard() {
     }
   };
   const userInformation = async (e) => {
+      
+  const user = firebase.auth.currentUser;
+
     setDisable(true);
     setLoading(true);
     try {
+      setLoading(true);
       await firebase.db
         .collection("programmanager")
         .where("email", "==", user.email)
@@ -112,6 +119,12 @@ export default function Dashboard() {
                       Faculty Data
                     </a>
                   </li>
+                  <li><a style={{ cursor: 'pointer' }} onClick={() => {
+                    history('/filter', { replace: true })
+                  }}
+                    className="dropdown-item" >
+                    Filter Faculty Data
+                  </a></li>
 
 
                 </ul>
@@ -163,7 +176,7 @@ export default function Dashboard() {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Course registration
+                  Course
                 </a>
                 <ul
                   className="dropdown-menu"
@@ -178,17 +191,6 @@ export default function Dashboard() {
                       className="dropdown-item"
                     >
                       Create a Course
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      style={{ cursor: "pointer" }}
-                      onClick={() => {
-                        history("/getdata", { replace: true });
-                      }}
-                      className="dropdown-item"
-                    >
-                      Courses info
                     </a>
                   </li>
                 </ul>

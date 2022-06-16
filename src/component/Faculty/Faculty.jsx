@@ -6,10 +6,15 @@ import { Helmet } from 'react-helmet';
 export default function Faculty() {
 
 
+ 
+
+  
+ 
   useEffect(() => {
     // change background color with a random color
     setLoading(true);
-    userInformation();
+
+  userInformation();
   }, []);
 
   const getInitialState = () => {
@@ -74,11 +79,10 @@ export default function Faculty() {
     }
   }
   const userInformation = async (e) => {
-
     const user = firebase.auth.currentUser;
 
     setDisable(true);
-
+    setLoading(true);
     try {
       setLoading(true);
 
@@ -153,11 +157,12 @@ export default function Faculty() {
 
       .then(function () {
         alert("Data updated successfully")
-        setTimeout(function () { window.location.reload() }, 1500);
+        
+        
       })
       .catch(function (error) {
         alert(error.message)
-        setTimeout(function () { window.location.reload() }, 1500);
+        
       })
 
 
@@ -205,6 +210,11 @@ export default function Faculty() {
                  className="dropdown-item" >
                 Course Registration
                 </a></li>
+                {/* <li><a style={{cursor:'pointer'}} onClick={()=>{
+                history('/courselist',{replace:true})}}
+                 className="dropdown-item" >
+                Your Courses
+                </a></li> */}
                 {/* <li><a style={{cursor:'pointer'}} onClick={()=>{
                 history('/getdata',{replace:true})}}
                  className="dropdown-item" >
@@ -286,6 +296,18 @@ export default function Faculty() {
                     <tr>
                       <th>Date of Birth</th>
                       <td> {data.age} </td>
+                    </tr>
+                    <tr>
+                      <th>Course 1</th>
+                      <td> {data.course1} </td>
+                    </tr>
+                    <tr>
+                      <th>Course 2</th>
+                      <td> {data.course2} </td>
+                    </tr>
+                    <tr>
+                      <th>Course 3</th>
+                      <td> {data.course3} </td>
                     </tr>
                     <tr>
                       <th><label htmlFor="role" className='f_label form-label' ><b>Timeslot</b></label></th>
