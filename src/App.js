@@ -14,9 +14,9 @@ import Course from './component/Faculty/Course';
 import Announce from './component/Admin/Annoucement/Annouce';
 import Announcement from './component/Admin/Annoucement/Annoucement';
 import AnnouceData from './component/Admin/Annoucement/AnnouceData';
+import FacultyForm from './component/Admin/FacultyForm/FacultyForm';
+import Deregistration from './component/Admin/Course/Deregistration';
 
-
-// import Announce from './component/Annoucement/Annouce';
 
 import { Route, Routes as Switch, BrowserRouter } from 'react-router-dom';
 import { auth } from './firebase';
@@ -51,8 +51,10 @@ function App() {
          <Route exact path='/announce' element={<Announce />}/> 
          <Route exact path='/announcement' element={<Announcement/>}/> 
          <Route exact path='/annoucedata' element={<AnnouceData/>}/> 
-    
-
+        <Route exact path='/facultyform1' element={<FacultyForm/>}/> 
+         
+        <Route exact path='/deregistration' element={<Deregistration/>}/> 
+         
 
 
       </Switch>

@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import * as firebase from '../../../firebase';
 import { Navigate, useNavigate } from 'react-router';
-import './form.css'
+import '../../Coordinator/Form/form.css';
 
 
 
-export default function Form() {
+export default function FacultyForm() {
 
 
 
@@ -47,6 +47,7 @@ export default function Form() {
 
                 })
                 alert("Faculty data added successfully")
+                
             })
             .catch((error) => {
                 alert(error.message);
@@ -58,24 +59,6 @@ export default function Form() {
         setField("");
         setPassword("");
 
-    }
-
-    const handleUser = async (e) => {
-        const user = firebase.auth.currentUser;
-        await firebase.db.collection("users").where("email", "==", user.email).get().then(querySnapshot => {
-            querySnapshot.forEach(element => {
-                var data = element.data();
-                if (data.role === "admin") {
-                    history('/Admin', { replace: true })
-                    
-                }
-                else if (data.role === "coordinator") {
-                    history('/Dashboard', { replace: true })
-                }
-
-
-            })
-        });
     }
 
     return (
@@ -132,8 +115,9 @@ export default function Form() {
 
 
                 </form>
-                <button className="col-2 s_button btn" style={{ padding: '2px', color: 'black', background: 'none' }} onClick={() => {
-                            history('/dashboard', { replace: true })
+                <button id='back' className='cf_button btn inp inp-brd' style={{ color: 'black', backgroundColor: 'white' }}
+                        onClick={() => {
+                            history('/Admin', { replace: true })
                         }}>Back</button>
             </div>
         </div>

@@ -43,15 +43,19 @@ export default function GetData() {
         await firebase.db.collection("facultyform").get()
             .then((querySnapshot) => {
 
-
+                if (querySnapshot.empty){
+                    setLoading(false);
+                    setShow(false);
+                }
+                else{
                 querySnapshot.forEach(element => {
                     var data = element.data();
                     setInfo(arr => [...arr, data]);
+                    setLoading(false);
+                    setShow(true);
 
-
-                });
-                setLoading(false);
-                setShow(true);
+                });}
+                
             })
 
     }

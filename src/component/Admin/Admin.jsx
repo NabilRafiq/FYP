@@ -101,7 +101,7 @@ export default function Dashboard() {
                     <a
                       style={{ cursor: "pointer" }}
                       onClick={() => {
-                        history("/facultyform", { replace: true });
+                        history("/facultyform1", { replace: true });
                       }}
                       className="dropdown-item"
                     >
@@ -191,6 +191,17 @@ export default function Dashboard() {
                       className="dropdown-item"
                     >
                       Create a Course
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      style={{ cursor: "pointer" }}
+                      onClick={() => {
+                        history("/deregistration", { replace: true });
+                      }}
+                      className="dropdown-item"
+                    >
+                      Deregistation Requests
                     </a>
                   </li>
                 </ul>
