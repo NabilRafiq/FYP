@@ -250,6 +250,12 @@ export default function Faculty() {
                     className="dropdown-item" >
                     Your Courses
                   </a></li>
+                  <li><a style={{ cursor: 'pointer' }} onClick={() => {
+                    history('/courserequest', { replace: true })
+                  }}
+                    className="dropdown-item" >
+                    Course Requests
+                  </a></li>
                   {/* <li><a style={{cursor:'pointer'}} onClick={()=>{
                 history('/getdata',{replace:true})}}
                  className="dropdown-item" >
