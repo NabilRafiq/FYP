@@ -204,6 +204,17 @@ export default function Dashboard() {
                       Deregistation Requests
                     </a>
                   </li>
+                  <li>
+                    <a
+                      style={{ cursor: "pointer" }}
+                      onClick={() => {
+                        history("/request", { replace: true });
+                      }}
+                      className="dropdown-item"
+                    >
+                      Request a Course
+                    </a>
+                  </li>
                 </ul>
               </li>
               <li className="nav-item dropdown">

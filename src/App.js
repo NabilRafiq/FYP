@@ -16,6 +16,7 @@ import Announcement from './component/Admin/Annoucement/Annoucement';
 import AnnouceData from './component/Admin/Annoucement/AnnouceData';
 import FacultyForm from './component/Admin/FacultyForm/FacultyForm';
 import Deregistration from './component/Admin/Course/Deregistration';
+import Request from './component/Admin/Course/Request';
 
 
 import { Route, Routes as Switch, BrowserRouter } from 'react-router-dom';
@@ -54,6 +55,7 @@ function App() {
         <Route exact path='/facultyform1' element={<FacultyForm/>}/> 
          
         <Route exact path='/deregistration' element={<Deregistration/>}/> 
+        <Route exact path='/request' element={<Request/>}/> 
          
 
 
