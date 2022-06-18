@@ -8,7 +8,7 @@ width: 70%;
 .s_form {
 
   background-color: white;
-  height: 80vh;
+  height: 90vh;
   padding: 10px;
   margin:auto;
   box-shadow: rgb(0 0 0 / 70%) 0px 5px 15px;
@@ -73,5 +73,5 @@ opacity: 0.8;
 
 #inputGroupSelect01{
   border-radius: 0px 50px 50px 0px;
-  padding:12px 0;
+  padding:5px 0;
 }
