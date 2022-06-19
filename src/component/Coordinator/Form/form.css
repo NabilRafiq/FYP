@@ -17,6 +17,9 @@
   #dt{
     width: 100%;
   }
+  #famodel{
+    box-shadow: none!important;
+  }
   
   .f_input {
     width: 100%;

@@ -5,8 +5,8 @@ import { Navigate, useNavigate } from 'react-router';
 import { Helmet } from 'react-helmet';
 import { Button, Modal } from 'react-bootstrap';
 export default function Faculty() {
-  
-  
+
+
   const getInitialState = () => {
     const value = "8:00am-10:30am";
     return value;
@@ -32,19 +32,20 @@ export default function Faculty() {
     userInformation1();
   }, []);
 
- 
-const userInformation1 = async (e) => {
-  await firebase.db.collection("facultyform").get()
-        .then(querySnapshot => {
 
-          querySnapshot.forEach(element => {
+  const userInformation1 = async (e) => {
+    await firebase.db.collection("facultyform").get()
+      .then(querySnapshot => {
 
-            var data = element.data();
-            console.log(user)
+        querySnapshot.forEach(element => {
 
-          })})
-  userInformation();
-}
+          var data = element.data();
+          console.log(user)
+
+        })
+      })
+    userInformation();
+  }
 
 
   const [state, setState] = useState({
@@ -157,7 +158,7 @@ const userInformation1 = async (e) => {
     } catch (err) {
       alert(err.message);
     }
-   
+
   }
 
   const handleSubmit = async (e) => {
@@ -365,10 +366,10 @@ const userInformation1 = async (e) => {
                           keyboard={false}
                         >
                           <Modal.Header closeButton>
-                            <Modal.Title>Deregister Course</Modal.Title>
+                            <Modal.Title>Deregister Cours</Modal.Title>
                           </Modal.Header>
                           <Modal.Body>
-                            <form className='faform'   style={{boxShadow:"none!important"}}>
+                            <form className='f_form' >
 
                               <div class="form-group">
                                 <label for="exampleFormControlTextarea1">Reason for Deregistration</label>
@@ -392,65 +393,13 @@ const userInformation1 = async (e) => {
                       <th>Course 2</th>
                       <td> {data.course2}
                         <button className="btn btn-danger" onClick={() => { setModel(true); setCourse(data.course2) }}><i class="bi bi-slash-circle"></i></button>
-                        <Modal
-                          show={model}
-                          onHide={handleClose}
-                          backdrop="static"
-                          keyboard={false}
-                        >
-                          <Modal.Header closeButton>
-                            <Modal.Title>Deregister Course</Modal.Title>
-                          </Modal.Header>
-                          <Modal.Body>
-                            <form className='f_form' >
-
-                              <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Reason for Deregistration</label>
-                                <textarea required class="form-control" id="exampleFormControlTextarea1" onChange={(e) => setReason(e.target.value)} rows="3"></textarea>
-                              </div>
-
-
-                            </form>
-                          </Modal.Body>
-                          <Modal.Footer>
-                            <Button variant="secondary" onClick={handleClose}>
-                              Close
-                            </Button>
-                            <button className="btn btn-primary" onClick={() => { handleCourse(data) }}>Submit</button>
-                          </Modal.Footer>
-                        </Modal> </td>
+                      </td>
                     </tr>
                     <tr>
                       <th>Course 3</th>
                       <td> {data.course3}
                         <button className="btn btn-danger" onClick={() => { setModel(true); setCourse(data.course3) }}><i class="bi bi-slash-circle"></i></button>
-                        <Modal
-                          show={model}
-                          onHide={handleClose}
-                          backdrop="static"
-                          keyboard={false}
-                        >
-                          <Modal.Header closeButton>
-                            <Modal.Title>Deregister Course</Modal.Title>
-                          </Modal.Header>
-                          <Modal.Body>
-                            <form className='f_form' >
-
-                              <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Reason for Deregistration</label>
-                                <textarea required class="form-control" id="exampleFormControlTextarea1" onChange={(e) => setReason(e.target.value)} rows="3"></textarea>
-                              </div>
-
-
-                            </form>
-                          </Modal.Body>
-                          <Modal.Footer>
-                            <Button variant="secondary" onClick={handleClose}>
-                              Close
-                            </Button>
-                            <button className="btn btn-primary" onClick={() => { handleCourse(data) }}>Submit</button>
-                          </Modal.Footer>
-                        </Modal></td>
+                      </td>
                     </tr>
                     <tr>
                       <th><label htmlFor="role" className='f_label form-label' ><b>Timeslot</b></label></th>
