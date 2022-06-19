@@ -89,8 +89,8 @@ export default function Cform() {
         await db.collection("users").where("email", "==", user.email).get().then(querySnapshot => {
             querySnapshot.forEach(element => {
                 var data = element.data();
-                if (data.role === "faculty") {
-                    history('/Faculty', { replace: true })
+                if (data.role === "admin") {
+                    history('/admin', { replace: true })
 
                 }
                 else if (data.role === "coordinator") {

@@ -61,6 +61,7 @@ export default function Form() {
     }
 
     const handleUser = async (e) => {
+        console.log("zzzzzzzzzzzzzzz")
         const user = firebase.auth.currentUser;
         await firebase.db.collection("users").where("email", "==", user.email).get().then(querySnapshot => {
             querySnapshot.forEach(element => {
@@ -132,9 +133,11 @@ export default function Form() {
 
 
                 </form>
-                <button className="col-2 s_button btn" style={{ padding: '2px', color: 'black', background: 'none' }} onClick={() => {
-                            history('/dashboard', { replace: true })
-                        }}>Back</button>
+                <div className="d-flex justify-content-center">
+            <button className='ms-3 my-2' style={{ color: 'black', backgroundColor: 'white', border: 'none' }}
+                onClick={
+                    (e) => { handleUser(e) }
+                }>Back</button></div>
             </div>
         </div>
 

@@ -1,23 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import './Faculty.css';
+import './Faculty.css'
 import * as firebase from '../../firebase';
 import { Navigate, useNavigate } from 'react-router';
 import { Helmet } from 'react-helmet';
 import { Button, Modal } from 'react-bootstrap';
 export default function Faculty() {
-
-
-
-
-
-
-  useEffect(() => {
-    // change background color with a random color
-    setLoading(true);
-
-    userInformation();
-  }, []);
-
+  
+  
   const getInitialState = () => {
     const value = "8:00am-10:30am";
     return value;
@@ -30,6 +19,32 @@ export default function Faculty() {
   const [model, setModel] = useState(false);
   const [reason, setReason] = useState("");
   const [course, setCourse] = useState("");
+  const [user, setUser] = React.useState(null);
+
+
+
+
+  useEffect(() => {
+    // change background color with a random color
+    setLoading(true);
+    if (user) setUser(user)
+    else setUser(null)
+    userInformation1();
+  }, []);
+
+ 
+const userInformation1 = async (e) => {
+  await firebase.db.collection("facultyform").get()
+        .then(querySnapshot => {
+
+          querySnapshot.forEach(element => {
+
+            var data = element.data();
+            console.log(user)
+
+          })})
+  userInformation();
+}
 
 
   const [state, setState] = useState({
@@ -353,7 +368,7 @@ export default function Faculty() {
                             <Modal.Title>Deregister Course</Modal.Title>
                           </Modal.Header>
                           <Modal.Body>
-                            <form className='f_form' >
+                            <form className='faform'   style={{boxShadow:"none!important"}}>
 
                               <div class="form-group">
                                 <label for="exampleFormControlTextarea1">Reason for Deregistration</label>
