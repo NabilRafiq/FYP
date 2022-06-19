@@ -286,7 +286,7 @@ export default function Deregistration() {
 
                         return (
 
-                            <h1 style={{ textAlign: "center" }}>No Request Found</h1>
+                            <h3 style={{ textAlign: "center" }}>No Request Found</h3>
                         )
                 })()
 

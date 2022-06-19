@@ -245,12 +245,6 @@ export default function Faculty() {
                     Course Registration
                   </a></li>
                   <li><a style={{ cursor: 'pointer' }} onClick={() => {
-                    history('/courselist', { replace: true })
-                  }}
-                    className="dropdown-item" >
-                    Your Courses
-                  </a></li>
-                  <li><a style={{ cursor: 'pointer' }} onClick={() => {
                     history('/courserequest', { replace: true })
                   }}
                     className="dropdown-item" >
@@ -277,10 +271,17 @@ export default function Faculty() {
                 </a>
               </li>
               <li className="nav-item">
-                {<a onClick={handleLogin} style={{ cursor: 'pointer' }} className="nav-link active" aria-current="page" >
+                <a
+                  onClick={handleLogin}
+                  style={{ cursor: "pointer" }}
+                  className="nav-link active"
+                  aria-current="page"
+                  id="logout"
+                >
                   Logout
+
+                  <i class="fa-solid fa-right-from-bracket ms-3" ></i>
                 </a>
-                }
               </li>
             </ul>
           </div>

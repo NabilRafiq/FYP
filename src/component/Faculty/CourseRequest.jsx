@@ -220,10 +220,9 @@ export default function CourseRequest() {
             </Helmet>
 
 
+            <h2 style={{ textAlign:"center"}}>Course Requests</h2>
 
-
-
-            <div className="s_container d-flex justify-content-center">
+            <div className="s_container d-flex justify-content-center" style={{marginTop:"40px" }}>
 
                 {(() => {
 

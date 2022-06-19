@@ -27,15 +27,29 @@ export default function Announcement() {
             if (user) setUser(user.email)
             else setUser(null)
           })
-        Fetchdata(user);
+        Fetchdata1(user);
     }, []);
+    const Fetchdata1 = async (user) => {
 
+        await firebase.db.collection("annoucement").get().then((querySnapshot) => {
 
-    const Fetchdata = async (user) => {
+            if (!querySnapshot.empty) {
+                const user2 = firebase.auth.currentUser;
+                firebase.db.collection("annoucement").where("email", "==", user2.email).get().then((querySnapshot) => {
 
+                    querySnapshot.forEach(element => {
+                    console.log("wait for it");
+                    })
+                 } )}})
+    Fetchdata();
+                }
+
+    const Fetchdata = async () => {
+        
         await firebase.db.collection("users").where("email", "==", user).get().then(querySnapshot => {
             querySnapshot.forEach(element => {
                 var data = element.data();
+                console.log(data.role)
 
                 firebase.db.collection("annoucement").where("role", "==", data.role).get().then((querySnapshot) => {
                     console.log("me chal rha hu")
@@ -142,13 +156,15 @@ export default function Announcement() {
 
 
 
-
-            <div className="s_container d-flex justify-content-center">
+            <h2 style={{ textAlign:"center"}}>Announcements</h2>
+            <div className="s_container  d-flex justify-content-center" style={{ marginTop : "40px" }}>
+            
+        
                 {(() => {
 
                     if (show1) {
                         return (
-
+                            
                             info1.map((data) => (
                                 <div className="container" style={{ display: "block" }}>
                                     <div class="accordion-item">
@@ -213,11 +229,11 @@ export default function Announcement() {
 
             </div>
 
-
+                <div className="d-flex justify-content-center">
             <button className='ms-3 my-2' style={{ color: 'black', backgroundColor: 'white', border: 'none' }}
                 onClick={
                     (e) => { handleUser(e) }
-                }>Back</button>
+                }>Back</button></div>
 
         </div>
     )

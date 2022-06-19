@@ -84,6 +84,23 @@ export default function Cform() {
         // setDepart("");
 
     }
+    const handleUser = async (e) => {
+        const user = auth.currentUser;
+        await db.collection("users").where("email", "==", user.email).get().then(querySnapshot => {
+            querySnapshot.forEach(element => {
+                var data = element.data();
+                if (data.role === "faculty") {
+                    history('/Faculty', { replace: true })
+
+                }
+                else if (data.role === "coordinator") {
+                    history('/Dashboard', { replace: true })
+                }
+
+
+            })
+        });
+    }
     return (
         <div className='Form'>
             <Helmet>
@@ -133,15 +150,16 @@ export default function Cform() {
 
 
                     <button id='cf_button' type="submit" className='cf_button btn inp inp-brd'>Submit</button>
-                    <button id='back' className='cf_button btn inp inp-brd' style={{ color: 'black', backgroundColor: 'white' }}
-                        onClick={() => {
-                            history('/Admin', { replace: true })
-                        }}>Back</button>
+               
 
 
 
                 </form>
-
+                <div className="d-flex justify-content-center">
+            <button className='ms-3 my-2' style={{ color: 'black', background: 'none', border: 'none' }}
+                onClick={
+                    (e) => { handleUser(e) }
+                }>Back</button></div>
             </div>
         </div>
 

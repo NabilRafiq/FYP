@@ -143,7 +143,7 @@ export default function Dashboard() {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Manage Cordinator
+                  Manage Coordinator
                 </a>
                 <ul
                   className="dropdown-menu"

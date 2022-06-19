@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import { db, auth } from '../../../firebase';
+import * as firebase from '../../../firebase';
 import { Navigate, useNavigate } from 'react-router';
-import './AAform.css'
+import '../../Coordinator/Form/form.css'
 
 
 
 export default function AAform() {
+
 
 
     const [name, setName] = useState("");
@@ -18,30 +19,32 @@ export default function AAform() {
     const history = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await auth.createUserWithEmailAndPassword(email, password)
+        await firebase.auth.createUserWithEmailAndPassword(email, password)
 
             .then(() => {
-                db.collection('coordinator').add({
+                firebase.db.collection('coordinator').add({
                     name: name,
                     email: email,
                     age: age,
                     qualification: qualification,
                     field: field,
                     password: password,
-                    role: "coordinator"
+                    role: "coordinator",
+                    
 
                 })
-                db.collection('users').add({
+                firebase.db.collection('users').add({
                     name: name,
                     email: email,
                     age: age,
                     qualification: qualification,
                     field: field,
                     password: password,
-                    role: "coordinator"
+                    role: "coordinator",
+                   
 
                 })
-                alert("Academic Coordinator data added successfully")
+                alert("Coordinator data added successfully")
             })
             .catch((error) => {
                 alert(error.message);
@@ -54,6 +57,9 @@ export default function AAform() {
         setPassword("");
 
     }
+
+
+
     return (
         <div className='Form'>
             <Helmet>
@@ -61,41 +67,56 @@ export default function AAform() {
             </Helmet>
 
 
-            <div className="container-sm aaf_container">
-                <form className='aaf_form' onSubmit={(e) => handleSubmit(e)}>
+            <div className="container-sm f_container">
+                <form className='f_form' onSubmit={(e) => handleSubmit(e)}>
 
-                    <h3 style={{ textAlign: 'center' }}><i class="bi bi-person-plus-fill"></i>Cordinator registration</h3>
+                    <h3 style={{ textAlign: 'center' }}><i class="bi bi-person-plus-fill"></i></h3>
+                   
+                    <label for="uname" className='f_label form-label'><b>Name</b></label>
+                    <input type="text" className='f_input  form-control' name="uname" required onChange={(e) => setName(e.target.value)} />
+                    
 
-                    <label for="uname" className='aaf_label form-label'><b>Name</b></label>
-                    <input type="text" className='aaf_input  form-control' name="uname" required value={name} onChange={(e) => setName(e.target.value)} />
+                    <label for="age" className='f_label form-label'><b>Date of Birth</b></label><br />
+                    <input type="date" className="s_input form-control" max="1997-12-31" id='dt' name="age" required onChange={(e) => setAge(e.target.value)} />
+                    
+                    <label className='f_label form-label'><b>Program</b></label><br />
+                   <div class="input-group mb-3">
+                        <label class="input-group-text" for="inputGroupSelect01"><i class='fas fa-graduation-cap'></i></label>
+                        <select onChange={(e) => setQualification(e.target.value)} value={qualification} class="form-select" name='form-select1' id="inputGroupSelect01">
+                            <option value="Bachelors">Bachelors</option>
+                            <option value="Master">Master</option>
+                            <option value="Mphil">Mphil</option>
+                            <option value="PHD">PHD</option>
+                        </select>
+                    </div>
+                    <label className='f_label form-label'><b>Department</b></label><br />
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="inputGroupSelect01"><i class='fas fa-school'></i></label>
+                        <select onChange={(e) => setField(e.target.value)} value={field} class="form-select" name='form-select1' id="inputGroupSelect01">
+                            <option value="ComputerScience">ComputerScience</option>
+                            <option value="Artificial Intelligence">Artificial Intelligence</option>
+                            <option value="MediaScience">MediaScience</option>
+                            <option value="Buisness Adminstration">Buisness Adminstration</option>
+                        </select>
+                    </div>
+                    <label for="Email" className='f_label form-label'><b>Email</b></label>
+                    <input type="email" className='f_input form-control'  name="Email" value={email} required onChange={(e) => setEmail(e.target.value)} />
+                    <label for="psw" className='f_label form-label'><b>Password</b></label>
+                    <input type="password" className='f_input form-control'  name="psw" value={password} required onChange={(e) => setPassword(e.target.value)} />
+                    <label for="role" className='f_label form-label' ><b>Role</b></label>
+                    <input type="text" disabled className='f_input form-control' readonly value="coordinator" name="role" />
 
 
-                    <label for="age" className='aaf_label form-label'><b>Age</b></label>
-                    <input type="number" className='aaf_input form-control'  name="age" value={age} required onChange={(e) => setAge(e.target.value)} />
 
-                    <label for="qual" className='aaf_label form-label' ><b>Qualification</b></label>
-                    <input type="text" className='aaf_input form-control'  name="qual" value={qualification} required onChange={(e) => setQualification(e.target.value)} />
-                    <label for="field" className='aaf_label form-label'><b>Field</b></label>
-                    <input type="text" className='aaf_input form-control'  name="field" value={field} required onChange={(e) => setField(e.target.value)} />
-                    <label for="Email" className='aaf_label form-label'><b>Email</b></label>
-                    <input type="email" className='aaf_input form-control'  name="Email" value={email} required onChange={(e) => setEmail(e.target.value)} />
-                    <label for="psw" className='aaf_label form-label'><b>Password</b></label>
-                    <input type="password" className='aaf_input form-control'  name="psw" value={password} required onChange={(e) => setPassword(e.target.value)} />
-                    <label for="role" className='aaf_label form-label' ><b>Role</b></label>
-                    <input type="text" disabled className='aaf_input form-control' readonly  value="Coordinator" name="role" />
-
-
-
-                    <button id='aaf_button' type="submit" className='aaf_button btn'>Submit</button>
-                    <button className='aaf_button btn ms-3' style={{ color: 'black', backgroundColor: 'white' }}
-                        onClick={() => {
-                            history('/Admin', { replace: true })
-                        }}>Back</button>
-
+                    <button id='f_button' type="submit" className='f_button btn my-3'>Submit</button>
+                
+                  
 
 
                 </form>
-
+                <button className="col-2 s_button btn" style={{ padding: '2px', color: 'black', background: 'none' }} onClick={() => {
+                            history('/admin', { replace: true })
+                        }}>Back</button>
             </div>
         </div>
 
