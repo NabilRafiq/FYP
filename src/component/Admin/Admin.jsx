@@ -4,20 +4,25 @@ import * as firebase from "../../firebase";
 import { Navigate, useNavigate } from "react-router";
 import { Helmet } from "react-helmet";
 export default function Dashboard() {
-  useEffect(() => {
-    // change background color with a random color
 
-    setLoading(true);
-
- 
-    userInformation();
-  }, []);
 
   const history = useNavigate();
 
   const [info, setInfo] = useState([]);
   const [disable, setDisable] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
+  const [user, setUser] = React.useState(null);
+  useEffect(() => {
+    // change background color with a random color
+
+    setLoading(true);
+
+    firebase.auth.onAuthStateChanged(user => {
+      if (user) setUser(user)
+      else setUser(null)
+    })
+    userInformation();
+  }, []);
   
 
   const handleLogin = async (e) => {
@@ -29,9 +34,10 @@ export default function Dashboard() {
       alert(err.message);
     }
   };
-  const userInformation = async (e) => {
-      
-  const user = firebase.auth.currentUser;
+  const userInformation = async () => {
+      const user = firebase.auth.currentUser;
+  console.log(user)
+  
 
     setDisable(true);
     setLoading(true);
