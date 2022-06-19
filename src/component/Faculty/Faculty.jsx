@@ -366,10 +366,10 @@ export default function Faculty() {
                           keyboard={false}
                         >
                           <Modal.Header closeButton>
-                            <Modal.Title>Deregister Cours</Modal.Title>
+                            <Modal.Title>Deregister Course</Modal.Title>
                           </Modal.Header>
                           <Modal.Body>
-                            <form className='f_form' >
+                            <form className='' >
 
                               <div class="form-group">
                                 <label for="exampleFormControlTextarea1">Reason for Deregistration</label>
